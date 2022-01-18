@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="include">
+
+	<sql id="page_cnt_start">
+		SELECT *
+		  FROM (SELECT ROWNUM AS RNUM, QUERYDEPT1.*
+		          FROM ( SELECT QUERYDEPT2.*, COUNT (*) OVER () AS TOT_CNT FROM (
+	</sql>
+
+	<sql id="page_cnt_end">
+		         ) QUERYDEPT2  ) QUERYDEPT1
+		         WHERE ROWNUM &lt;= #{lastRecordIndex})
+		 WHERE RNUM > #{firstRecordIndex}
+	</sql>
+
+	<sql id="page_start">
+		SELECT *
+		  FROM (SELECT ROWNUM AS RNUM, QUERYDEPT1.*
+		          FROM (
+	</sql>
+
+	<sql id="page_end">
+		          ) QUERYDEPT1
+		         WHERE ROWNUM &lt;= 10)
+		 WHERE RNUM > 0
+	</sql>
+
+	<sql id="combo_all">
+		SELECT '' AS srchKey
+			  ,'전체' AS srchTxt
+			  ,'' AS sortSnAry
+		FROM DUAL
+		UNION ALL
+	</sql>
+
+</mapper>

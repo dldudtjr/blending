@@ -1,0 +1,43 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false"
+	monitoring="autodetect" dynamicConfig="true">
+
+	<cache name="popupCache" maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LFU">
+	</cache>
+
+	<cache name="contCache" maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LFU">
+	</cache>
+
+	<cache name="layoutCache" maxEntriesLocalHeap="50" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LFU">
+	</cache>
+	<cache name="codeGrpCache" maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LFU">
+	</cache>
+
+	<cache name="codeAddrCache" maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LFU">
+	</cache>
+
+
+
+	<cache name="cmsmMenuCache" maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LFU">
+	</cache>
+
+	<cache name="cmsmMemberCache" maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		memoryStoreEvictionPolicy="LFU">
+	</cache>
+
+	<cache name="loginChkCache" maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="300"
+		memoryStoreEvictionPolicy="LFU">
+	</cache>
+	<cache name="lpsmMenuCache" maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="300"
+		memoryStoreEvictionPolicy="LFU">
+	</cache>
+	<cache name="endPonServerNum" maxEntriesLocalHeap="10000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="300"
+		memoryStoreEvictionPolicy="LFU">
+	</cache>
+
+</ehcache>

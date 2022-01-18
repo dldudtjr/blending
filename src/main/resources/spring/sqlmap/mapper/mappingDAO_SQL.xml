@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Wed May 11 15:49:38 KST 2016 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappingDAO">
+	<sql id="basicQry">
+		SELECT USER_ID,
+		 (SELECT LAST_NM||' '||FIRST_NM FROM TB_USER WHERE USER_ID = A.USER_ID ) USER_FULL_NM
+		 ,(SELECT EMAIL FROM TB_USER WHERE USER_ID = A.USER_ID ) EMAIL
+		 ,PARNTS_DTA_ID
+		 , USE_YN
+		 , REGIST_DT
+		 , UPDT_DT
+		FROM BLENDING.TB_RELATION_MAPPING A
+	</sql>
+
+	<sql id="basicQry_where">
+		<where>
+		 USE_YN ='Y'
+			<if test="srchUserId != '' and srchUserId != null">
+				AND PARNTS_DTA_ID = #{srchUserId}
+			</if>
+			<if test="srchMappingType != '' and srchMappingType != null">
+				AND PARNTS_DTA_ID LIKE  #{srchMappingType}||'%'
+			</if>
+		</where>
+	</sql>
+
+	<sql id="basicQry_pk">
+		WHERE  USER_ID =(SELECT USER_ID FROM TB_USER WHERE EMAIL = #{email}) AND PARNTS_DTA_ID = #{parntsDtaId}
+	</sql>
+
+	<select id="getMappingLst" parameterType="net.app.vo.SrchVO" resultType="egovMap">
+		<include refid="basicQry" />
+		<include refid="basicQry_where" />
+	</select>
+
+	<update id="uptMappingUseYnDo" parameterType="String" >
+		UPDATE TB_RELATION_MAPPING SET USE_YN = 'N'
+		WHERE PARNTS_DTA_ID = #{parntsDtaId}
+
+	</update>
+
+	<insert id="udtConnectAuthDo" parameterType="net.app.front.mypage.vo.UserVO" >
+		MERGE
+			INTO
+				BLENDING.TB_RELATION_MAPPING tgt
+					USING
+					(
+					SELECT
+					#{userId}			As PARNTS_DTA_ID
+					,(SELECT USER_ID FROM TB_USER  WHERE EMAIL = #{email}) As USER_ID
+					,'Y'				As USE_YN
+					,sysdate			As REGIST_DT
+					,sysdate			As UPDT_DT
+					FROM DUAL
+					) src
+			ON
+				(tgt.USER_ID = src.USER_ID AND tgt.PARNTS_DTA_ID = src.PARNTS_DTA_ID)
+				WHEN MATCHED
+			THEN
+			UPDATE
+				SET
+					tgt.REGIST_DT 	= src.REGIST_DT,
+					tgt.UPDT_DT 	= src.UPDT_DT,
+					tgt.USE_YN 		= src.USE_YN
+					WHEN NOT MATCHED
+				THEN
+				INSERT
+					(
+					PARNTS_DTA_ID,
+					USER_ID,
+					REGIST_DT,
+					UPDT_DT,
+					USE_YN)
+				VALUES (
+				src.PARNTS_DTA_ID,
+				src.USER_ID,
+				src.REGIST_DT,
+				src.UPDT_DT,
+				src.USE_YN)
+
+	</insert>
+
+
+<!--
+	<insert id="insMappingInfoDo" parameterType="net.app.vo.MappingVO" >
+		MERGE
+			INTO
+				BLENDING.TB_RELATION_MAPPING tgt
+					USING
+					(
+					SELECT
+					,#{parntsDtaId}		As PARNTS_DTA_ID
+					 #{userId}			As USER_ID
+					,#{useYn}			As USE_YN
+
+					,sysdate			As REGIST_DT
+					,sysdate			As UPDT_DT
+					FROM DUAL
+					) src
+			ON
+				(tgt.USER_ID = src.USER_ID AND tgt.PARNTS_DTA_ID = src.PARNTS_DTA_ID)
+				WHEN MATCHED
+			THEN
+			UPDATE
+				SET
+					tgt.PARNTS_DTA_ID = src.PARNTS_DTA_ID,
+					tgt.USER_ID = src.USER_ID,
+					tgt.REGIST_DT = src.REGIST_DT,
+					tgt.UPDT_DT = src.UPDT_DT,
+					tgt.USE_YN = src.USE_YN
+					WHEN NOT MATCHED
+				THEN
+				INSERT
+					(USER_ID,
+					PARNTS_DTA_ID,
+					REGIST_DT,
+					UPDT_DT,
+					USE_YN)
+				VALUES (
+				src.PARNTS_DTA_ID,
+				src.USER_ID,
+				src.REGIST_DT,
+				src.UPDT_DT,
+				src.USE_YN)
+
+	</insert>
+
+ -->
+
+
+</mapper>

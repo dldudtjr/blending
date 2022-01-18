@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Wed May 11 15:49:38 KST 2016 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userDAO">
+	<sql id="basicQry">
+		SELECT
+			 USER_ID
+			,PHONE
+			,EMAIL
+			,FIRST_NM
+			,LAST_NM
+			,USER_TYPE
+			,USER_PASSWORD
+			,STATUS
+			,REGIST_DT
+			,UPDT_DT
+			,USE_YN
+			,POSITION
+		FROM
+			BLENDING.TB_USER
+	</sql>
+
+	<sql id="basicQry_where">
+		<if test="srchEmail != '' and srchEmail != null">
+			AND EMAIL = #{srchEmail}
+		</if>
+		<if test="srchPhone != '' and srchPhone != null">
+			AND PHONE = #{srchPhone}
+		</if>
+	</sql>
+
+	<sql id="basicQry_pk">
+		WHERE  USER_ID = #{userId}
+	</sql>
+
+
+	<select id="getUserDtl" parameterType="net.app.front.mypage.vo.UserVO" resultType="net.app.front.mypage.vo.UserVO">
+		<include refid="basicQry" />
+		<include refid="basicQry_pk" />
+	</select>
+
+
+	<select id="getUserPageLst" parameterType="net.app.vo.SrchVO" resultType="egovMap">
+
+		<include refid="include.page_cnt_start" />
+			<include refid="basicQry" />
+			<include refid="basicQry_where" />
+		<include refid="include.page_cnt_end" />
+	</select>
+
+
+	<insert id="insUserInfoDo" parameterType="net.app.front.mypage.vo.UserVO" >
+		MERGE
+		INTO
+			BLENDING.TB_USER tgt
+				USING
+				(
+				SELECT
+				(SELECT 'usr' || TO_CHAR(SYSDATE, 'YYYY') || LPAD(NVL(Max(SUBSTR(USER_ID,8))+1,1),7,'0') FROM TB_USER WHERE TO_CHAR(SYSDATE, 'YYYY') = SUBSTR(USER_ID,4,4))
+				AS USER_ID
+				,#{firstNm}			AS FIRST_NM
+				,#{lastNm}			AS LAST_NM
+				,#{status}			AS STATUS
+				,#{email}			AS EMAIL
+				,#{phone}			AS PHONE
+				,#{userPassword}	AS USER_PASSWORD
+				,'Y'				AS USE_YN
+				,#{userType}		AS USER_TYPE
+				,sysdate			AS REGIST_DT
+				,sysdate			AS UPDT_DT
+				FROM DUAL
+				) src
+		ON
+			(tgt.USER_ID = src.USER_ID
+				AND tgt.EMAIL = src.EMAIL
+
+				)
+			WHEN MATCHED
+		THEN
+		UPDATE
+		SET
+			 tgt.FIRST_NM 		= src.FIRST_NM
+			,tgt.LAST_NM 		= src.LAST_NM
+			,tgt.USER_TYPE 		= src.USER_TYPE
+			,tgt.PHONE 			= src.PHONE
+			,tgt.REGIST_DT 		= src.REGIST_DT
+			,tgt.UPDT_DT 		= src.UPDT_DT
+			WHEN NOT MATCHED
+		THEN
+		INSERT
+			(USER_ID,
+			PHONE,
+			EMAIL,
+			FIRST_NM,
+			LAST_NM,
+			USER_TYPE,
+			USER_PASSWORD,
+			STATUS,
+			REGIST_DT,
+			UPDT_DT)
+		VALUES (
+			 src.USER_ID
+			,src.PHONE
+			,src.EMAIL
+			,src.FIRST_NM
+			,src.LAST_NM
+			,src.USER_TYPE
+			,src.USER_PASSWORD
+			,src.STATUS
+			,src.REGIST_DT
+			,src.UPDT_DT)
+	</insert>
+
+
+	<update id="udtUserInfoDo" parameterType="net.app.front.mypage.vo.UserVO" >
+		UPDATE BLENDING.TB_USER
+			SET
+				 FIRST_NM 		= #{firstNm}
+				,LAST_NM 		= #{lastNm}
+				,USER_TYPE 		= #{userType}
+				,EMAIL 			= #{email}
+				,EMAIL_CHECK_YN = #{emailCheckYn}
+				,PHONE_CHECK_YN = #{phoneCheckYn}
+				,POSITION 		= #{position}
+				,UPDT_DT 		= SYSDATE
+		WHERE USER_ID 		= #{userId}
+	</update>
+
+	<update id="uptUserStatusDo" parameterType="net.app.front.mypage.vo.UserVO" >
+		UPDATE TB_USER SET STATUS = #{status}
+		<include refid="basicQry_pk" />
+	</update>
+
+	<update id="uptUserYnDo" parameterType="net.app.front.mypage.vo.UserVO" >
+		UPDATE TB_USER SET USE_YN = #{useYn}
+		<include refid="basicQry_pk" />
+	</update>
+
+	<update id="uptPasswordDo" parameterType="net.app.front.mypage.vo.UserVO" >
+		UPDATE TB_USER SET USER_PASSWORD = #{userPassword}
+		<include refid="basicQry_pk" />
+	</update>
+
+	<update id="uptEmailDo" parameterType="net.app.front.mypage.vo.UserVO" >
+		UPDATE TB_USER SET EMAIL = #{email} , STATUS =#{status}, EMAIL_CHECK_YN = #{emailCheckYn}
+		, RTN_VAL = #{rtnVal}
+		<include refid="basicQry_pk" />
+	</update>
+
+
+
+
+
+
+</mapper>

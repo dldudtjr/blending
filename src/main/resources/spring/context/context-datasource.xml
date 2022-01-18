@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	<alias name="dataSource-cms" alias="cms.dataSource" />
+	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="#{dbProps['DataBase.Oracle.DriverClassName']}"/>
+        <property name="url" value="#{dbProps['DataBase.cms.Url']}" />
+		<property name="username" value="#{dbProps['DataBase.cms.UserName']}" />
+		<property name="password" value="#{dbProps['DataBase.cms.Password']}" />
+	</bean>
+	<bean id="dataSource-cms" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceSpied" />
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value=""/>
+			</bean>
+		</property>
+	</bean>
+
+
+</beans>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Wed May 11 15:49:38 KST 2016 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cmpyDAO">
+	<sql id="basicQry">
+		SELECT
+		*
+		FROM BLENDING.TB_CMPY
+	</sql>
+
+	<sql id="basicQry_where">
+		<if test="srchCmpyId != '' and srchCmpyId != null">
+			AND CMPY_ID = #{srchCmpyId}
+		</if>
+	</sql>
+
+	<sql id="basicQry_pk">
+		WHERE  CMPY_ID = #{cmpyId} OR USER_ID = #{userId}
+	</sql>
+
+
+	<select id="getCmpyDtl" parameterType="net.app.vo.SrchVO" resultType="net.app.front.mypage.vo.CmpyVO">
+		<include refid="basicQry" />
+		<include refid="basicQry_pk" />
+	</select>
+
+
+	<select id="getCmpyPageLst" parameterType="net.app.vo.SrchVO" resultType="egovMap">
+		<include refid="include.page_cnt_start" />
+			<include refid="basicQry" />
+			<include refid="basicQry_where" />
+		<include refid="include.page_cnt_end" />
+	</select>
+
+	<update id="uptCmpyStatusDo" parameterType="net.app.front.mypage.vo.CmpyVO" >
+		TB_CNPY SET STATUS = #{status}
+		<include refid="basicQry_pk" />
+	</update>
+
+	<insert id="insCmpyInfoDo" parameterType="net.app.front.mypage.vo.CmpyVO" >
+		MERGE
+			INTO
+				BLENDING.TB_CMPY tgt
+					USING
+					(
+					SELECT
+					NVL(#{cmpyId},
+					 (SELECT 'cpy' || TO_CHAR(SYSDATE, 'YYYY') || LPAD(NVL(Max(SUBSTR(CMPY_ID,8))+1,1),7,'0') FROM BLENDING.TB_CMPY WHERE TO_CHAR(SYSDATE, 'YYYY') = SUBSTR(CMPY_ID,4,4))
+					 ) AS CMPY_ID
+					,#{userId}			As USER_ID
+					,#{cmpyNm}			As CMPY_NM
+					,#{brandNm}			As BRAND_NM
+					,#{bizType}			As BIZ_TYPE
+					,#{bizCategory}		As BIZ_CATEGORY
+					,#{bizRegNo}		As BIZ_REG_NO
+					,#{legalEntityNo}	As LEGAL_ENTITY_NO
+					,#{repNm}			As REP_NM
+					,#{repPhone}		As REP_PHONE
+					,#{repFax}			As REP_FAX
+					,#{repEmail}		As REP_EMAIL
+					,#{repEmailCheckYn} As REP_EMAIL_CHECK_YN
+					,#{repPhoneCheckYn} As REP_PHONE_CHECK_YN
+					,#{addr}			AS ADDR
+					,#{status}			AS STATUS
+					,#{useYn}			As USE_YN
+					,sysdate			As REGIST_DT
+					,#{userId}			As REGIST_ID
+					,sysdate			As UPDT_DT
+					,#{userId}			As UPDT_ID
+					,#{industry}		As INDUSTRY
+					,#{sectors}			As SECTORS
+					FROM DUAL
+					) src
+			ON
+				(tgt.CMPY_ID = src.CMPY_ID)
+				WHEN MATCHED
+			THEN
+			UPDATE
+			SET
+				tgt.CMPY_NM 			= src.CMPY_NM,
+				tgt.BRAND_NM 			= src.BRAND_NM,
+				tgt.BIZ_TYPE 			= src.BIZ_TYPE,
+				tgt.BIZ_CATEGORY 		= src.BIZ_CATEGORY,
+				tgt.BIZ_REG_NO 			= src.BIZ_REG_NO,
+				tgt.LEGAL_ENTITY_NO 	= src.LEGAL_ENTITY_NO,
+				tgt.REP_NM 				= src.REP_NM,
+				tgt.REP_PHONE 			= src.REP_PHONE,
+				tgt.REP_FAX 			= src.REP_FAX,
+				tgt.REP_EMAIL 			= src.REP_EMAIL,
+				tgt.REP_EMAIL_CHECK_YN 	= src.REP_EMAIL_CHECK_YN,
+				tgt.REP_PHONE_CHECK_YN 	= src.REP_PHONE_CHECK_YN,
+				tgt.ADDR 				= src.ADDR,
+				tgt.STATUS 				= src.STATUS,
+				tgt.USE_YN 				= src.USE_YN,
+				tgt.INDUSTRY 			= src.INDUSTRY,
+				tgt.SECTORS 			= src.SECTORS,
+				tgt.REGIST_DT 			= src.REGIST_DT,
+				tgt.REGIST_ID 			= src.REGIST_ID,
+				tgt.UPDT_DT 			= src.UPDT_DT,
+				tgt.UPDT_ID 			= src.UPDT_ID
+				WHEN NOT MATCHED
+			THEN
+			INSERT
+				(CMPY_ID,
+				USER_ID,
+				CMPY_NM,
+				BRAND_NM,
+				BIZ_TYPE,
+				BIZ_CATEGORY,
+				BIZ_REG_NO,
+				LEGAL_ENTITY_NO,
+				REP_NM,
+				REP_PHONE,
+				REP_FAX,
+				REP_EMAIL,
+				ADDR,
+				STATUS,
+				USE_YN,
+				INDUSTRY,
+				SECTORS,
+				REGIST_DT,
+				REGIST_ID,
+				UPDT_DT,
+				UPDT_ID)
+			VALUES (src.CMPY_ID,
+			src.USER_ID,
+			src.CMPY_NM,
+			src.BRAND_NM,
+			src.BIZ_TYPE,
+			src.BIZ_CATEGORY,
+			src.BIZ_REG_NO,
+			src.LEGAL_ENTITY_NO,
+			src.REP_NM,
+			src.REP_PHONE,
+			src.REP_FAX,
+			src.REP_EMAIL,
+			src.ADDR,
+			src.STATUS,
+			src.USE_YN,
+			src.INDUSTRY,
+			src.SECTORS,
+			src.REGIST_DT,
+			src.REGIST_ID,
+			src.UPDT_DT,
+			src.UPDT_ID
+			)
+	</insert>
+</mapper>

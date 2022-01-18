@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configuration>
+<configuration>
+	<property resource="/spring/prop/sys.properties" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d %5p [%c:%L] %m%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${Globals.log}/webapp.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>webapp.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d %5p [%c:%L] %m%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="jdbc.connection" 		level="info" />
+	<logger name="jdbc.sqlonly" 		level="info" />
+	<logger name="jdbc.sqltiming" 		level="off" />
+	<logger name="jdbc.audit" 			level="off" />
+	<logger name="jdbc.resultset" 		level="off" />
+	<logger name="jdbc.resultsettable"	level="info" />
+
+	<logger name="org.springframework"	level="DEBUG" />
+	<logger name="org.apache.commons"	level="DEBUG" />
+	<logger name="org.mybatis.spring"	level="DEBUG" />
+	<logger name="net.sf.ehcache"		level="DEBUG" />
+
+	<root level="DEBUG">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+
+</configuration>

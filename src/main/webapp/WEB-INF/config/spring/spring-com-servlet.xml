@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+        http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task.xsd">
+	<context:component-scan base-package="egov net" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+<!-- 	<bean id="CmsScheduled" class="net.cmsm.cmm.utl.CmsScheduled" /> -->
+	<task:scheduler id="gsScheduler" pool-size="10" />
+	<task:executor id="gsTaskExecutor" pool-size="10" />
+	<task:annotation-driven executor="gsTaskExecutor" scheduler="gsScheduler" />
+
+	 <mvc:resources mapping="/files/**" location="/files/" />
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+		<mvc:argument-resolvers>
+			<bean class="net.base.cmm.handlerMhdResolver.ExcpXSSHandlerResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+	<!-- webBindingInitializer -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="webBindingInitializer">
+			<bean class="egov.cmm.EgovBindingInitializer" />
+		</property>
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"> <!-- 확인해야함 -->
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+				<bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	<bean id="cmsPageRenderer" class="net.base.cmm.pageRenderer.CmsPaginationRenderer" />
+	<bean id="lpsPageRenderer" class="net.base.cmm.pageRenderer.LpsPaginationRenderer" />
+	<bean id="paginationManager" class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+		<property name="rendererType">
+			<map>
+				<entry key="bootstrapk" value-ref="cmsPageRenderer" />
+				<entry key="lpsPage" value-ref="lpsPageRenderer" />
+			</map>
+		</property>
+	</bean>
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="ko" />
+	</bean>
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="com/error/egovError" />
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.dao.DataAccessException">com/error/dataAccessFailure</prop>
+				<prop key="org.springframework.transaction.TransactionException">com/error/egovError</prop>
+				<prop key="egovframework.rte.fdl.cmmn.exception.EgovBizException">com/error/egovBizException</prop>
+			</props>
+		</property>
+	</bean>
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="2" p:viewClass="org.springframework.web.servlet.view.JstlView" p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1" p:viewClass="org.springframework.web.servlet.view.tiles3.TilesView" />
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>classpath:spring/tiles/tiles-layout.xml</value>
+			</list>
+		</property>
+		<property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory" />
+	</bean>
+	<bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="contentType" value="text/html;charset=UTF-8" />
+	</bean>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<property name="paramName" value="lang" />
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="net.base.cmm.interceptor.WebInterceptor" />
+		</mvc:interceptor>
+		<!-- <mvc:interceptor>
+			<mvc:mapping path="/cms/**" />
+			<bean class="net.cmsm.lgn.interceptor.CmsmInterceptor" />
+		</mvc:interceptor>
+
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="net.base.cmm.interceptor.BaseInterceptor" />
+		</mvc:interceptor> -->
+	</mvc:interceptors>
+</beans>

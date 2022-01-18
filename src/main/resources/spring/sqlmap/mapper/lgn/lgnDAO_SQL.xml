@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lgnDAO">
+
+	<select id="getLoginDtl" parameterType="net.app.lgn.vo.SessionUserVO" resultType="net.app.lgn.vo.SessionUserVO">
+		SELECT
+			 USER_ID
+			,PHONE
+			,EMAIL
+			,FIRST_NM
+			,LAST_NM
+			,USER_TYPE
+			,USER_PASSWORD
+			,STATUS
+			,REGIST_DT
+			,UPDT_DT
+		FROM
+			BLENDING.TB_USER
+		<where>
+			<if test="loginId != '' and loginId != null">
+				AND PHONE = #{loginId} OR EMAIL = #{loginId}
+				AND USE_YN = 'Y' AND STATUS = '002'
+			</if>
+			<if test="rtnVal != '' and rtnVal != null">
+				AND RTN_VAL = #{rtnVal}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insLoginHistDo" parameterType="net.app.lgn.vo.LoginHistVO">
+		INSERT INTO TBSM_LOGIN_HIST(
+					 LOGIN_HIST_SN
+					,USER_ID
+					,USER_IP
+					,STATUS
+					)
+				VALUES(
+					 (
+					 SELECT NVL (MAX (login_hist_sn), 0) + 1 FROM TBSM_LOGIN_HIST)
+					,#{loginId}
+					,#{userIp}
+					,#{status}
+					)
+	</insert>
+
+	<update id="uptUserInfo" parameterType="net.app.lgn.vo.SessionUserVO">
+		UPDATE TB_USER SET USE_YN = 'Y' , STATUS = '002', EMAIL_CHECK_YN = 'Y', RTN_VAL = ''
+		WHERE USER_ID = #{userId}
+	</update>
+
+	<select id="getLastLoginTime" parameterType="string" resultType="string">
+		SELECT TO_CHAR (MAX (REGIST_DT), 'YYYY MM-DD HH24:MI')
+		FROM TBSM_LOGIN_HIST
+		WHERE USER_ID = #{userId}
+	</select>
+
+</mapper>

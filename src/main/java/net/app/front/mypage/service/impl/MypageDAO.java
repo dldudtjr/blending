@@ -1,0 +1,79 @@
+package net.app.front.mypage.service.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import egov.cmm.service.impl.EgovComAbstractDAO;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
+import net.app.front.mypage.vo.CmpyVO;
+import net.app.front.mypage.vo.UserVO;
+import net.app.vo.MappingVO;
+import net.app.vo.MappingVO;
+import net.app.vo.SrchVO;
+
+@Repository("mypageDAO")
+public class MypageDAO extends EgovComAbstractDAO {
+
+    public List<EgovMap> getUserPageLst(UserVO vo) {
+        return this.selectList("userDAO.getUserPageLst", vo);
+    }
+
+    public UserVO getUserDtl(UserVO vo) {
+        return this.selectOne("userDAO.getUserDtl", vo);
+    }
+
+    public String insUserInfoDo(UserVO vo) {
+        return this.insert("userDAO.insUserInfoDo", vo)+"";
+    }
+
+    public String udtUserInfoDo(UserVO vo) {
+        return this.update("userDAO.udtUserInfoDo", vo)+"";
+    }
+
+    public String uptPasswordDo(UserVO vo) {
+        return this.update("userDAO.uptPasswordDo", vo)+"";
+    }
+
+    public String uptEmailDo(UserVO vo) {
+        return this.update("userDAO.uptEmailDo", vo)+"";
+    }
+
+    public String uptUserStatusDo(UserVO vo) {
+        return this.update("userDAO.uptUserStatusDo", vo)+"";
+    }
+
+    public List<EgovMap> getCmpyPageLst(CmpyVO vo) {
+        return this.selectList("cmpyDAO.getCmpyPageLst", vo);
+    }
+
+    public CmpyVO getCmpyDtl(CmpyVO vo) {
+        return this.selectOne("cmpyDAO.getCmpyDtl", vo);
+    }
+
+    public String insCmpyInfoDo(CmpyVO vo) {
+        return this.insert("cmpyDAO.insCmpyInfoDo", vo)+"";
+    }
+
+    public String uptCmpyStatusDo(CmpyVO vo) {
+        return this.update("cmpyDAO.uptCmpyStatusDo", vo)+"";
+    }
+
+
+
+
+    /* 접근 권한 */
+    public List<EgovMap> getMappingLst(SrchVO vo) {
+        return this.selectList("mappingDAO.getMappingLst", vo);
+    }
+
+    public String uptMappingUseYnDo(String parntsId) {
+        return this.update("mappingDAO.uptMappingUseYnDo", parntsId)+"";
+    }
+
+    public String udtConnectAuthDo(UserVO insVO) {
+        return this.update("mappingDAO.udtConnectAuthDo", insVO)+"";
+    }
+
+
+}

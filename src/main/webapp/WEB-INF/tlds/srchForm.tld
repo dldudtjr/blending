@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+                 "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>srchFm</short-name>
+	<uri>http://www.leadpoint.co.kr/ctl/srchFm</uri>
+	<display-name>srchFm</display-name>
+	<description>srch form Tag Library</description>
+
+	<tag>
+		<name>makeForm</name>
+		<tag-class>net.base.cmm.taglibs.SrchFormParamSetRenderer</tag-class>
+		<body-content>empty</body-content>
+		<description>srch form Tag</description>
+		<attribute>
+			<name>paginationInfoVO</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>formname</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>action</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>method</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>makeInput</name>
+		<tag-class>net.base.cmm.taglibs.InputParamSetRenderer</tag-class>
+		<body-content>empty</body-content>
+		<description>input Tag</description>
+		<attribute>
+			<name>paginationInfoVO</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>makePageInput</name>
+		<tag-class>net.base.cmm.taglibs.InputPageParamSetRenderer</tag-class>
+		<body-content>empty</body-content>
+		<description>input Tag</description>
+		<attribute>
+			<name>paginationInfoVO</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+</taglib>
