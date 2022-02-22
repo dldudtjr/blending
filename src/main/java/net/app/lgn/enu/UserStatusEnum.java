@@ -6,7 +6,12 @@ public enum UserStatusEnum{
     ,USE("002")
     ,DEL("003")
     ,Y("Y")
-    ,N("N");
+    ,N("N")
+    ,INTRODUCE("001")
+    ,DETAIL("002")
+    ,DISTRIBUTTION("003")
+    ,MAKETING("004")
+    ;
 
     final private String code;
 

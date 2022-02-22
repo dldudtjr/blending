@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Wed May 11 15:49:38 KST 2016 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="productDAO">
+	<sql id="basicQry">
+	SELECT
+		A.*
+		,(SELECT MAX(FILE_ID) FROM TB_FILE WHERE PARNTS_DTA_ID=A.CMPY_ID AND UPLOAD_FILE_NM = 'cmpyImg') AS CMPY_FILE_ID
+	 FROM (
+			SELECT
+				A.*
+				,(SELECT CMPY_ID FROM TB_CMPY WHERE USER_ID=A.REGT_ID) AS CMPY_ID
+				,(SELECT CMPY_NM FROM TB_CMPY WHERE USER_ID=A.REGT_ID) AS CMPY_NM
+				,(SELECT MAX(FILE_ID) FROM TB_FILE WHERE PARNTS_DTA_ID=A.PRODUCT_ID AND UPLOAD_FILE_NM = 'productImg[]') AS FILE_ID
+		FROM TB_PRODUCT A
+	) A
+	</sql>
+
+	<sql id="basicQry_where">
+		<where>
+			<if test="srchRegtId != '' and srchRegtId != null">
+				AND REGT_ID = #{srchRegtId}
+			</if>
+			<if test="srchRegtIds != '' and srchRegtIds != null">
+				AND REGT_ID IN #{srchRegtIds}
+			</if>
+			<if test="srchProductNm != '' and srchProductNm != null">
+				AND PRODUCT_NM LIKE  #{srchProductNm}||'%'
+			</if>
+			<if test="srchTxt != '' and srchTxt != null">
+				AND PRODUCT_NM LIKE  #{srchTxt}||'%'
+			</if>
+		</where>
+	</sql>
+
+	<sql id="basicQry_pk">
+		WHERE PRODUCT_ID = #{productId}
+	</sql>
+
+
+	<select id="getProductDtl" parameterType="net.app.front.brand.product.vo.ProductVO" resultType="net.app.front.brand.product.vo.ProductVO">
+		<include refid="basicQry" />
+		<include refid="basicQry_pk" />
+	</select>
+
+	<select id="getProductLatestDtl" parameterType="net.app.front.brand.product.vo.ProductVO" resultType="net.app.front.brand.product.vo.ProductVO">
+	SELECT * FROM(
+		SELECT A.*
+		,COUNT(*) OVER() AS PRODUCT_TOTAL_CNT
+
+		FROM (
+		<include refid="basicQry" />
+		WHERE REGT_ID = #{regtId}
+		ORDER BY PRODUCT_ID ASC
+		 )A
+		)    A WHERE ROWNUM = 1
+	</select>
+
+
+	<select id="getProductPageLst" parameterType="net.app.vo.SrchVO" resultType="egovMap">
+
+		<include refid="include.page_cnt_start" />
+			<include refid="basicQry" />
+			<include refid="basicQry_where" />
+		<include refid="include.page_cnt_end" />
+	</select>
+
+	<select id="getProductId" parameterType="net.app.front.brand.product.vo.ProductVO" resultType="String">
+		SELECT 'pdt' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') || LPAD(NVL(Max(SUBSTR(PRODUCT_ID,17))+1,1),3,'0') AS PRODUCT_ID FROM TB_PRODUCT
+		            WHERE TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') = SUBSTR(PRODUCT_ID,4,14)
+
+	</select>
+
+	<insert id="udtProductIntroduceInfoDo" parameterType="net.app.front.brand.product.vo.ProductVO" >
+		MERGE
+			INTO
+				BLENDING.TB_PRODUCT tgt
+					USING
+					(
+					SELECT
+					 #{productId} AS PRODUCT_ID
+					,#{productRegStatus} AS PRODUCT_REG_STATUS
+					,#{productNm}        AS PRODUCT_NM
+					,#{cateNm}       	 AS CATE_NM
+					,#{certStatus}       AS CERT_STATUS
+					,#{usp}              AS USP
+					,#{productInfo}      AS PRODUCT_INFO
+					,#{regtId}			 AS REGT_ID
+					,sysdate			 AS REGT_DT
+					,#{updtId}			 AS UPDT_ID
+					,sysdate			 AS UPDT_DT
+					FROM DUAL
+					) src
+			ON
+				(tgt.PRODUCT_ID = src.PRODUCT_ID)
+				WHEN MATCHED
+			THEN UPDATE SET
+				 PRODUCT_REG_STATUS  = src.PRODUCT_REG_STATUS
+				,PRODUCT_NM          = src.PRODUCT_NM
+				,CERT_STATUS         = src.CERT_STATUS
+				,CATE_NM             = src.CATE_NM
+				,USP                 = src.USP
+				,PRODUCT_INFO        = src.PRODUCT_INFO
+			WHEN NOT MATCHED
+			THEN
+			INSERT
+			(
+				 PRODUCT_ID
+				,PRODUCT_REG_STATUS
+				,PRODUCT_NM
+				,CERT_STATUS
+				,CATE_NM
+				,USP
+				,PRODUCT_INFO
+				,REGT_ID
+				,REGT_DT
+				,UPDT_ID
+				,UPDT_DT
+				)
+			VALUES(
+				 src.PRODUCT_ID
+				,src.PRODUCT_REG_STATUS
+				,src.PRODUCT_NM
+				,src.CERT_STATUS
+				,src.CATE_NM
+				,src.USP
+				,src.PRODUCT_INFO
+				,src.REGT_ID
+				,src.REGT_DT
+				,src.UPDT_ID
+				,src.UPDT_DT
+			)
+	</insert>
+
+
+	<update id="udtProductDetailInfoDo" parameterType="net.app.front.brand.product.vo.ProductVO" >
+		UPDATE BLENDING.TB_PRODUCT
+			SET
+			 PRODUCT_REG_STATUS		= #{productRegStatus}
+			,PRODUCT_STYLE_NO  		= #{productStyleNo}
+			,COST              		= #{cost}
+			,MSRP              		= #{msrp}
+			,COST_INFO            	= #{costInfo}
+			,BCD_YN               	= #{bcdYn}
+			,BCD_SLT              	= #{bcdSlt}
+			,BCD_NO               	= #{bcdNo}
+			,PKG_YN               	= #{pkgYn}
+			,PKG_STD_CODE         	= #{pkgStdCode}
+			,PKG_STD_X             	= #{pkgStdX}
+			,PKG_STD_Y             	= #{pkgStdY}
+			,PKG_STD_H             	= #{pkgStdH}
+			,CARTON_YN            	= #{cartonYn}
+			,PRODUCT_VOL_CODE      	= #{productVolCode}
+			,PRODUCT_VOL           	= #{productVol}
+			,PRODUCT_WT_CODE       	= #{productWtCode}
+			,PRODUCT_WT            	= #{productWt}
+			,CARTON_X              	= #{cartonX}
+			,CARTON_Y              	= #{cartonY}
+			,CARTON_H              	= #{cartonH}
+			,CARTON_STD_CODE      	= #{cartonStdCode}
+			,CARTON_CBM_VOL_CODE  	= #{cartonCbmVolCode}
+			,CARTON_CBM_VOL       	= #{cartonCbmVol}
+			,CARTON_WT_CODE       	= #{cartonWtCode}
+			,CARTON_WT            	= #{cartonWt}
+			,PALLET_TI            	= #{palletTi}
+			,PALLET_HI            	= #{palletHi}
+			,CARTON_TOT           	= #{cartonTot}
+			,INBOX_YN             	= #{inboxYn}
+			,INBOX_STD_CODE       	= #{inboxStdCode}
+			,INBOX_X              	= #{inboxX}
+			,INBOX_Y              	= #{inboxY}
+			,INBOX_H              	= #{inboxH}
+			,INBOX_CBM_VOL_CODE   	= #{inboxCbmVolCode}
+			,INBOX_CBM_VOL        	= #{inboxCbmVol}
+			,INBOX_WT_CODE        	= #{inboxWtCode}
+			,INBOX_WT             	= #{inboxWt}
+			,EXPIRE_DT_YN         	= #{expireDtYn}
+			,EXPIRE_DT_CODE       	= #{expireDtCode}
+			,EXPIRE_DT            	= #{expireDt}
+			,INGREDIENTS_YN       	= #{ingredientsYn}
+			,INGREDIENTS       	  	= #{ingredients}
+			,LABEL_YN             	= #{labelYn}
+			,UPDT_ID           	  	= #{regtId}
+			,UPDT_DT           	  	= sysdate
+		WHERE PRODUCT_ID 	   	  	= #{productId}
+	</update>
+
+
+	<update id="udtProductDistributionInfoDo" parameterType="net.app.front.brand.product.vo.ProductVO" >
+		UPDATE BLENDING.TB_PRODUCT
+			SET
+				 PRODUCT_REG_STATUS		 =#{productRegStatus}
+				,MANU_FACTURED_COUNTRY	 =#{manuFacturedCountry}
+				,MANU_FACTURED_CITY      =#{manuFacturedCity}
+				,SELL_YN                 =#{sellYn}
+				,SELL_WHERE              =#{sellWhere}
+				,PURCHASE_YN             =#{purchaseYn}
+				,DISTRIBUTOR_TYPE        =#{distributorType}
+				,DISTRIBUTED_WHERE       =#{distributedWhere}
+				,DELIVERY_YN             =#{deliveryYn}
+				,PB_ORDER_YN             =#{pbOrderYn}
+				,COLD_STORAGE_YN         =#{coldStorageYn}
+				,STORAGE_METHOD_YN       =#{storageMethodYn}
+				,UPDT_ID           			= #{regtId}
+				,UPDT_DT           			= sysdate
+
+		WHERE PRODUCT_ID 	   = #{productId}
+	</update>
+
+	<update id="udtProductMaketingInfoDo" parameterType="net.app.front.brand.product.vo.ProductVO" >
+		UPDATE BLENDING.TB_PRODUCT
+			SET
+			 PRODUCT_REG_STATUS	=#{productRegStatus}
+			,MARKETING_BUDGET  	=#{marketingBudget}
+			,MV_URL				=#{mvUrl}
+			,UPDT_ID           = #{regtId}
+			,UPDT_DT           = sysdate
+		WHERE PRODUCT_ID 	   	=#{productId}
+	</update>
+
+	<delete id="delProductInfoDo" parameterType="net.app.front.brand.product.vo.ProductVO" >
+		DELETE FROM BLENDING.TB_PRODUCT
+		WHERE PRODUCT_ID 	   	=#{productId}
+	</delete>
+
+
+
+
+	<update id="uptProductStatusDo" parameterType="net.app.front.brand.product.vo.ProductVO" >
+		UPDATE TB_PRODUCT SET STATUS = #{status}
+		<include refid="basicQry_pk" />
+	</update>
+
+	<update id="uptProductYnDo" parameterType="net.app.front.brand.product.vo.ProductVO" >
+		UPDATE TB_PRODUCT SET USE_YN = #{useYn}
+		<include refid="basicQry_pk" />
+	</update>
+
+</mapper>

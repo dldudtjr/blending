@@ -23,4 +23,6 @@ public class CmpyVO extends SessEtdVO{
     private String repEmailCheckYn;
     private String repFax;
     private String addr;
+    private String fileId;
+    private String mvUrl;
  }

@@ -59,6 +59,7 @@ public class FileController {
     public void fileDownDo(FileVO fileVO, HttpServletRequest request, HttpServletResponse response) {
 
         List<FileVO> list = this.fileService.getFileLst(fileVO);
+        if ( list.size() > 0) {
         FileVO vo = list.get(0);
         InputStream in = null;
         OutputStream out = null;
@@ -96,18 +97,42 @@ public class FileController {
                 FileCopyUtils.copy(in, out);
                 out.flush();
             } else {
-                response.setCharacterEncoding("UTF-8");
-                response.setContentType("text/html; charset=utf-8");
-                PrintWriter printwriter = response.getWriter();
-                printwriter.println("<script>alert('파일을 다운로드 할 수 없습니다.'); history.go(-1);</script>");
-                printwriter.flush();
-                printwriter.close();
+
+
+                String uploadPathProp = "real.upload.file.path";
+
+                if (request.getRequestURL().indexOf("localhost") > -1 || request.getRequestURL().indexOf("127.0.0.1") > -1 || request.getRequestURL().indexOf("192.168") > -1) {
+                    uploadPathProp = "dev.upload.file.path";
+                }
+
+                filePath = EgovProperties.getProperty(uploadPathProp)+"/images/noimg.png";
+                System.out.println(">>>>>>>>>>>>filePath="+filePath);
+
+                uFile = new File(filePath);
+                fSize = (int) uFile.length();
+                if (uFile.exists()) {
+                    response.setContentType(mimeType);
+                    this.setDisposition(vo.getRealFileNm(), request, response);
+                    response.setContentLength(fSize);
+                    in = new BufferedInputStream(new FileInputStream(uFile));
+                    out = new BufferedOutputStream(response.getOutputStream());
+                    FileCopyUtils.copy(in, out);
+                    out.flush();
+                }else {
+                    response.setCharacterEncoding("UTF-8");
+                    response.setContentType("text/html; charset=utf-8");
+                    PrintWriter printwriter = response.getWriter();
+                    printwriter.println("<script>alert('파일을 다운로드 할 수 없습니다.'); history.go(-1);</script>");
+                    printwriter.flush();
+                    printwriter.close();
+                }
             }
 
         } catch (IOException ignored) {
             EgovBasicLogger.ignore(this.getClass() + " fileDownDo >> Occurred Exception to close resource is ignored!! : " + ignored);
         } finally {
             EgovResourceCloseHelper.close(in, out);
+        }
         }
     }
 

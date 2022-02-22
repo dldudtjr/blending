@@ -1,6 +1,8 @@
 package net.base.cmm.interceptor;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import egov.cmm.util.EgovBasicLogger;
+import egov.utl.inno.CryptoUtils;
 import net.app.lgn.annotation.PassAuth;
 import net.app.lgn.util.CmsSessionUtils;
 import net.base.utl.str.CommStringUtil;
@@ -24,13 +27,29 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) {
 
+
+
+        try {
+            String sessKey = CryptoUtils.createChkKey("loginPageA");
+            String symtcKey = CryptoUtils.createChkKey("loginPageB");
+            req.getSession().setAttribute(sessKey, symtcKey);
+            req.setAttribute("_ssesKey", sessKey);
+            req.setAttribute("_symtcKey", symtcKey);
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
         if(req.getParameter("lang") != null && !"".equals(req.getParameter("lang"))) {
             Locale locale = extractLocale(req,req.getParameter("lang"));
             LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(req);
             localeResolver.setLocale(req, res, locale);
         }
 
-        if (CmsSessionUtils.isLoginChk() && (req.getRequestURI().indexOf("login.lp") > -1)) {
+        if (CmsSessionUtils.isLoginChk() && (req.getRequestURI().indexOf("login.bt") > -1)) {
             try {
                 res.sendRedirect(req.getContextPath() + "/web/main/index.bt");
             } catch (IOException e) {

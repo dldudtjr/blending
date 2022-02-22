@@ -35,6 +35,13 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
         return this.mypageDAO.getUserPageLst(vo);
     }
 
+
+
+    @Override
+    public String getUserId(UserVO userVO) {
+        return this.mypageDAO.getUserId(userVO);
+    }
+
     @Override
     public UserVO getUserDtl(UserVO userVO) {
 
@@ -43,10 +50,33 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
         return this.mypageDAO.getUserDtl(userVO);
     }
 
+
+    @Override
+    public UserVO getUserEmailDtl(UserVO userVO) {
+        return this.mypageDAO.getUserEmailDtl(userVO);
+
+    }
+
+
+
     @Override
     public String insUserInfoDo(UserVO vo) {
         return this.mypageDAO.insUserInfoDo(vo);
     }
+
+    @Override
+    public String insUserCmpyInfoDo(UserVO userVO, CmpyVO cmpyVO) {
+        userVO.setUserId(this.getUserId(userVO));
+        this.insUserInfoDo(userVO);
+
+
+        cmpyVO.setUserId(userVO.getUserId());
+        cmpyVO.setRegtId(userVO.getUserId());
+        return this.insCmpyInfoDo(cmpyVO);
+    }
+
+
+
 
     @Override
     public String udtUserInfoDo(UserVO vo) {
@@ -89,7 +119,7 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
     }
 
     @Override
-    public List<EgovMap> getCmpyPageLst(CmpyVO vo) {
+    public List<EgovMap> getCmpyPageLst(SrchVO vo) {
         return this.mypageDAO.getCmpyPageLst(vo);
     }
 
@@ -98,6 +128,13 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
     public CmpyVO getCmpyDtl(CmpyVO vo) {
         return this.mypageDAO.getCmpyDtl(vo);
     }
+    @Override
+    public CmpyVO getCmpyIdDtl(String cmpyId) {
+        return this.mypageDAO.getCmpyIdDtl(cmpyId);
+    }
+
+
+
 
     @Override
     public String insCmpyInfoDo(CmpyVO vo) {
@@ -108,6 +145,14 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
     public String uptCmpyStatusDo(CmpyVO vo) {
         return this.mypageDAO.uptCmpyStatusDo(vo);
     }
+
+    @Override
+    public String udtCmpyMvUrlSubmit(CmpyVO vo) {
+        vo.setCmpyId(CmsSessionUtils.getUserInfo().getCmpyId());
+        return this.mypageDAO.udtCmpyMvUrlSubmit(vo);
+    }
+
+
 
     @Override
     public List<EgovMap> getMappingLst(SrchVO vo) {

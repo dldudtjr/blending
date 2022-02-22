@@ -13,6 +13,17 @@ public class SrchVO extends PaginationInfoVO {
 
     public String srchMappingType;
     public String srchUserId;
+    public String srchUserType;
+
+    public String srchRegtId;
+    public String srchRegtIds;
 
     public String goodsDtpgType;
+
+
+    public String srchProductNm;
+    public String srchCmpyId;
+
+    public String srchTxt;
+
 }

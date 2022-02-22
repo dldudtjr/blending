@@ -46,3 +46,8 @@
 		<a href="#" class="button bt-blue w-140">구독 변경하기</a>
 	</div>
 </div>
+<script>
+$( document ).ready(function() {
+	$(".detail-top").hide();
+});
+</script>

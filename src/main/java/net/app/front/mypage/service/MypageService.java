@@ -13,7 +13,15 @@ public interface MypageService {
 //  마이페이지 사용자
     List<EgovMap> getUserPageLst(UserVO vo);
 
+
+
+
+    String getUserId(UserVO vo);
+
     UserVO getUserDtl(UserVO vo);
+
+    UserVO getUserEmailDtl(UserVO vo);
+
 
     String insUserInfoDo(UserVO vo);
 
@@ -29,8 +37,11 @@ public interface MypageService {
     // 접근권한추가
     String udtConnectAuthDo(MappingVO vo);
 
+
+
+
     //  마이페이지 회사
-    List<EgovMap> getCmpyPageLst(CmpyVO vo);
+    List<EgovMap> getCmpyPageLst(SrchVO vo);
 
     CmpyVO getCmpyDtl(CmpyVO vo);
 
@@ -39,6 +50,20 @@ public interface MypageService {
     String uptCmpyStatusDo(CmpyVO vo);
 
     List<EgovMap> getMappingLst(SrchVO vo);
+
+    String udtCmpyMvUrlSubmit(CmpyVO vo);
+
+
+
+    String insUserCmpyInfoDo(UserVO userVO, CmpyVO cmpyVO);
+
+
+    CmpyVO getCmpyIdDtl(String cmpyId);
+
+
+
+
+
 
 
 

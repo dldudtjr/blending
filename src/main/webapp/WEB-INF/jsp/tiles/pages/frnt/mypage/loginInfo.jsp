@@ -4,27 +4,33 @@
 		<h3 class="tit">로그인 설정</h3>
 	</header>
 	<div class="info-wrap block mt-30">
-		<sf:form commandName="saveFm" cssClass="form-horizontal" enctype="multipart/form-data">
 			<h4 class="info-wrap-title">로그인 이메일 & 비밀번호 설정</h4>
+			<sf:form commandName="emailFm" cssClass="form-horizontal" enctype="multipart/form-data">
 			<div class="form-field">
 				<div class="input-add add-right2">
 					<input type="text" class="input-text" name="email" id="email" placeholder="새로운 이메일">
 					<button type="button"  class="emailSend button bt-blue-text">인증</button>
 				</div>
+				<font style="color:blue; font-size:9pt">* 새로운 이매일 입력후 인증버튼을 누르세요  </font>
 			</div>
+			</sf:form>
 			<!-- <div class="form-field">
 				<input type="password" class="input-text" name="userPassword" placeholder="새로운 비밀번호" value="">
 			</div> -->
+			<sf:form commandName="saveFm" cssClass="form-horizontal" enctype="multipart/form-data">
 			<div class="form-field">
-				<input type="text" class="input-text" name="chgPassWd" id="chgPassWd" placeholder="새로운 비밀번호" value="">
+				<input type="password" class="input-text" name="chgPassWd" id="chgPassWd" placeholder="새로운 비밀번호" value="">
 			</div>
 			<div class="form-field">
 				<div class="input-add add-right2">
-					<input type="text" class="input-text" name="chgPassWdChk" id="chgPassWdChk" placeholder="비밀번호 확인">
+					<input type="password" class="input-text" name="chgPassWdChk" id="chgPassWdChk" placeholder="비밀번호 확인 ">
 					<button type="button"  class="passwordChk button bt-blue-text">확인</button>
 				</div>
+				<font style="color:blue; font-size:9pt">* 비밀번호 입력 후 확인버튼을 누르세요  </font><br />
+				<font style="color:red;  font-size:9pt">* <code:msg code='validate.msg.pw_regexp'/></font>
 			</div>
-
+			</sf:form>
+<%--
 			<h4 class="info-wrap-title mt-30">접근 권한</h4>
 			<div class="connectAuth">
 				<c:forEach items="${authLst}" var="row" varStatus="cnt">
@@ -47,11 +53,10 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		<div class="mt-30 bt-right">
+			</div> --%>
+		<!-- <div class="mt-30 bt-right">
 			<a href="#" class="authSaveBtn button bt-blue w-140">저장</a>
-		</div>
-		</sf:form>
+		</div> -->
 		<!-- <div class="form-field">
 			<div class="d-flex">
 				<div class="input-add add-right2">
@@ -66,14 +71,9 @@
 var cnt = 0;
 
 $(function() {
-	$(document).on("click",".emailSend",function() {
-		var msg = "이메일을 변경 하시겠습니까? \n 변경후 재로그인 부탁드립니다. ";
-		if (confirm(msg)) {
-			var url = "<c:url value='/web/mypage/emailChgDo.ax'/>";
-			var sendData = $("#saveFm").serialize();
-			fn_submitReloadAjax(url, sendData);
-		}
-	});
+	$(".detail-top").hide();
+
+
 
     $(document).on("click",".btnAdd",function() {
     	var txt = "";
@@ -102,6 +102,7 @@ $(function() {
 
 
 
+
 	$.validator.addMethod("pw_regexp", function(value, element) {
 		// return this.optional(element) ||  /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(value);
 		return this.optional(element) ||  /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+]).*$/.test(value);
@@ -114,6 +115,43 @@ $(function() {
 		}
 	  return true;
 	});
+
+	$("#emailFm").validate({
+		rules : {
+			 email : {
+					required: true,
+					email : true
+				},
+
+		},
+		messages : {
+			email : {
+			 required	: "<s:message code='validate.msg.common'/>" //ID (이메일형식)를 입력해 주세요
+			,email 		: "email 형식에 맞게 입력해 주세요" //email 형식에 맞게 입력해 주세요
+		},
+		},
+		errorPlacement : function(error, element) {
+			if(element.is(":radio") || element.is(":checkbox")){
+			}else if ( element.is('select') ) {
+				element.attr("placeholder",error[0].outerText);
+				element.css("border", "red solid 1px");
+				element.css("width", "500px");
+			}else{
+				element.attr("placeholder",error[0].outerText);
+			}
+		},
+		submitHandler : function() {
+
+			var msg = "이메일을 변경 하시겠습니까? \n 변경후 재로그인 부탁드립니다. ";
+			if (confirm(msg)) {
+
+				var url = "<c:url value='/web/mypage/emailChgDo.ax'/>";
+				var sendData = $("#emailFm").serialize();
+				fn_submitFileRtnAjax(url, sendData);
+			}
+		}
+	});
+
 
 
 
@@ -178,6 +216,11 @@ $(function() {
 		}
 	});
 
+	$(document).on("click",".emailSend",function() {
+		$("#emailFm").submit();
+	});
+
+
 	$(document).on("click",".authSaveBtn",function() {
 		var msg ="접속 권한을 추가 하시겠습니까?? \n 이름과 이메일이 가입된 유저의 정보와 일치하지 않을시 저장되지 않습니다. ";
 		if (confirm(msg)) {
@@ -188,6 +231,12 @@ $(function() {
 	});
 
 });
+
+
+
+function rtnFunction(typ, data){
+	location.href='/web/lgn/logOut.bt';
+}
 
 function submitDo(){
 	var url = "<c:url value='/web/mypage/passChgSubmitDo.ax'/>";

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Wed May 11 15:49:38 KST 2016 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="commCodeDAO" >
+
+	<select id="getCodeLst" parameterType="net.base.code.vo.SrchCmsmVO" resultType="egovMap">
+		SELECT comm_code
+			  ,cmmn_group_code
+			  ,sys_spchckn_code
+			  ,comm_code_nm
+			  ,comm_code_nm_en
+			  ,comm_code_nm_cn
+			  ,crops_spchckn_code
+			  ,sort_sn
+			  ,rm
+			  ,use_yn
+			  ,REGISTER_ID
+			  ,TO_CHAR (REGIST_DT, 'YYYY-MM-DD HH24:MI') AS REGIST_DT
+			  ,UPSR_ID
+			  ,TO_CHAR (UPDT_DT, 'YYYY-MM-DD HH24:MI') AS UPDT_DT
+			  ,comm_code AS tmp_comm_code
+			  ,cmmn_group_code as tmp_cmmn_group_code
+		  FROM TBSM_CMMN_CODE
+		<where>
+			<if test="srchUseYn !=null and srchUseYn != ''" >
+				USE_YN = #{srchUseYn}
+			</if>
+			<if test="srchCmmnGroupCode !=null and srchCmmnGroupCode != ''" >
+			AND cmmn_group_code = #{srchCmmnGroupCode}
+			</if>
+			<if test="srchCommCode != null and srchCommCode != ''">
+				AND comm_code = #{srchCommCode}
+			</if>
+			<if test="srchSysSpchcknCode != null and srchSysSpchcknCode != ''">
+				<!-- AND sys_spchckn_code = #{srchSysSpchcknCode} -->
+			</if>
+			<if test="srchGroupTxt != null and srchGroupTxt != ''">
+				AND (CMMN_GROUP_CODE = '*' AND (upper(comm_code_nm) like '%'||upper(#{srchGroupTxt})||'%' OR upper(comm_code) like '%'||upper(#{srchGroupTxt})||'%'))
+                OR comm_code IN (SELECT cmmn_group_code FROM TBSM_CMMN_CODE WHERE upper(comm_code_nm) like  '%'||upper(#{srchGroupTxt})||'%')
+			</if>
+		</where>
+		<choose>
+		 <when test="srchCmmnGroupCode !=null and srchCmmnGroupCode != ''" >
+		 	ORDER BY COMM_CODE ASC, SORT_SN ASC
+		 </when>
+		 <otherwise>
+		 ORDER BY COMM_CODE_NM ASC
+		 </otherwise>
+		</choose>
+	</select>
+
+	<select id="getCodeComboLst" parameterType="net.base.code.vo.SrchCmsmVO" resultType="net.base.cmm.vo.SrchKeyTxtVO">
+		<if test='srchCombo !=null and srchCombo.equals("Y")' >
+			SELECT '' AS srchKey,
+			 FN_GETCODENMA(#{srchLocale}) AS srchTxt,
+			 0 AS SORT_SN FROM DUAL
+			 UNION ALL
+		</if>
+		<if test='srchCombo !=null and srchCombo.equals("S")' >
+			SELECT '' AS srchKey,
+			fn_getCodeNmB(#{srchLocale}) AS srchTxt,
+			0 AS SORT_SN
+			FROM DUAL
+			UNION ALL
+		</if>
+		  SELECT TO_CHAR (COMM_CODE) AS srchKey,
+		  fn_getCodeNm(cmmn_group_code,COMM_CODE,#{srchLocale}) AS srchTxt,
+			  SORT_SN
+			FROM TBSM_CMMN_CODE
+		   WHERE	 cmmn_group_code = #{srchCmmnGroupCode}
+				 AND use_yn = 'Y'
+		ORDER BY SORT_SN ASC
+	</select>
+
+	<insert id="insCodeDo" parameterType="net.base.code.vo.CommCodeVO">
+		INSERT INTO TBSM_CMMN_CODE (COMM_CODE
+		                           ,CMMN_GROUP_CODE
+		                           ,SYS_SPCHCKN_CODE
+		                           ,COMM_CODE_NM
+		                           ,COMM_CODE_NM_EN
+		                           ,CROPS_SPCHCKN_CODE
+		                           ,SORT_SN
+		                           ,RM
+		                           ,USE_YN
+		                           ,REGISTER_ID
+		                           ,UPSR_ID
+		                           ,COMM_CODE_NM_CN)
+						     VALUES (
+						       #{commCode}
+						     , NVL(#{cmmnGroupCode},'*')
+						     , NVL(#{sysSpchcknCode},'00')
+						     , #{commCodeNm}
+						     , #{commCodeNmEn}
+						     , #{cropsSpchcknCode}
+						     , #{sortSn}
+						     , #{rm}
+						     , #{useYn}
+						     , #{registerId}
+						     , #{upsrId}
+						     , #{commCodeNmCn}
+						     )
+	</insert>
+
+	<update id="udtCodeDo" parameterType="net.base.code.vo.CommCodeVO">
+		UPDATE	TBSM_CMMN_CODE
+		SET	COMM_CODE 				= #{commCode}
+			,CMMN_GROUP_CODE 		= #{cmmnGroupCode}
+			,CMPY_NO		 		= #{cmpyNo}
+			,COMM_CODE_NM			= #{commCodeNm}
+			,COMM_CODE_NM_EN 		= #{commCodeNmEn}
+			,COMM_CODE_NM_CN		= #{commCodeNmCn}
+			,CROPS_SPCHCKN_CODE 	= #{cropsSpchcknCode}
+			,SORT_SN 				= #{sortSn}
+			,RM 					= #{rm}
+			,USE_YN 				= #{useYn}
+			,UPSR_ID 				= #{upsrId}
+		WHERE	COMM_CODE 			= #{tmpCommCode}
+		AND	CMMN_GROUP_CODE 		= #{tmpCmmnGroupCode}
+	</update>
+
+	<update id="udtUpperCodeDo" parameterType="net.base.code.vo.CommCodeVO">
+		UPDATE	TBSM_CMMN_CODE
+		SET	CMMN_GROUP_CODE 		= #{commCode}
+		WHERE	CMMN_GROUP_CODE 	= #{tmpCommCode}
+		AND SYS_SPCHCKN_CODE 		= #{sysSpchcknCode}
+	</update>
+
+	<delete id="delCodeDo" parameterType="net.base.code.vo.CommCodeVO">
+		DELETE FROM TBSM_CMMN_CODE
+		WHERE	COMM_CODE 			= #{commCode}
+		AND	CMMN_GROUP_CODE 		= #{cmmnGroupCode}
+	</delete>
+
+	<update id="delUpperCodeDo" parameterType="net.base.code.vo.CommCodeVO">
+		DELETE FROM	TBSM_CMMN_CODE
+		WHERE	CMMN_GROUP_CODE = #{tmpCommCode}
+		AND SYS_SPCHCKN_CODE = #{sysSpchcknCode}
+	</update>
+
+
+
+</mapper>

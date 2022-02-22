@@ -27,6 +27,7 @@ import egov.utl.inno.CryptoTest;
 import egov.utl.inno.CryptoUtils;
 import net.app.file.service.FileService;
 import net.app.front.mypage.service.MypageService;
+import net.app.front.mypage.vo.CmpyVO;
 import net.app.front.mypage.vo.UserVO;
 import net.app.lgn.annotation.PassAuth;
 import net.app.lgn.enu.SessionTypeEnum;
@@ -164,6 +165,7 @@ public class LoginController  {
     @ResponseBody
     public ModelMap joinSubmitDo(
             UserVO userVO
+            ,CmpyVO cmpyVO
             ,SrchVO srchVO
             , HttpSession session, HttpServletRequest req
             , SessionUserVO sessionUserVO
@@ -172,28 +174,38 @@ public class LoginController  {
         ModelMap modelMap = new ModelMap();
         String rtnId  ="";
 
-        try {
-            userVO.setStatus(UserStatusEnum.REG.getCode());
-            userVO.setRtnVal(CryptoUtils.createChkKey(userVO.getEmail()+""));
-            userVO.setUserPassword(SHA256EncryptUtil.getSHA256(userVO.getPassword()));
-            rtnId  = mypageService.insUserInfoDo(userVO);
 
-            MailVO mailVO = new MailVO();
-            userVO.setEmail(userVO.getEmail());
-            mailVO.setRtnVal(userVO.getRtnVal());
-            mailVO.setTo(userVO.getEmail() + "");
-            mailVO.setLang(LocaleContextHolder.getLocale() + "");
-            cmsMailUtil.sendMailCertify(mailVO); // 1건씩 전송
 
-        } catch (UnsupportedEncodingException | GeneralSecurityException e) {
-            e.printStackTrace();
-        }
+        UserVO emailUserVO = mypageService.getUserEmailDtl(userVO);
+         if(emailUserVO == null) {
+            try {
+                userVO.setStatus(UserStatusEnum.REG.getCode());
+                userVO.setRtnVal(CryptoUtils.createChkKey(userVO.getEmail()+""));
+                userVO.setUserPassword(SHA256EncryptUtil.getSHA256(userVO.getPassword()));
 
-        if ("1".equals(rtnId)) {
-            sessionUserVO = lgnService.getLoginDtl(sessionUserVO);
-            this.setSessionContextFactory(sessionUserVO, session);
-            modelMap.put("code","0001");
-            modelMap.put("msg", this.egovMessageSource.getMessage("success.common.join"));
+                rtnId  = mypageService.insUserCmpyInfoDo(userVO,cmpyVO);
+
+
+                MailVO mailVO = new MailVO();
+                userVO.setEmail(userVO.getEmail());
+                mailVO.setRtnVal(userVO.getRtnVal());
+                mailVO.setTo(userVO.getEmail() + "");
+                mailVO.setLang(LocaleContextHolder.getLocale() + "");
+                cmsMailUtil.sendMailCertify(mailVO); // 1건씩 전송
+
+            } catch (UnsupportedEncodingException | GeneralSecurityException e) {
+                e.printStackTrace();
+            }
+
+            if ("1".equals(rtnId)) {
+    //            sessionUserVO = lgnService.getLoginDtl(sessionUserVO);
+    //            this.setSessionContextFactory(sessionUserVO, session);
+                modelMap.put("code","0001");
+                modelMap.put("msg", this.egovMessageSource.getMessage("success.common.join"));
+            }else {
+                modelMap.put("code","9999");
+                modelMap.put("msg", this.egovMessageSource.getMessage("success.common.fail"));
+            }
         }else {
             modelMap.put("code","9999");
             modelMap.put("msg", this.egovMessageSource.getMessage("success.common.fail"));

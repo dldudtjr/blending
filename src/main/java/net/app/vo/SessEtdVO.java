@@ -14,8 +14,8 @@ public class SessEtdVO {
 //
 //    private String userNm = CmsSessionUtils.getName();
 //
-    private String registId;
-    private String registDt;
+    private String regtId;
+    private String regtDt;
     private String updtId;
     private String updtDt;
     private String useYn  = "Y";

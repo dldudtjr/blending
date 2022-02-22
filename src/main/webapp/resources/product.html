@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>BLENDING TREND - Product</title>
+  <link rel="stylesheet" href="./lib/jquery/css/jquery-ui.min.css">
+  <link rel="stylesheet" href="./lib/swiper/swiper-bundle.min.css">
+  <link rel="stylesheet" href="./css/lib.css">
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+  <div class="site-container">
+    <header class="global-header">
+      <div class="global-nav-bar-container" id="stickyHeader">
+        <nav class="global-nav-bar no-line">
+          <div class="wrapper">
+            <a href="main.html" class="header-logo-link">
+              <h1 class="header-logo" title="BLENDING TREND"></h1>
+            </a>
+            <ul class="gnb-menu">
+              <li class="menu-item"><a href="#"><span class="tit">Home</span></a></li>
+              <li class="menu-item"><a href="#"><span class="tit">Brand</span></a></li>
+              <li class="menu-item"><a href="#"><span class="tit">Buyers</span></a></li>
+            </ul>
+            <ul class="global-top-menu gnb-menu-extra">
+              <li class="gtm-item">
+                <a href="WN_PB_PC_ORD_010100.html" class="gtm-item-main">
+                  <span class="top-btn">Verify Brand</span>
+                </a>
+              </li>
+              <li class="gtm-item hover-menu">
+                <a href="#" class="gtm-item-main">
+                  <span class="top-info"><img src="images/info_img.png" alt=""></span>
+                  <span class="top-info-arrow"></span>
+                </a>
+                <div class="gtm-item-sub hover-sub">
+                  <ul class="sub-list com-sub-list">
+                    <li class="sub-item"><a href="#">계정설정</a></li>
+                    <li class="sub-item"><a href="#">로그아웃</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="main-container">
+      <div class="main-content">
+        <div class="sub-img">
+          <div class="form-attach-image">
+            <input type="file" name="" id="input-file" hidden="">
+            <label for="input-file">
+              <div class="attach-image-thumb">
+                <span>Cover Image</span>
+                <div class="img-square">
+                  <div class="img-crop" data-attach-role="bgImg"></div>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+        <div class="sidebar-layout">
+          <div class="sidebar-main title-up">
+            <header class="guide-title">
+              <div class="guide-title-img">
+                <div class="form-attach-image">
+                  <input type="file" name="" id="input-file2" hidden="">
+                  <label for="input-file2">
+                    <div class="attach-image-thumb">
+                      <img src="images/info_img.png" alt="">
+                      <div class="img-square">
+                        <div class="img-crop" data-attach-role="bgImg"></div>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <h3 class="tit">Farming Season</h3>
+            </header>
+            <div class="guide-wrap">
+              <div class="guide-tab">
+                <a href="product.html" class="active">Product</a>
+                <a href="brand.html">Brand</a>
+                <a href="#" class="share ml-auto"><img src="images/Icon-ionic-ios-share-alt.png" alt="공유하기"></a>
+              </div>
+              <div class="line-gray"></div>
+              <div class="product-wrap">
+                <div class="product-left">
+                  <!-- 20220217 -->
+                  <div class="product-form add-line">
+                    <a href="#" class="product-remove"><img src="images/x-16-red@2x.png" alt=""></a>
+                    <div class="product-img">
+                      <img src="images/sample1.png" alt="">
+                    </div>
+                    <div class="info-bt ml-auto">
+                      <div class="product-popup-bt">
+                        <a href="javascript:void(0)"><img src="/resources/images/modify24@2x.png" alt=""></a>
+                        <a href="javascript:void(0)" onclick="$('#popProduct').modal('show')"><img src="/resources/images/search24@2x.png" alt=""></a>
+                        <a href="javascript:void(0)"><img src="/resources/images/Icon-feather-menu.png" alt=""></a>
+                      </div>
+                      <div class="product-bot-bt">
+                        <a href="#"><img src="images/Icon-ionic-ios-checkmark-circle.png" alt=""></a>
+                        <a href="#"><img src="images/Icon-material-wifi.png" alt=""></a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- // 20220217 -->
+                  <div class="product-form">
+                    <a href="#" class="add-bt">
+                      <img src="images/Icon-material-add-circle.png" alt="">
+                      <span>Add Product</span>
+                    </a>
+                  </div>
+                  <div class="product-form">
+                    <a href="#" class="add-bt">
+                      <img src="images/Icon-material-add-circle.png" alt="">
+                      <span>Add Product</span>
+                    </a>
+                  </div>
+                  <div class="product-form">
+                    <a href="#" class="add-bt">
+                      <img src="images/Icon-material-add-circle.png" alt="">
+                      <span>Add Product</span>
+                    </a>
+                  </div>
+                </div>
+                <ul class="product-right">
+                  <li>
+                    <section class="detail-right-container">
+                      <div class="detail-img"><img src="./images/info_img.png" alt=""></div>
+                      <div class="detail-img-text">
+                        <span>SeSi Lever</span>
+                        <span class="detail-img-text-title">SeSi Leggings</span>
+                        <div class="add-r mt-10">
+                          <span>$20.00</span>
+                          <span>Cost/item</span>
+                          <span>58.00%</span>
+                          <span>Margin</span>
+                        </div>
+                      </div>
+                    </section>
+                  </li>
+                  <li>Products <span>0</span></li>
+                  <li>주소 <span>-</span></li>
+                  <li>Website <span>-</span></li>
+                  <li>Established <span>2021</span></li>
+                  <li>Revenue <span>$ ~ $</span></li>
+                  <li>Instagram <span>Url</span></li>
+                  <li>Facebook <span>Url</span></li>
+                  <li>Youtube <span>Url</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="spacer-bottom">
+      </div><!-- /.main-content -->
+    </main>
+
+    <footer class="global-footer">
+      <div class="footer-content">
+        <h1 class="header-logo" title="BLENDING TREND"></h1>
+      </div>
+    </footer>
+  </div><!-- /.site-container -->
+
+
+  <!-- 팝업: product -->
+  <section class="modal fade wn-modal" id="popProduct">
+    <div class="modal-dialog modal-dialog-centered modal-slide">
+      <div class="modal-content">
+        <button class="btn-close" data-dismiss="modal" title="닫기"></button>
+        <div class="wn-modal-body">
+          <div class="pop-product-img"><img src="images/mium.png" alt="" style="width: 65px;"></div>
+          <div class="pop-product-wrap">
+            <div class="pop-product-title">
+              <img src="images/product-logo.png" alt="" style="width: 30px;">
+              <span class="ml-10">Farming Season</span>
+            </div>
+            <div class="pop-product-sub">
+              <span class="product-title-name">Mium</span>
+              <span class="px-5">-</span>
+              <span class="">Korean Taste for Seasoning</span>
+            </div>
+            <div class="pop-product-sub2">
+              <p>MSRP $20.00 ~ $25.00</p>
+              <p>Cost/Item $5.00</p>
+              <p>Margin 20% ~ 25%</p>
+            </div>
+          </div>
+          <footer class="wn-modal-footer">
+            <a href="#"><i class="wn-icon int"></i><span>Interested</span></a>
+            <a href="#"><i class="wn-icon cont"></i><span>Contact</span></a>
+            <a href="#"><i class="wn-icon sample"></i><span>Sample</span></a>
+            <a href="javascript:void(0)" class="detail-info-bt"><i class="wn-icon deInfo"></i><span>Detail Info</span></a>
+          </footer>
+        </div>
+        <div class="wn-modal-body">
+          <nav>
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a href="#tab-content-1" class="nav-link active" data-toggle="tab">소개</a>
+              </li>
+              <li class="nav-item">
+                <a href="#tab-content-2" class="nav-link" data-toggle="tab">유통현황</a>
+              </li>
+              <li class="nav-item">
+                <a href="#tab-content-3" class="nav-link" data-toggle="tab">가격</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="tab-content">
+            <section class="tab-pane show active" id="tab-content-1">
+              <div class="pop-detail-info">
+                <span class="pop-detail-info-title">제품소개</span>
+                <span>Unique all-around seasoning for the real taste of Korea.
+                  Experience the different taste of 8 Korean Provinces.</span>
+              </div>
+              <div class="pop-detail-info">
+                <span class="pop-detail-info-title">USP (Unique Selling Propositions)</span>
+                <p>USP 1</p>
+                <p>USP 2</p>
+                <p>USP 3</p>
+              </div>
+            </section>
+            <section class="tab-pane" id="tab-content-2">
+              <div class="pop-detail-info">
+                <span class="pop-detail-info-title">제조 국가</span>
+                <span>South Korea, China</span>
+              </div>
+              <div class="pop-detail-info">
+                <span class="pop-detail-info-title">제조 도시</span>
+                <span>South Korea, China</span>
+              </div>
+              <div class="pop-detail-info">
+                <span class="pop-detail-info-title">판매 가능 여부</span>
+                <span>South Korea, China</span>
+              </div>
+              <div class="pop-detail-info">
+                <span class="pop-detail-info-title">유통업자</span>
+                <span>South Korea, China</span>
+              </div>
+              <div class="pop-detail-info">
+                <span class="pop-detail-info-title">유통처</span>
+                <span>South Korea, China</span>
+              </div>
+            </section>
+            <section class="tab-pane" id="tab-content-3">
+              <div class="pop-detail-info flex">
+                <span class="pop-detail-info-title">권장 소비자가격(MSRP)</span>
+                <span>US$ 10 - US$ 12</span>
+              </div>
+              <div class="pop-detail-info flex">
+                <span class="pop-detail-info-title">공급가격(Cost)</span>
+                <span>US$ 2</span>
+              </div>
+              <div class="pop-detail-info flex">
+                <span class="pop-detail-info-title">마진(Margin)</span>
+                <span>US$ 8 - US$ 10</span>
+              </div>
+              <div class="pop-detail-info flex mt-40">
+                <span class="pop-detail-info-title">카튼당 구매가격</span>
+                <span>US$ 20</span>
+              </div>
+              <div class="pop-detail-info flex">
+                <span class="pop-detail-info-title">카튼박스 입수량</span>
+                <span>10</span>
+              </div>
+              <div class="pop-detail-info flex mt-40">
+                <span class="pop-detail-info-title">무상샘플지원</span>
+                <span>3</span>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <script src="./lib/jquery/jquery.min.js"></script>
+  <script src="./lib/jquery/jquery-ui.min.js"></script>
+  <script src="./lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="./lib/swiper/swiper-bundle.min.js"></script>
+  <script src="./lib/waypoints/jquery.waypoints.min.js"></script>
+  <script src="./lib/waypoints/shortcuts/sticky.min.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/main-pc.js"></script>
+  <script src="./js/detail.js"></script>
+</body>
+
+</html>

@@ -20,11 +20,11 @@ import egov.utl.inno.CryptoUtils;
 import net.app.front.mypage.service.MypageService;
 import net.app.front.mypage.vo.UserVO;
 import net.app.lgn.annotation.PassAuth;
+import net.app.lgn.util.CmsSessionUtils;
 import net.base.web.CommUtils;
 
 @PassAuth
 @Controller
-@RequestMapping(path = "/web/main")
 public class IndexController {
 
 
@@ -44,14 +44,19 @@ public class IndexController {
 
     String path = "tiles/pages/lpsm/road/user";
 
+    @RequestMapping(path = {"/web/main/main.bt"})
+    public String indexss(
+            @ModelAttribute("loginFm") UserVO loginVO,
+            @ModelAttribute("saveFm") UserVO userVO,
+            ModelMap model, HttpServletRequest req, HttpServletResponse res, HttpSession session) throws NoSuchAlgorithmException, UnsupportedEncodingException, GeneralSecurityException {
 
-    @RequestMapping(path = "index.bt")
-    public String index() {
-        return  "tiles/pages/frnt/index";
+        String rtnPage = "redirect:/web/main/index.bt";
+
+        return  rtnPage;
+
     }
 
-
-    @RequestMapping(path = "main.bt")
+    @RequestMapping(path = {"/","/web/main/index.bt"})
     public String main(
             @ModelAttribute("loginFm") UserVO loginVO,
             @ModelAttribute("saveFm") UserVO userVO,
@@ -62,11 +67,32 @@ public class IndexController {
         req.getSession().setAttribute(sessKey, symtcKey);
         model.addAttribute("_ssesKey", sessKey);
         model.addAttribute("_symtcKey", symtcKey);
-        return  "tiles/pages/frnt/main";
+        String rtnPage = "tiles/pages/frnt/index";
+        if (CmsSessionUtils.isLoginChk() && "001".equals(CmsSessionUtils.getUserInfo().getUserType())){
+            rtnPage = "tiles/pages/frnt/brandIndex";
+        }else if (CmsSessionUtils.isLoginChk() && "002".equals(CmsSessionUtils.getUserInfo().getUserType())){
+//            rtnPage = "tiles/pages/frnt/buyerIndex";
+            rtnPage = "redirect:/web/buyer/productLst.bt";
+        }
+
+        return  rtnPage;
 
     }
 
 
+    @RequestMapping(path = {"buyerMain.bt"})
+    public String buyerMain() {
+        String rtnPage = "tiles/pages/frnt/buyerIndex";
+        return  rtnPage;
+
+    }
+
+    @RequestMapping(path = {"brandMain.bt"})
+    public String brandMain() {
+        String rtnPage = "tiles/pages/frnt/brandIndex";
+        return  rtnPage;
+
+    }
 
 
 }

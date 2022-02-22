@@ -65,7 +65,6 @@ public class MyPageController {
     String path = "tiles/pages/frnt/mypage";
 
 
-
     @RequestMapping(path = "registGuide.bt")
     public String registGuide() {
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/registGuide");
@@ -105,7 +104,7 @@ public class MyPageController {
         }
 
         if ("1".equals(rtnId)) {
-            sessionUserVO.setLoginId(sessionUserVO.getEmail());
+            sessionUserVO.setLoginId(CmsSessionUtils.getUserInfo().getEmail());
             sessionUserVO = lgnService.getLoginDtl(sessionUserVO);
 
             this.setSessionContextFactory(sessionUserVO, session);
@@ -124,12 +123,23 @@ public class MyPageController {
     }
 
     @RequestMapping(path = "insUserInfoDo.ax")
-    public ModelMap insUserInfoDo(UserVO UserVO, ModelMap model) {
+    public ModelMap insUserInfoDo(MultipartHttpServletRequest request ,UserVO UserVO, ModelMap model) {
+        ModelMap modelMap = new ModelMap();
+
         String rtn = mypageService.insUserInfoDo(UserVO);
 
-        ModelMap modelMap = new ModelMap();
-        if ("insert".equals(rtn) || "update".equals(rtn)) {
-            modelMap.put("msg", this.egovMessageSource.getMessage("success.common." + rtn));
+        List<FileVO> list;
+        try {
+            list = EgovFileUpload.fileUploads(request, this.path); // 파일 업로드
+            if (list.size() > 0) {
+                this.fileService.insFileDo(list, UserVO.getUserId());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if ("1".equals(rtn)) {
+            modelMap.put("msg", this.egovMessageSource.getMessage("success.common.update"));
         } else {
             modelMap.put("msg", this.egovMessageSource.getMessage("success.common.error"));
         }
@@ -138,8 +148,9 @@ public class MyPageController {
     }
 
     @RequestMapping(path = "cmpyInfo.bt")
-    public String cmpyInfo(SrchVO srchVO, @ModelAttribute("saveFm") CmpyVO cmpyVO, ModelMap model) {
+    public String cmpyInfo(SrchVO srchVO, CmpyVO cmpyVO, ModelMap model) {
         cmpyVO.setUserId(CmsSessionUtils.getUserId());
+        cmpyVO.setCmpyId(CmsSessionUtils.getUserInfo().getCmpyId());
         model.addAttribute("saveFm", mypageService.getCmpyDtl(cmpyVO));
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/cmpyInfo");
     }
@@ -189,6 +200,7 @@ public class MyPageController {
     @RequestMapping(path = "loginInfo.bt")
     public String loginInfo(SrchVO srchVO
                 ,@ModelAttribute("saveFm") UserVO userVO
+                ,@ModelAttribute("emailFm") UserVO emailuserVO
                 ,ModelMap model) {
 
         srchVO.setSrchMappingType("usr");
@@ -220,15 +232,25 @@ public class MyPageController {
     }
 
 
+
+
     @RequestMapping(path = "/emailChgDo.ax")
     @ResponseBody
     public ModelMap findIdPwDo(UserVO vo,HttpSession session) throws IOException {
         ModelMap modelMap = new ModelMap();
 
+        if(vo.getEmail() != CmsSessionUtils.getUserInfo().getEmail()) {
+
 
         try {
+
             UserVO userVO = mypageService.getUserDtl(vo);
-            if (userVO != null) {
+
+            UserVO emailUserVO = mypageService.getUserEmailDtl(vo);
+
+
+
+            if (userVO != null && emailUserVO == null) {
                 MailVO mailVO = new MailVO();
                 userVO.setRtnVal(CryptoUtils.createChkKey(userVO.getEmail()+""));
                 userVO.setEmail(vo.getEmail());
@@ -236,19 +258,23 @@ public class MyPageController {
                 mailVO.setRtnVal(userVO.getRtnVal());
                 mailVO.setTo(vo.getEmail() + "");
                 mailVO.setLang(LocaleContextHolder.getLocale() + "");
-                cmsMailUtil.sendMailPw(mailVO); // 1건씩 전송
+                cmsMailUtil.sendMailCertify(mailVO); // 1건씩 전송
                 mypageService.uptEmailDo(userVO);
 
-                session.invalidate();
+
 
                 modelMap.put("msg", this.egovMessageSource.getMessage("web.sending"));
                 modelMap.put("code", "0000");
             } else {
-                modelMap.put("msg", this.egovMessageSource.getMessage("success.common.nmnotFound"));
+                modelMap.put("msg", this.egovMessageSource.getMessage("success.common.fail"));
                 modelMap.put("code", "9999");
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        }else {
+            modelMap.put("msg", this.egovMessageSource.getMessage("success.common.fail"));
+            modelMap.put("code", "9999");
         }
         return modelMap;// success";
     }
@@ -266,11 +292,33 @@ public class MyPageController {
         } else {
             modelMap.put("msg", this.egovMessageSource.getMessage("success.common.error"));
         }
-
-
-
         return modelMap;// success";
     }
+
+    @RequestMapping(path = "/udtCmpyMvUrlSubmit.ax")
+    @ResponseBody
+    public ModelMap udtCmpyMvUrlSubmit(CmpyVO vo, SessionUserVO sessionUserVO,HttpSession session) throws IOException {
+
+        ModelMap modelMap = new ModelMap();
+
+        String rtn = mypageService.udtCmpyMvUrlSubmit(vo);
+
+        if ("1".equals(rtn)) {
+
+            sessionUserVO.setLoginId(CmsSessionUtils.getUserInfo().getEmail());
+            sessionUserVO = lgnService.getLoginDtl(sessionUserVO);
+
+            session.setAttribute(SessionTypeEnum._sessionKey.toString(), sessionUserVO);
+
+            modelMap.put("msg", this.egovMessageSource.getMessage("success.common.update"));
+        } else {
+            modelMap.put("msg", this.egovMessageSource.getMessage("success.common.error"));
+        }
+        return modelMap;// success";
+    }
+
+
+
 
 
     @RequestMapping(path = "payInfo.bt")
@@ -284,6 +332,7 @@ public class MyPageController {
     }
 
     private void setSessionContextFactory(SessionUserVO sessionUserVO, HttpSession session) {
+        session.invalidate();
         SessionContext sessionContext = (SessionContext) this.sessionContextFactory.getObject();
         sessionContext.setAuthenticated(true);
         sessionContext.setSessionUserVO(sessionUserVO);

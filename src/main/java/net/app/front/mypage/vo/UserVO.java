@@ -22,7 +22,7 @@ public class UserVO extends SessEtdVO{
     private String chgPassWd;
     private String chgPassWdChk;
     private String rtnVal;
-
+    private String fileId;
     private String  authorGradCodeNm;
     private String  licenseTypeNm;
 }

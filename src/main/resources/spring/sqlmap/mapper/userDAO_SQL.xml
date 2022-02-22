@@ -4,29 +4,21 @@
 <mapper namespace="userDAO">
 	<sql id="basicQry">
 		SELECT
-			 USER_ID
-			,PHONE
-			,EMAIL
-			,FIRST_NM
-			,LAST_NM
-			,USER_TYPE
-			,USER_PASSWORD
-			,STATUS
-			,REGIST_DT
-			,UPDT_DT
-			,USE_YN
-			,POSITION
+			A.*
+			,(SELECT MAX(FILE_ID) FROM TB_FILE WHERE PARNTS_DTA_ID=A.USER_ID AND UPLOAD_FILE_NM = 'myImg') AS FILE_ID
 		FROM
-			BLENDING.TB_USER
+			BLENDING.TB_USER A
 	</sql>
 
 	<sql id="basicQry_where">
+		<where>
 		<if test="srchEmail != '' and srchEmail != null">
 			AND EMAIL = #{srchEmail}
 		</if>
 		<if test="srchPhone != '' and srchPhone != null">
 			AND PHONE = #{srchPhone}
 		</if>
+		</where>
 	</sql>
 
 	<sql id="basicQry_pk">
@@ -39,6 +31,13 @@
 		<include refid="basicQry_pk" />
 	</select>
 
+	<select id="getUserEmailDtl" parameterType="net.app.front.mypage.vo.UserVO" resultType="net.app.front.mypage.vo.UserVO">
+		<include refid="basicQry" />
+		WHERE  EMAIL = #{email}
+	</select>
+
+
+
 
 	<select id="getUserPageLst" parameterType="net.app.vo.SrchVO" resultType="egovMap">
 
@@ -48,6 +47,9 @@
 		<include refid="include.page_cnt_end" />
 	</select>
 
+	<select id="getUserId" parameterType="net.app.vo.SrchVO" resultType="String">
+		SELECT 'usr' || TO_CHAR(SYSDATE, 'YYYY') || LPAD(NVL(Max(SUBSTR(USER_ID,8))+1,1),7,'0') FROM TB_USER WHERE TO_CHAR(SYSDATE, 'YYYY') = SUBSTR(USER_ID,4,4)
+	</select>
 
 	<insert id="insUserInfoDo" parameterType="net.app.front.mypage.vo.UserVO" >
 		MERGE
@@ -56,8 +58,7 @@
 				USING
 				(
 				SELECT
-				(SELECT 'usr' || TO_CHAR(SYSDATE, 'YYYY') || LPAD(NVL(Max(SUBSTR(USER_ID,8))+1,1),7,'0') FROM TB_USER WHERE TO_CHAR(SYSDATE, 'YYYY') = SUBSTR(USER_ID,4,4))
-				AS USER_ID
+				 #{userId}			AS USER_ID
 				,#{firstNm}			AS FIRST_NM
 				,#{lastNm}			AS LAST_NM
 				,#{status}			AS STATUS

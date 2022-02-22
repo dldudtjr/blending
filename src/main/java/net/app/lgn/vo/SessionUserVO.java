@@ -13,6 +13,8 @@ public class SessionUserVO {
 
     private String userType;
 
+    private String userNm = this.getFirstNm() +" "+this.getLastNm();
+
     private String status;
 
     private String firstNm;
@@ -29,7 +31,20 @@ public class SessionUserVO {
 
     private String useYn;
 
-    private String lang = LocaleContextHolder.getLocale() + "";
+    private String fileId;
 
+    private String coverFileId;
+
+    private String brandFileId;
+
+    private String cmpyFileId;
+
+    private String cmpyId;
+
+    private String cmpyNm;
+
+    private String mvUrl;
+
+    private String lang = LocaleContextHolder.getLocale() + "";
 
 }

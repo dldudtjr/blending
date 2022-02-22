@@ -27,6 +27,13 @@ public class CryptoUtils {
     public static String createChkKey(String id) throws NoSuchAlgorithmException, UnsupportedEncodingException, GeneralSecurityException {
         UUID uuid = UUID.randomUUID();
         System.out.println(uuid);
-        return AES256Util.encrypt(id,(id+UUID.randomUUID().toString().replace("-", ""))+"");
+        return StringReplace(AES256Util.encrypt(id,(id+UUID.randomUUID().toString().replace("-", ""))+""));
     }
+
+    public static String StringReplace(String str){
+        String match = "[^\uAC00-\uD7A30-9a-zA-Z]";
+        str = str.replaceAll(match, "");
+        return str;
+    }
+
 }
