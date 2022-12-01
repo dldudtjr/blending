@@ -12,28 +12,37 @@
 				<sf:hidden path="productOrgStatus"  value="004" />
             <div class="detail-wrap">
               <div class="detail-wrap-left">
-                <div class="form-field">
-                  <h4 class="detail-wrap-title">마케팅 예산<span>- 선택사항</span>
-                    <div class="help-wrap">
-                      <i class="wn-icon help">QnA</i>
-                      <div class="help-cont">
-                        <span>세부내용 설명입니다. 세부내용 설명입니다.</span>
-                      </div>
-                    </div>
-                  </h4>
-                  <div class="custom-select">
-                 	 <sf:select path="marketingBudget">
-	                      <c:forEach items="${CodeIdSP07}" var="row" varStatus="cnt">
-								<sf:option value="${row.srchKey}" label="${row.srchTxt}"  />
-							</c:forEach>
-                        </sf:select>
-                      <!-- <option value="">선택</option>
-                      <option value="">~ US$10K</option>
-                      <option value="">US$10K ~ US$50K</option>
-                      <option value="">US$50K ~ US$100K</option>
-                      <option value="">US$100K ~</option>
-                       -->
-                  </div>
+
+                <div class="mt-30">
+                  	<h4 class="detail-wrap-title">제품명</h4>
+	                <div class="form-field">
+						<sf:input path="productNm" class="input-text" placeholder="SeSi Leggings"  disabled="true"  />
+					</div>
+                </div>
+				<div class="mt-30">
+	                <div class="form-field">
+	                  <h4 class="detail-wrap-title">마케팅 예산<span>- 선택사항</span>
+	                    <div class="help-wrap">
+	                      <i class="wn-icon help">QnA</i>
+	                      <div class="help-cont">
+	                        <span>세부내용 설명입니다. 세부내용 설명입니다.</span>
+	                      </div>
+	                    </div>
+	                  </h4>
+	                  <div class="custom-select">
+	                 	 <sf:select path="marketingBudget">
+		                      <c:forEach items="${CodeIdSP07}" var="row" varStatus="cnt">
+									<sf:option value="${row.srchKey}" label="${row.srchTxt}"  />
+								</c:forEach>
+	                        </sf:select>
+	                      <!-- <option value="">선택</option>
+	                      <option value="">~ US$10K</option>
+	                      <option value="">US$10K ~ US$50K</option>
+	                      <option value="">US$50K ~ US$100K</option>
+	                      <option value="">US$100K ~</option>
+	                       -->
+	                  </div>
+	                </div>
                 </div>
                 <div class="mt-30">
                   <div class="form-field">
@@ -148,18 +157,18 @@
                     </div>
                   </div>
                 </div>
-                 <div class="mt-30">
+                 <!-- <div class="mt-30">
                   <div class="form-field">
                     <h4 class="detail-wrap-title">제품 영상<span>- 선택사항</span></h4>
-                    <!-- 20220217 -->
+                    20220217
                     <div class="input-add item-center add-right">
                       <p class="youtube-text">유튜브 URL</p>
                       <input type="text" class="input-text" name="mvUrl" placeholder="직접입력" value="">
-                      <!-- <button class="button bt-gray w-140">URL 변경</button> -->
+                      <button class="button bt-gray w-140">URL 변경</button>
                     </div>
-                    <!-- // 20220217 -->
+                    // 20220217
                   </div>
-                </div>
+                </div> -->
 
                <!--  <div class="mt-30">
                   <div class="form-field">
@@ -247,11 +256,6 @@
 			}
 		});
 
-
-
-
-
-		});
 
 
 		$(".saveBtn").click(function() {

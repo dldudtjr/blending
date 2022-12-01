@@ -94,7 +94,14 @@ public class LoginController  {
 
         }
 
-        return new ModelAndView("redirect:" + "/web/main/main.bt?lang="+loginHistVO.getLocale());
+        String urls ="/web/brand/productLst.bt";
+        if("001".equals(sessionUserVO.getUserType())) {
+            urls ="/web/brand/productLst.bt";
+        }else {
+            urls ="/web/buyer/productLst.bt";
+        }
+        //        return new ModelAndView("redirect:" + urls"/web/main/main.bt?lang="+loginHistVO.getLocale());
+        return new ModelAndView("redirect:" + urls+"?lang="+loginHistVO.getLocale());
     }
 
 

@@ -76,11 +76,13 @@ public class ProductServiceImpl extends EgovAbstractServiceImpl implements Produ
             if("".equals(vo.getProductId()) || vo.getProductId() == null ) {
                 vo.setProductId(this.productDAO.getProductId(vo));
             }
-
+            System.out.println(">>>>>>>>>vo.getProductId() A= "+vo.getProductId());
 
             this.productDAO.udtProductIntroduceInfoDo(vo);
             vo.setCateType("001");
             this.InscateGory(vo);
+
+            System.out.println(">>>>>>>>>vo.getProductId() B= "+vo.getProductId());
 
         }else if("002".equals(vo.getProductOrgStatus())){
             this.productDAO.udtProductDetailInfoDo(vo);
@@ -104,14 +106,16 @@ public class ProductServiceImpl extends EgovAbstractServiceImpl implements Produ
 
     public void InscateGory(ProductVO vo) {
         this.productDAO.delProductCateDo(vo.getProductId());
-        for(String cateNm : vo.getCategoryArr()) {
-            String cateCode = this.productDAO.getCateDo(cateNm);
-            if("".equals(cateCode) || cateCode == null) {
-                this.productDAO.udtCateDo(cateNm);
-                cateCode = this.productDAO.getCateDo(cateNm);
+        if(vo.getCategoryArr() != null) {
+            for(String cateNm : vo.getCategoryArr()) {
+                String cateCode = this.productDAO.getCateDo(cateNm);
+                if("".equals(cateCode) || cateCode == null) {
+                    this.productDAO.udtCateDo(cateNm);
+                    cateCode = this.productDAO.getCateDo(cateNm);
+                }
+                vo.setCateCode(cateCode);
+                this.productDAO.insProductCateDo(vo);
             }
-            vo.setCateCode(cateCode);
-            this.productDAO.insProductCateDo(vo);
         }
     }
 

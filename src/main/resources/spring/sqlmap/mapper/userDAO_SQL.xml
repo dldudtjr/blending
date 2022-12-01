@@ -144,7 +144,7 @@
 
 	<update id="uptPasswordDo" parameterType="net.app.front.mypage.vo.UserVO" >
 		UPDATE TB_USER SET USER_PASSWORD = #{userPassword}
-		WHERE EMAIL = #{email}
+		WHERE USER_ID = #{userId}
 	</update>
 
 

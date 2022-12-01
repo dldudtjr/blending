@@ -10,9 +10,10 @@
 					<h1 class="header-logo" title="BLENDING TREND"></h1>
 				</a>
 				<ul class="gnb-menu">
-					<c:if test="${not empty _sessionKey}">
+
+				<%-- 	<c:if test="${not empty _sessionKey}">
 						<li class="menu-item"><a href="<c:url value='/web/main/main.bt'/>"><span class="tit">Home</span></a></li>
-					</c:if>
+					</c:if> --%>
 
 
 					<c:choose>

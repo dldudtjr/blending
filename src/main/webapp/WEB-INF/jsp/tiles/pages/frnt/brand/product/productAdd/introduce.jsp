@@ -306,6 +306,7 @@
 		}
 
 		var nextPg = "detail";
+		alert(data.productId);
 		$("#makingProductId").val(data.productId);
 		var url = "<c:url value='/web/brand/"+ nextPg+ "/productAdd.bt'/>";
 

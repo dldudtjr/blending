@@ -70,14 +70,13 @@ public class IndexController {
         model.addAttribute("_symtcKey", symtcKey);
         String rtnPage = "tiles/pages/frnt/index";
         if (FrntSessionUtils.isLoginChk() && "001".equals(FrntSessionUtils.getUserInfo().getUserType())){
-            rtnPage = "tiles/pages/frnt/brandIndex";
+            // rtnPage = "tiles/pages/frnt/brandIndex";
+            rtnPage = "redirect:/web/brand/productLst.bt";
         }else if (FrntSessionUtils.isLoginChk() && "002".equals(FrntSessionUtils.getUserInfo().getUserType())){
 //            rtnPage = "tiles/pages/frnt/buyerIndex";
             rtnPage = "redirect:/web/buyer/productLst.bt";
         }
-
         return  rtnPage;
-
     }
 
 

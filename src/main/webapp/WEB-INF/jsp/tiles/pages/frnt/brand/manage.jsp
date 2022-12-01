@@ -35,11 +35,13 @@
                     </div>
                   </div>
                    <!-- 20220217 -->
+				<c:if test="${_sessionKey.mvUrl eq null}">
                   <div class="product-form">
-                    <a href="javascript:void(0)" onclick="$('#popVideo').modal('show')" class="add-bt">
-                      <img src="images/Icon-awesome-video.png" alt="">
-                      <span>Add Video</span>
-                    </a>
+	                    <a href="javascript:void(0)" onclick="$('#popVideo').modal('show')" class="add-bt">
+	                      <img src="images/Icon-awesome-video.png" alt="">
+	                      <span>Add Video</span>
+	                    </a>
+
                     <!-- <div class="add-video">
                       <div class="input-add item-center">
                         <p class="youtube-text">유튜브 URL</p>
@@ -47,14 +49,17 @@
                       </div>
                     </div> -->
                   </div>
+                  </c:if>
                   <!-- // 20220217 -->
                    <!-- 20220221 -->
+                  <c:if test="${not empty _sessionKey.mvUrl}">
                   <div class="product-form add-line">
                     <div class="modify-bt">
-                      <a href="javascript:void(0)"><img src="images/modify24.png" alt=""></a>
+                      <a href="javascript:void(0)" onclick="$('#popVideo').modal('show')"><img src="images/modify24.png" alt=""></a>
                     </div>
                     <iframe width="440" height="280" src="${_sessionKey.mvUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                   </div>
+                  </c:if>
                   <!-- // 20220221 -->
                   <!-- 20220217 -->
 				  <!-- 팝업: add video -->
@@ -78,20 +83,6 @@
 				  </section>
 				  <!-- // 20220217 -->
 
-                  <!-- 20220217 -->
-                <%--   <div class="product-form">
-                    <a href="javascript:void(0)" class="add-bt popVideo">
-                      <img src="/resources/images/Icon-awesome-video.png" alt="">
-                      <span>Add Video</span>
-                    </a>
-                    <div class="add-video">
-                      <div class="input-add item-center">
-                        <p class="youtube-text">유튜브 URL</p>
-                        <input type="text" class="input-text" name="mvUrl" id="mvUrl" placeholder="직접입력" value="${_sessionKey.mvUrl}">
-                      </div>
-                    </div>
-                  </div> --%>
-                  <!-- // 20220217 -->
 
                 </div>
                 <ul class="product-right">

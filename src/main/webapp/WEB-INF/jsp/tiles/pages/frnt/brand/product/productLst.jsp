@@ -85,10 +85,11 @@
 			return false;
 		});
 	</script>
-				<!-- <div class="product-form">
+				 <div class="product-form">
 					<a href="javascript:void(0)" class="add-bt"> <img src="/resources/images/Icon-material-add-circle.png" alt=""> <span>Add Product</span>
 					</a>
 				</div>
+				<!--
 				 <div class="product-form add-line">
 					<div class="product-img">
 						<img src="/resources/images/sample1.png" alt="">
@@ -100,8 +101,8 @@
 							<a href="#"><img src="/resources/images/Icon-material-wifi.png" alt=""></a>
 						</div>
 					</div>
-				</div> -->
-
+				</div>
+ -->
 				<!-- <div class="product-form">
 					<a href="#" class="add-bt"> <img src="/resources/images/Icon-material-add-circle.png" alt=""> <span>Add Product</span>
 					</a>

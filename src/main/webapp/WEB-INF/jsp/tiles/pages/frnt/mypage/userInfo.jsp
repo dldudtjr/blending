@@ -170,7 +170,7 @@ $( document ).ready(function() {
 });
 
 </script>
-
+<%--
 	</br>
 	<header class="sidebar-main-header">
 		<h3 class="tit">회사 정보</h3>
@@ -283,7 +283,7 @@ $( document ).ready(function() {
 			<div class="form-field">
 				<sf:input path="bizRegNo" 	class="input-text" placeholder=" 사업자등록번호 "  /><!-- <input type="text" class="input-text" name="" placeholder="회사 등록 번호" value=""> -->
 			</div>
-			<%-- <div class="form-field">
+			<div class="form-field">
 				<div class="input-add add-right2">
 					<sf:input path="repEmail" class="input-text" placeholder="회사 등록 번호"  />
 					<sf:hidden path="repEmailCheckYn" />
@@ -315,13 +315,13 @@ $( document ).ready(function() {
 						<button class="button bt-blue-text phoneSend">인증</button>
 					</c:if>
 				</div>
-			</div> --%>
+			</div>
 			<div class="form-field">
 				<sf:input path="sectors"	class="input-text" placeholder="품목 "  />
 			</div>
-			<%-- <div class="form-field">
+			<div class="form-field">
 				<sf:input path="industry"	class="input-text" placeholder="산업 "  />
-			</div> --%>
+			</div>
 			<div class="mt-30 bt-right">
 				<a href="#" class="cmpyBtn button bt-blue w-140">저장</a>
 			</div>
@@ -391,7 +391,7 @@ $( document ).ready(function() {
 
 });
 
-</script>
+</script> --%>
 
 <script src="<c:url value='/resources/js/ui.js'/>"></script>
 <script src="<c:url value='/resources/js/main-pc.js' />"></script>

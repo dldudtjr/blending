@@ -18,7 +18,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 							<div class="detail-wrap-left">
 								<div class="form-field">
 									<h4 class="detail-wrap-title">제품명</h4>
-									<sf:input path="productNm" class="input-text" placeholder="SeSi Leggings" />
+									<sf:input path="productNm" class="input-text" placeholder="SeSi Leggings"  disabled="true"  />
 								</div>
 
 								<div class="mt-30">

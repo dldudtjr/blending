@@ -5,15 +5,15 @@
 			<h3 class="sidebar-menu-hd">계정 설정</h3>
 			<ul class="sidebar-menu">
 
-				<%-- <li class="sidebar-menu-item userInfo">
+				<li class="sidebar-menu-item userInfo">
 					<a href="<c:url value='/web/mypage/userInfo.bt'/>">나의 정보</a>
 				</li>
 				<li class="sidebar-menu-item cmpyInfo">
 					<a href="<c:url value='/web/mypage/cmpyInfo.bt'/>">회사 정보</a>
-				</li> --%>
-				<li class="sidebar-menu-item userInfo">
-					<a href="<c:url value='/web/mypage/userInfo.bt'/>">계정 정보</a>
 				</li>
+<%-- 				<li class="sidebar-menu-item userInfo">
+					<a href="<c:url value='/web/mypage/userInfo.bt'/>">계정 정보</a>
+				</li> --%>
 
 				<li class="sidebar-menu-item loginInfo">
 					<a href="<c:url value='/web/mypage/loginInfo.bt'/>">로그인 설정</a>

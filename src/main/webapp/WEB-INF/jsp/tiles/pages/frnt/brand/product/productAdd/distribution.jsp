@@ -18,21 +18,29 @@
 
             <div class="detail-wrap">
               <div class="detail-wrap-left">
-                <h4 class="detail-wrap-title">제품이 제조되는 국가/지역이 어디입니까?</h4>
-                <div class="form-field">
-                  <div class="form-field">
-                    <div class="input-add add-right">
-                      <input type="text" class="input-text manuFacturedCountryTmp" placeholder="">
-                      <button type="button" class="button bt-blue-light w-140 listAdd" data-id="manuFacturedCountry">등록</button>
-                    </div>
-                  </div>
-                  <div class="detail-tag manuFacturedCountryLst">
-	                  <c:if test="${not empty saveFm.manuFacturedCountry}" >
-							<c:forEach var="item" items="${fn:split(saveFm.manuFacturedCountry,'||')}">
-								<span class="tag-pill">${item}<input type="hidden" name="manuFacturedCountryArr" value="${item}"> <a href="#" class="btn-remove"><i class="wn-icon close"></i></a></span>
-							</c:forEach>
-						</c:if>
-                  </div>
+				<div class="mt-30">
+                  	<h4 class="detail-wrap-title">제품명</h4>
+	                <div class="form-field">
+						<sf:input path="productNm" class="input-text" placeholder="SeSi Leggings"  disabled="true"  />
+					</div>
+                </div>
+				<div class="mt-30">
+	                <h4 class="detail-wrap-title">제품이 제조되는 국가/지역이 어디입니까?</h4>
+	                <div class="form-field">
+	                  <div class="form-field">
+	                    <div class="input-add add-right">
+	                      <input type="text" class="input-text manuFacturedCountryTmp" placeholder="">
+	                      <button type="button" class="button bt-blue-light w-140 listAdd" data-id="manuFacturedCountry">등록</button>
+	                    </div>
+	                  </div>
+	                  <div class="detail-tag manuFacturedCountryLst">
+		                  <c:if test="${not empty saveFm.manuFacturedCountry}" >
+								<c:forEach var="item" items="${fn:split(saveFm.manuFacturedCountry,'||')}">
+									<span class="tag-pill">${item}<input type="hidden" name="manuFacturedCountryArr" value="${item}"> <a href="#" class="btn-remove"><i class="wn-icon close"></i></a></span>
+								</c:forEach>
+							</c:if>
+	                  </div>
+	                </div>
                 </div>
                 <%-- <div class="mt-30">
                   <h4 class="detail-wrap-title">제품이 제조되는 주/도시가 어디입니까?</h4>
