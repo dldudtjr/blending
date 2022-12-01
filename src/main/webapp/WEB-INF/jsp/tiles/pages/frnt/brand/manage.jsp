@@ -34,8 +34,52 @@
                       </label>
                     </div>
                   </div>
-                  <!-- 20220217 -->
+                   <!-- 20220217 -->
                   <div class="product-form">
+                    <a href="javascript:void(0)" onclick="$('#popVideo').modal('show')" class="add-bt">
+                      <img src="images/Icon-awesome-video.png" alt="">
+                      <span>Add Video</span>
+                    </a>
+                    <!-- <div class="add-video">
+                      <div class="input-add item-center">
+                        <p class="youtube-text">유튜브 URL</p>
+                        <input type="text" class="input-text" name="" placeholder="직접입력" value="">
+                      </div>
+                    </div> -->
+                  </div>
+                  <!-- // 20220217 -->
+                   <!-- 20220221 -->
+                  <div class="product-form add-line">
+                    <div class="modify-bt">
+                      <a href="javascript:void(0)"><img src="images/modify24.png" alt=""></a>
+                    </div>
+                    <iframe width="440" height="280" src="${_sessionKey.mvUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                  </div>
+                  <!-- // 20220221 -->
+                  <!-- 20220217 -->
+				  <!-- 팝업: add video -->
+				  <section class="modal fade wn-modal" id="popVideo">
+				    <div class="modal-dialog modal-dialog-centered modal-video">
+				      <div class="modal-content">
+				        <button class="btn-close" data-dismiss="modal" title="닫기"></button>
+				        <div class="wn-modal-body">
+				          <div class="text-center">
+				            <p class="youtube-text">YouTube URL 입력</p>
+				            <input type="text" class="input-text" name="mvUrl" id="mvUrl" placeholder="직접입력" value="${_sessionKey.mvUrl}">
+				          </div>
+				          <!-- 20220221 -->
+				          <div class="mt-20 text-center">
+				            <a href="#mvUrlSave" class="button bt-blue w-100 mvUrlBtn" data-dismiss="modal">등록</a>
+				          </div>
+				          <!-- // 20220221 -->
+				        </div>
+				      </div>
+				    </div>
+				  </section>
+				  <!-- // 20220217 -->
+
+                  <!-- 20220217 -->
+                <%--   <div class="product-form">
                     <a href="javascript:void(0)" class="add-bt popVideo">
                       <img src="/resources/images/Icon-awesome-video.png" alt="">
                       <span>Add Video</span>
@@ -46,7 +90,7 @@
                         <input type="text" class="input-text" name="mvUrl" id="mvUrl" placeholder="직접입력" value="${_sessionKey.mvUrl}">
                       </div>
                     </div>
-                  </div>
+                  </div> --%>
                   <!-- // 20220217 -->
 
                 </div>
@@ -63,7 +107,8 @@
 
 						</div>
 						<div class="detail-img-text">
-							<span>SeSi Lever</span> <span class="detail-img-text-title">${productLatest.productNm}</span>
+							<!-- <span>SeSi Lever</span> -->
+							<span class="detail-img-text-title">${productLatest.productNm}</span>
 							<div class="add-r mt-10">
 								<span>$ ${productLatest.cost}</span><!--  <span>Cost/item</span> <span>58.00%</span> <span>Margin</span> -->
 							</div>
@@ -99,6 +144,12 @@ $(function(){
 	$(".global-nav-bar").addClass("no-line");
 
 
+/* 	$(".main-container").addClass("sub"); */
+	/* $(".global-nav-bar").addClass("no-line"); */
+	$(".main-content").addClass("no-line");
+	$(".sub-img").css("border-bottom","solid 0px #f8f8f8");
+
+
 	  <c:if test="${not empty _sessionKey.coverFileId}">
 		var src = "<c:url value='/util/fileDownload.ax'/>?parntsDtaId=${_sessionKey.cmpyId}&fileId=${_sessionKey.coverFileId}";
 	  $("#brandCoverImg").css({
@@ -122,17 +173,22 @@ $(function(){
 		fn_submitModal(url,sendData,"popProduct");
 	});
 
-    $("#mvUrl").bind('paste', function() {
+/*     $("#mvUrl").bind('paste', function() {
     	setTimeout(function(){
     		var url	 ="<c:url value='/web/mypage/udtCmpyMvUrlSubmit.ax' />";
     		var sendData ={"mvUrl" : $("#mvUrl").val()};
     		fn_submitReloadAjax(url,sendData,"popProduct");
     		}, 500);
-     });
+     }); */
+     $(".mvUrlBtn").click(function(){
+     		var url	 ="<c:url value='/web/mypage/udtCmpyMvUrlSubmit.ax' />";
+     		var sendData ={"mvUrl" : $("#mvUrl").val()};
+     		fn_submitReloadAjax(url,sendData,"popProduct");
+      });
 
 
 	$(".product-manage").click(function(){
-		var url	 ="<c:url value='/web/brand/productMod.bt' />";
+		var url	 ="<c:url value='/web/brand/introduce/productAdd.bt' />";
 		$("#productId").val($(this).data("productid"));
 		$("#srchFm").attr("action",url);
 		$("#srchFm").submit();
@@ -191,18 +247,6 @@ $(function(){
 
   </section>
 
-    <!-- 20220217 -->
-  <!-- 팝업: add video -->
-  <section class="modal fade wn-modal" id="popVideo">
-    <div class="modal-dialog modal-dialog-centered modal-video">
-      <div class="modal-content">
-        <button class="btn-close" data-dismiss="modal" title="닫기"></button>
-        <div class="wn-modal-body">
-          <iframe width="560" height="320" src="${_sessionKey.mvUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- // 20220217 -->
+
 
 

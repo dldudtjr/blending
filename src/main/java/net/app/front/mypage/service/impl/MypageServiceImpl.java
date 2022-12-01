@@ -13,7 +13,7 @@ import net.app.front.mypage.service.MypageService;
 import net.app.front.mypage.vo.CmpyVO;
 import net.app.front.mypage.vo.UserVO;
 import net.app.lgn.enu.UserStatusEnum;
-import net.app.lgn.util.CmsSessionUtils;
+import net.app.lgn.util.FrntSessionUtils;
 import net.app.vo.MappingVO;
 import net.app.vo.SrchVO;
 
@@ -45,7 +45,7 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
     @Override
     public UserVO getUserDtl(UserVO userVO) {
 
-        userVO.setUserId(CmsSessionUtils.getUserId());
+        userVO.setUserId(FrntSessionUtils.getUserId());
 
         return this.mypageDAO.getUserDtl(userVO);
     }
@@ -93,7 +93,7 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
 
         userVO.setUseYn(UserStatusEnum.Y.getCode());
         userVO.setStatus(UserStatusEnum.REG.getCode());
-        userVO.setUserId(CmsSessionUtils.getUserId());
+        userVO.setUserId(FrntSessionUtils.getUserId());
         return this.mypageDAO.uptEmailDo(userVO);
     }
 
@@ -101,11 +101,11 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
     @Override
     public String udtConnectAuthDo(MappingVO mappingVO) {
 
-     this.mypageDAO.uptMappingUseYnDo(CmsSessionUtils.getUserId());
+     this.mypageDAO.uptMappingUseYnDo(FrntSessionUtils.getUserId());
      for(String email :  mappingVO.getUserEmailArr()) {
 
          UserVO insVO = new UserVO();
-         insVO.setUserId(CmsSessionUtils.getUserId());
+         insVO.setUserId(FrntSessionUtils.getUserId());
          insVO.setEmail(email);
          this.mypageDAO.udtConnectAuthDo(insVO);
      }
@@ -148,7 +148,7 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
 
     @Override
     public String udtCmpyMvUrlSubmit(CmpyVO vo) {
-        vo.setCmpyId(CmsSessionUtils.getUserInfo().getCmpyId());
+        vo.setCmpyId(FrntSessionUtils.getUserInfo().getCmpyId());
         return this.mypageDAO.udtCmpyMvUrlSubmit(vo);
     }
 

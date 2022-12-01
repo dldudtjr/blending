@@ -1,3 +1,4 @@
+
 package net.app;
 
 import java.io.UnsupportedEncodingException;
@@ -20,7 +21,7 @@ import egov.utl.inno.CryptoUtils;
 import net.app.front.mypage.service.MypageService;
 import net.app.front.mypage.vo.UserVO;
 import net.app.lgn.annotation.PassAuth;
-import net.app.lgn.util.CmsSessionUtils;
+import net.app.lgn.util.FrntSessionUtils;
 import net.base.web.CommUtils;
 
 @PassAuth
@@ -56,7 +57,7 @@ public class IndexController {
 
     }
 
-    @RequestMapping(path = {"/","/web/main/index.bt"})
+    @RequestMapping(path = {"/web/main/index.bt"})
     public String main(
             @ModelAttribute("loginFm") UserVO loginVO,
             @ModelAttribute("saveFm") UserVO userVO,
@@ -68,9 +69,9 @@ public class IndexController {
         model.addAttribute("_ssesKey", sessKey);
         model.addAttribute("_symtcKey", symtcKey);
         String rtnPage = "tiles/pages/frnt/index";
-        if (CmsSessionUtils.isLoginChk() && "001".equals(CmsSessionUtils.getUserInfo().getUserType())){
+        if (FrntSessionUtils.isLoginChk() && "001".equals(FrntSessionUtils.getUserInfo().getUserType())){
             rtnPage = "tiles/pages/frnt/brandIndex";
-        }else if (CmsSessionUtils.isLoginChk() && "002".equals(CmsSessionUtils.getUserInfo().getUserType())){
+        }else if (FrntSessionUtils.isLoginChk() && "002".equals(FrntSessionUtils.getUserInfo().getUserType())){
 //            rtnPage = "tiles/pages/frnt/buyerIndex";
             rtnPage = "redirect:/web/buyer/productLst.bt";
         }
@@ -80,15 +81,33 @@ public class IndexController {
     }
 
 
-    @RequestMapping(path = {"buyerMain.bt"})
-    public String buyerMain() {
+    @RequestMapping(path = {"/web/main/buyerMain.bt"})
+    public String buyerMain(
+            @ModelAttribute("loginFm") UserVO loginVO,
+            @ModelAttribute("saveFm") UserVO userVO,
+            ModelMap model, HttpServletRequest req, HttpServletResponse res, HttpSession session) throws NoSuchAlgorithmException, UnsupportedEncodingException, GeneralSecurityException {
+
+        String sessKey = CryptoUtils.createChkKey("loginPageA");
+        String symtcKey = CryptoUtils.createChkKey("loginPageB");
+        req.getSession().setAttribute(sessKey, symtcKey);
+        model.addAttribute("_ssesKey", sessKey);
+        model.addAttribute("_symtcKey", symtcKey);
         String rtnPage = "tiles/pages/frnt/buyerIndex";
         return  rtnPage;
 
     }
 
-    @RequestMapping(path = {"brandMain.bt"})
-    public String brandMain() {
+    @RequestMapping(path = {"/web/main/brandMain.bt"})
+    public String brandMain(
+            @ModelAttribute("loginFm") UserVO loginVO,
+            @ModelAttribute("saveFm") UserVO userVO,
+            ModelMap model, HttpServletRequest req, HttpServletResponse res, HttpSession session) throws NoSuchAlgorithmException, UnsupportedEncodingException, GeneralSecurityException {
+
+        String sessKey = CryptoUtils.createChkKey("loginPageA");
+        String symtcKey = CryptoUtils.createChkKey("loginPageB");
+        req.getSession().setAttribute(sessKey, symtcKey);
+        model.addAttribute("_ssesKey", sessKey);
+        model.addAttribute("_symtcKey", symtcKey);
         String rtnPage = "tiles/pages/frnt/brandIndex";
         return  rtnPage;
 

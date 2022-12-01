@@ -20,9 +20,10 @@
 					BLENDING.TB_USER A
 			) A
 		<where>
+			USE_YN ='Y'
 			<if test="loginId != '' and loginId != null">
 				AND PHONE = #{loginId} OR EMAIL = #{loginId}
-				AND STATUS = '002'
+				<!-- AND STATUS = '002' -->
 			</if>
 			<if test="rtnVal != '' and rtnVal != null">
 				AND RTN_VAL = #{rtnVal}
@@ -32,14 +33,14 @@
 
 	<insert id="insLoginHistDo" parameterType="net.app.lgn.vo.LoginHistVO">
 		INSERT INTO TBSM_LOGIN_HIST(
-					 LOGIN_HIST_SN
+					LOGIN_HIST_SN
 					,USER_ID
 					,USER_IP
 					,STATUS
 					)
 				VALUES(
-					 (
-					 SELECT NVL (MAX (login_hist_sn), 0) + 1 FROM TBSM_LOGIN_HIST)
+					(
+					SELECT NVL (MAX (login_hist_sn), 0) + 1 FROM TBSM_LOGIN_HIST)
 					,#{loginId}
 					,#{userIp}
 					,#{status}
@@ -55,6 +56,40 @@
 		SELECT TO_CHAR (MAX (REGIST_DT), 'YYYY MM-DD HH24:MI')
 		FROM TBSM_LOGIN_HIST
 		WHERE USER_ID = #{userId}
+	</select>
+
+	<select id="getUserLoginHist" parameterType="net.app.front.mypage.vo.UserVO" resultType="egovMap">
+			SELECT *
+			FROM (
+				SELECT *
+				FROM TBSM_LOGIN_HIST
+				WHERE USER_ID in (#{userId}, #{loginId})
+				ORDER BY REGIST_DT DESC
+			)
+			WHERE ROWNUM = 1
+		</select>
+
+
+	<select id="getLoginHistPageLst" parameterType="net.app.vo.SrchVO" resultType="egovMap">
+			<include refid="include.page_cnt_start" />
+				SELECT *
+				FROM
+				(
+					SELECT A.*,
+					CASE
+					WHEN A.STATUS = '001' THEN 'LOGIN'
+					WHEN A.STATUS = '003' THEN 'LOGOUT'
+					ELSE 'LOGIN FAIL' END STATUS_TXT,
+					(SELECT  FIRST_NM||' '||LAST_NM FROM TB_USER WHERE EMAIL = A.USER_ID) USER_NM
+					FROM TBSM_LOGIN_HIST A
+					<where>
+						<if test="srchTxt != null and srchTxt != '' ">
+							USER_ID = #{srchTxt}
+						</if>
+					</where>
+					ORDER BY REGIST_DT DESC
+				)
+			<include refid="include.page_cnt_end" />
 	</select>
 
 </mapper>

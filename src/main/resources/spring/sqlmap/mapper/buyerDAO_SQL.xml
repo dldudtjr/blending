@@ -3,18 +3,116 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="buyerDAO">
 
-				<select
-								id="getLatestBrand"
-								parameterType="net.app.vo.SrchVO"
-								resultType="egovMap">
-								SELECT
-								COUNT(*)OVER() AS NEW_BRAND_CNT
-								,( SELECT COUNT(PRODUCT_ID) AS CNT FROM BLENDING.TB_PRODUCT WHERE TO_CHAR(REGT_DT,'yyyymmdd') >= TO_CHAR(SYSDATE-30,'yyyymmdd') ) AS NEW_PRODUCT_CNT
-								,(SELECT MAX(FILE_ID) FROM TB_FILE WHERE PARNTS_DTA_ID=A.CMPY_ID AND UPLOAD_FILE_NM = 'cmpyImg') AS FILE_ID
-								,CMPY_NM
-								,CMPY_ID
-								FROM TB_CMPY A
-								WHERE TO_CHAR(REGT_DT,'yyyymmdd') >= TO_CHAR(SYSDATE-7,'yyyymmdd') AND USER_ID IN (SELECT USER_ID FROM TB_USER WHERE USER_TYPE ='001')
-				</select>
+	<select id="getLatestBrand" parameterType="net.app.vo.SrchVO" resultType="egovMap">
+		SELECT COUNT(*)OVER() AS NEW_BRAND_CNT
+				,( SELECT COUNT(PRODUCT_ID) AS CNT FROM BLENDING.TB_PRODUCT WHERE TO_CHAR(REGT_DT,'yyyymmdd') >= TO_CHAR(SYSDATE-30,'yyyymmdd') ) AS NEW_PRODUCT_CNT
+				,(SELECT MAX(FILE_ID) FROM TB_FILE WHERE PARNTS_DTA_ID=A.CMPY_ID AND UPLOAD_FILE_NM = 'cmpyImg') AS FILE_ID
+				,CMPY_NM ,CMPY_ID
+			FROM TB_CMPY A
+			WHERE TO_CHAR(REGT_DT,'yyyymmdd') >= TO_CHAR(SYSDATE-7,'yyyymmdd')
+			AND USER_ID IN (SELECT USER_ID FROM TB_USER WHERE USER_TYPE ='001')
+	</select>
+
+	<select id="getProductCateId" resultType="String">
+			SELECT 'PSC' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') || LPAD(NVL(Max(SUBSTR(PRODUCT_CATE_ID,17))+1,1),3,'0') AS PRODUCT_CATE_ID FROM TB_PRODUCT_SRCH_CATE
+	            WHERE TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') = SUBSTR(PRODUCT_CATE_ID,4,14)
+	</select>
+
+	<delete id="delCateCode" parameterType="net.app.front.brand.product.vo.ProductCateVO" >
+				DELETE FROM BLENDING.TB_PRODUCT_SRCH_CATE WHERE CATE_ID = ${productCateId}
+	</delete>
+
+	<update id="udtCategorySrchInfoDo" parameterType="net.app.front.brand.product.vo.ProductCateVO" >
+				MERGE
+					INTO
+						BLENDING.TB_PRODUCT_SRCH_CATE tgt
+						USING
+							(
+							SELECT
+							 	 #{productCateId} 	AS PRODUCT_CATE_ID
+							 	,#{productCateNm} 	AS PRODUCT_CATE_NM
+								,#{msrpMin} 		AS MSRP_MIN
+								,#{msrpMax} 		AS MSRP_MAX
+								,#{costMin} 		AS COST_MIN
+								,#{costMax} 		AS COST_MAX
+								,#{marginMin} 		AS MARGIN_MIN
+								,#{marginMax} 		AS MARGIN_MAX
+								,#{keyword} 		AS KEYWORD
+								,#{userId} 			AS USER_ID
+							FROM DUAL
+							) src
+							ON
+							(tgt.PRODUCT_CATE_ID = src.PRODUCT_CATE_ID)
+						WHEN MATCHED
+							THEN
+							UPDATE
+							SET
+								 tgt.PRODUCT_CATE_NM = src.PRODUCT_CATE_NM
+								,tgt.MSRP_MIN 		= src.MSRP_MIN
+								,tgt.MSRP_MAX 		= src.MSRP_MAX
+								,tgt.COST_MIN 		= src.COST_MIN
+								,tgt.COST_MAX 		= src.COST_MAX
+								,tgt.MARGIN_MIN 	= src.MARGIN_MIN
+								,tgt.MARGIN_MAX 	= src.MARGIN_MAX
+								,tgt.KEYWORD 		= src.KEYWORD
+								,tgt.SORT_SN 		= 1
+					WHEN NOT MATCHED
+							THEN
+							INSERT
+								(
+									 PRODUCT_CATE_ID
+									,PRODUCT_CATE_NM
+									,MSRP_MIN
+									,MSRP_MAX
+									,COST_MIN
+									,COST_MAX
+									,MARGIN_MIN
+									,MARGIN_MAX
+									,KEYWORD
+									,USER_ID
+									,SORT_SN
+								)
+							VALUES
+								(
+									src.PRODUCT_CATE_ID
+									,src.PRODUCT_CATE_NM
+									,src.MSRP_MIN
+									,src.MSRP_MAX
+									,src.COST_MIN
+									,src.COST_MAX
+									,src.MARGIN_MIN
+									,src.MARGIN_MAX
+									,src.KEYWORD
+									,src.USER_ID
+									,'1'
+								)
+	</update>
+
+	<select id="getProductCateLst" parameterType="net.app.front.brand.product.vo.ProductCateVO"  resultType="net.app.front.brand.product.vo.ProductCateVO" >
+			SELECT * FROM TB_PRODUCT_SRCH_CATE
+	            WHERE USER_ID = #{userId} ORDER BY SORT_SN ASC
+	</select>
+
+	<select id="getProductCateDtl" parameterType="net.app.front.brand.product.vo.ProductCateVO"  resultType="net.app.front.brand.product.vo.ProductCateVO" >
+			SELECT * FROM TB_PRODUCT_SRCH_CATE
+	            WHERE PRODUCT_CATE_ID = #{productCateId}
+	</select>
+
+	<insert id="insProductSrchCateDo" parameterType="net.app.front.brand.product.vo.ProductCateVO" >
+		INSERT INTO BLENDING.TB_MAPPING_CATE
+		(PARNT_ID, CATE_ID, CATE_TYPE)
+		VALUES(#{productCateId},#{cateId},#{cateType})
+	</insert>
+
+	<delete id="delProductCateMapDo" parameterType="String" >
+		DELETE FROM BLENDING.TB_MAPPING_CATE
+		WHERE PARNT_ID 	   	=#{productCateId}
+	</delete>
+	<delete id="delProductCateDo" parameterType="String" >
+		DELETE FROM BLENDING.TB_PRODUCT_SRCH_CATE
+		WHERE PRODUCT_CATE_ID 	   	=#{productCateId}
+	</delete>
+
+
 
 </mapper>

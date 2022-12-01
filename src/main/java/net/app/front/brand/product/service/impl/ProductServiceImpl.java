@@ -12,8 +12,9 @@ import egovframework.rte.psl.dataaccess.util.EgovMap;
 import net.app.file.service.FileService;
 import net.app.file.vo.FileVO;
 import net.app.front.brand.product.service.ProductService;
+import net.app.front.brand.product.vo.ProductCateVO;
 import net.app.front.brand.product.vo.ProductVO;
-import net.app.lgn.util.CmsSessionUtils;
+import net.app.lgn.util.FrntSessionUtils;
 import net.app.vo.SrchVO;
 
 @Service("productService")
@@ -41,6 +42,15 @@ public class ProductServiceImpl extends EgovAbstractServiceImpl implements Produ
     }
 
 
+
+    @Override
+    public List<EgovMap> getProductPageForCateLst(ProductCateVO vo) {
+        return this.productDAO.getProductPageForCateLst(vo);
+    }
+
+
+
+
     @Override
     public ProductVO getProductDtl(ProductVO vo) {
         return this.productDAO.getProductDtl(vo);
@@ -49,7 +59,7 @@ public class ProductServiceImpl extends EgovAbstractServiceImpl implements Produ
 
     @Override
     public ProductVO getProductLatestDtl(ProductVO vo) {
-        vo.setRegtId(CmsSessionUtils.getUserId());
+        vo.setRegtId(FrntSessionUtils.getUserId());
         return this.productDAO.getProductLatestDtl(vo);
     }
 
@@ -59,7 +69,7 @@ public class ProductServiceImpl extends EgovAbstractServiceImpl implements Produ
     @Override
     public String udtProductInfoDo(ProductVO vo) {
 
-        vo.setRegtId(CmsSessionUtils.getUserId());
+        vo.setRegtId(FrntSessionUtils.getUserId());
 
         if("001".equals(vo.getProductOrgStatus())){
 
@@ -69,6 +79,9 @@ public class ProductServiceImpl extends EgovAbstractServiceImpl implements Produ
 
 
             this.productDAO.udtProductIntroduceInfoDo(vo);
+            vo.setCateType("001");
+            this.InscateGory(vo);
+
         }else if("002".equals(vo.getProductOrgStatus())){
             this.productDAO.udtProductDetailInfoDo(vo);
         }else if("003".equals(vo.getProductOrgStatus())){
@@ -87,6 +100,21 @@ public class ProductServiceImpl extends EgovAbstractServiceImpl implements Produ
         return    this.productDAO.delProductInfoDo(vo);
 
     }
+
+
+    public void InscateGory(ProductVO vo) {
+        this.productDAO.delProductCateDo(vo.getProductId());
+        for(String cateNm : vo.getCategoryArr()) {
+            String cateCode = this.productDAO.getCateDo(cateNm);
+            if("".equals(cateCode) || cateCode == null) {
+                this.productDAO.udtCateDo(cateNm);
+                cateCode = this.productDAO.getCateDo(cateNm);
+            }
+            vo.setCateCode(cateCode);
+            this.productDAO.insProductCateDo(vo);
+        }
+    }
+
 
 
 }

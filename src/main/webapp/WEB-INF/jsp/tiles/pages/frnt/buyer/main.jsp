@@ -63,7 +63,8 @@
 							<img src="/resources/images/info_img.png" alt="">
 						</div>
 						<div class="detail-img-text">
-							<span>SeSi Lever</span> <span class="detail-img-text-title">SeSi Leggings</span>
+							<span>SeSi Lever</span>
+							<span class="detail-img-text-title">SeSi Leggings</span>
 							<div class="add-r mt-10">
 								<span>$20.00</span> <span>Cost/item</span> <span>58.00%</span> <span>Margin</span>
 							</div>

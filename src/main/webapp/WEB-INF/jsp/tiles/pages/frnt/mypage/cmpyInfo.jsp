@@ -3,7 +3,7 @@
 	<header class="sidebar-main-header">
 		<h3 class="tit">회사 정보</h3>
 	</header>
-	<sf:form commandName="saveFm" cssClass="form-horizontal" enctype="multipart/form-data">
+	<sf:form commandName="cmpyFm" cssClass="form-horizontal" enctype="multipart/form-data">
 	<sf:hidden path="cmpyId" />
 	<div class="info-wrap mt-30">
 
@@ -108,16 +108,16 @@
 				<sf:input path="brandNm" 	class="input-text" placeholder="브랜드명"  />
 			</div>
 			<div class="form-field">
-				<sf:input path="bizRegNo" 	class="input-text" placeholder="회사 등록 번호"  /><!-- <input type="text" class="input-text" name="" placeholder="회사 등록 번호" value=""> -->
+				<sf:input path="bizRegNo" 	class="input-text" placeholder=" 사업자등록번호 "  /><!-- <input type="text" class="input-text" name="" placeholder="회사 등록 번호" value=""> -->
 			</div>
 			<%-- <div class="form-field">
 				<div class="input-add add-right2">
 					<sf:input path="repEmail" class="input-text" placeholder="회사 등록 번호"  />
 					<sf:hidden path="repEmailCheckYn" />
-					<c:if test="${saveFm.repEmailCheckYn eq 'Y' }">
+					<c:if test="${cmpyFm.repEmailCheckYn eq 'Y' }">
 						<button class="button bt-blue-text">인증완료 </button>
 					</c:if>
-					<c:if test="${saveFm.repEmailCheckYn eq 'N' }">
+					<c:if test="${cmpyFm.repEmailCheckYn eq 'N' }">
 						<button class="button bt-blue-text emailSend">인증</button>
 					</c:if>
 
@@ -135,38 +135,34 @@
 					</div>
 					<sf:input path="repPhone" class="input-text" placeholder="Phone"  />
 					<sf:hidden path="repPhoneCheckYn" />
-					<c:if test="${saveFm.repPhoneCheckYn eq 'Y' }">
+					<c:if test="${cmpyFm.repPhoneCheckYn eq 'Y' }">
 						<button class="button bt-blue-text">인증완료 </button>
 					</c:if>
-					<c:if test="${saveFm.repPhoneCheckYn eq 'N' }">
+					<c:if test="${cmpyFm.repPhoneCheckYn eq 'N' }">
 						<button class="button bt-blue-text phoneSend">인증</button>
 					</c:if>
 				</div>
 			</div> --%>
 			<div class="form-field">
-				<sf:input path="sectors"	class="input-text" placeholder="업종 "  />
+				<sf:input path="sectors"	class="input-text" placeholder="품목 "  />
 			</div>
-			<div class="form-field">
+			<%-- <div class="form-field">
 				<sf:input path="industry"	class="input-text" placeholder="산업 "  />
-			</div>
+			</div> --%>
 			<div class="mt-30 bt-right">
-				<a href="#" class="saveBtn button bt-blue w-140">저장</a>
+				<a href="#" class="cmpyBtn button bt-blue w-140">저장</a>
 			</div>
 		</div>
 	</div>
 	</sf:form>
-</div>
-
-<script src="<c:url value='/resources/js/ui.js'/>"></script>
-<script src="<c:url value='/resources/js/detail.js'/>"></script>
 
 <script>
 $( document ).ready(function() {
 	$(".sub-img").remove();
 	$(".detail-top").hide();
 
-	 <c:if test="${not empty saveFm.fileId}">
-		var src = "<c:url value='/util/fileDownload.ax'/>?parntsDtaId=${saveFm.cmpyId}&fileId=${saveFm.fileId}";
+	 <c:if test="${not empty cmpyFm.fileId}">
+		var src = "<c:url value='/util/fileDownload.ax'/>?parntsDtaId=${cmpyFm.cmpyId}&fileId=${cmpyFm.fileId}";
 		  $("#cmpyImgLst").css({
 		      "background-image": "url(" + src + ")",
 		      "background-color": "#fff",
@@ -178,7 +174,7 @@ $( document ).ready(function() {
 
 	$(".detail-top").hide();
 
-	$("#saveFm").validate({
+	$("#cmpyFm").validate({
 		rules : {
 			cmpyNm : {
 				required : true
@@ -207,7 +203,7 @@ $( document ).ready(function() {
 			}
 		},
 		submitHandler : function() {
-			var form = $('form')[0];
+			var form = $('form')[1]
 			var formData = new FormData(form);
 			$(".modal_bg_sub").show();
 			var url = "<c:url value='/web/mypage/cmpyInfoSubmitDo.ax'/>";
@@ -215,10 +211,16 @@ $( document ).ready(function() {
 		}
 	});
 
-	$(".saveBtn").click(function() {
-		$("#saveFm").submit();
+	$(".cmpyBtn").click(function() {
+		$("#cmpyFm").submit();
 	});
 
 });
 
 </script>
+
+</div>
+
+<script src="<c:url value='/resources/js/ui.js'/>"></script>
+<script src="<c:url value='/resources/js/detail.js'/>"></script>
+

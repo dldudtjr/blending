@@ -21,7 +21,7 @@ import net.app.file.service.FileService;
 import net.app.file.vo.FileVO;
 import net.app.front.brand.product.service.ProductService;
 import net.app.front.brand.product.vo.ProductVO;
-import net.app.lgn.util.CmsSessionUtils;
+import net.app.lgn.util.FrntSessionUtils;
 import net.app.vo.SrchVO;
 import net.base.cmm.annotation.CodeId;
 import net.base.web.CommUtils;
@@ -58,7 +58,7 @@ public class ProductController {
 
         model.addAttribute("productLatest", productService.getProductLatestDtl(productVO));
 
-        srchVO.setSrchRegtId(CmsSessionUtils.getUserId());
+        srchVO.setSrchRegtId(FrntSessionUtils.getUserId());
         List<EgovMap> eMap = this.productService.getProductPageLst(srchVO);
         srchVO.setTotalRecordCount(eMap.size() > 0 ? Integer.parseInt(eMap.get(0).get("totCnt") + "") : 0);
         model.addAttribute("srchLst", eMap);
@@ -83,6 +83,15 @@ public class ProductController {
 
         return path+"/brand/product/productDtl";
     }
+
+    @RequestMapping(path = "productLatestDo.ax")
+    public String productLatestDo(SrchVO srchVO , ProductVO productVO, ModelMap model,FileVO fileVO) {
+        model.addAttribute("productCurrent", productService.getProductLatestDtl(productVO));
+
+        return path+"/brand/product/productAdd/detailSide";
+    }
+
+
 
 
     @CodeId({ "P01", "P02", "P03", "P04", "P05", "P06", "P07" }) // 게시판유형

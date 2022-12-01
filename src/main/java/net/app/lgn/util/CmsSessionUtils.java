@@ -14,7 +14,7 @@ import net.sf.ehcache.Element;
 
 public class CmsSessionUtils {
 
-    public final static String sessionKey = SessionTypeEnum._sessionKey.toString();
+    public final static String sessionKey = SessionTypeEnum._backSessionKey.toString();
 
     public final static String mainMemberId = SessionTypeEnum._mainMemberId.toString();
 

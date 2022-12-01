@@ -41,9 +41,11 @@
                         <a href="javascript:void(0)" ><img src="/resources/images/search24@2x.png" alt="" class="product-popup-bts" data-productid="${row.productId}" ></a>
                         <!-- <a href="javascript:void(0)"><img src="/resources/images/Icon-feather-menu.png" alt=""></a> -->
                       </div>
-                      <div class="product-bot-bt">
-<!--                         <a href="#"><img src="images/Icon-ionic-ios-checkmark-circle.png" alt=""></a>
-                        <a href="#"><img src="images/Icon-material-wifi.png" alt=""></a> -->
+                      <div class="product-bot-bt" id="product-bot-bt">
+                         <a href="#product-bot-bt" >
+                         	<img src="/resources/images/Icon-ionic-ios-checkmark-circle-1.png" alt="" class="circleToggle">
+                         </a>
+                        <a href="#"><img src="/resources/images/Icon-material-wifi.png" alt=""></a>
                       </div>
                     </div>
                   </div>
@@ -70,11 +72,24 @@
 		                    </div>
 					</div> --%>
 				</c:forEach>
-				<div class="product-form">
+	<script>
+		$(".circleToggle").click(function(){
+			var imgSrcA = "/resources/images/Icon-ionic-ios-checkmark-circle.png";
+			var imgSrcB = "/resources/images/Icon-ionic-ios-checkmark-circle-1.png";
+			var imgSrcC = "/resources/images/Icon-ionic-ios-checkmark-circle-outline.png";
+			if($(this).attr("src") == imgSrcA){
+				$(this).attr("src",imgSrcB)
+			}else{
+				$(this).attr("src",imgSrcA)
+			}
+			return false;
+		});
+	</script>
+				<!-- <div class="product-form">
 					<a href="javascript:void(0)" class="add-bt"> <img src="/resources/images/Icon-material-add-circle.png" alt=""> <span>Add Product</span>
 					</a>
 				</div>
-				<!-- <div class="product-form add-line">
+				 <div class="product-form add-line">
 					<div class="product-img">
 						<img src="/resources/images/sample1.png" alt="">
 					</div>
@@ -109,7 +124,8 @@
 
 						</div>
 						<div class="detail-img-text">
-							<span>SeSi Lever</span> <span class="detail-img-text-title">${productLatest.productNm}</span>
+							<!-- <span>SeSi Lever</span> -->
+							<span class="detail-img-text-title">${productLatest.productNm}</span>
 							<div class="add-r mt-10">
 								<span>$ ${productLatest.cost}</span><!--  <span>Cost/item</span> <span>58.00%</span> <span>Margin</span> -->
 							</div>
@@ -134,10 +150,14 @@ $(function(){
 	$("#brandTop").remove();
 
 
-	$(".global-nav-bar").addClass("buyer");
 	$(".main-container").addClass("sub");
+	$(".global-nav-bar").addClass("no-line");
+	$(".main-content").addClass("no-line");
+	$("#brandMain").css("border-bottom","solid 0px #f8f8f8");
+/*
+	$(".global-nav-bar").addClass("buyer");
 	$(".main-content").addClass("buyer");
-
+ */
 	  <c:if test="${not empty _sessionKey.coverFileId}">
 	  $("#brandMain").append('<img class="add-img" src="<c:url value="/util/fileDownload.ax"/>?parntsDtaId=${_sessionKey.cmpyId}&fileId=${_sessionKey.coverFileId}">');
 	  $("#brandMain").show();
@@ -157,7 +177,7 @@ $(function(){
 	});
 
 	$(".product-manage").click(function(){
-		var url	 ="<c:url value='/web/brand/productMod.bt' />";
+		var url	 ="<c:url value='/web/brand/introduce/productAdd.bt' />";
 		$("#productId").val($(this).data("productid"));
 		$("#srchFm").attr("action",url);
 		$("#srchFm").submit();
@@ -166,7 +186,7 @@ $(function(){
 
 
 	$(".add-bt").click(function(){
-		var url	 ="<c:url value='/web/brand/productAdd.bt' />";
+		var url	 ="<c:url value='/web/brand/introduce/productAdd.bt' />";
 		location.href=url;
 	});
 
@@ -183,4 +203,8 @@ $(function(){
   <section class="modal fade wn-modal modal_wrap" id="popProduct">
 
   </section>
+
+
+
+
 

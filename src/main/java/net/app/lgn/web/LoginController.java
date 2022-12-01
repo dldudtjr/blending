@@ -30,9 +30,11 @@ import net.app.front.mypage.service.MypageService;
 import net.app.front.mypage.vo.CmpyVO;
 import net.app.front.mypage.vo.UserVO;
 import net.app.lgn.annotation.PassAuth;
+import net.app.lgn.enu.LoginHistEnum;
 import net.app.lgn.enu.SessionTypeEnum;
 import net.app.lgn.enu.UserStatusEnum;
 import net.app.lgn.service.LgnService;
+import net.app.lgn.util.FrntSessionUtils;
 import net.app.lgn.vo.LoginHistVO;
 import net.app.lgn.vo.SessionContext;
 import net.app.lgn.vo.SessionUserVO;
@@ -128,8 +130,7 @@ public class LoginController  {
 
         if ((sessionUserVO != null) && !sessionUserVO.getUserPassword().equals(SHA256EncryptUtil.getSHA256(userPassword))) {
             loginHistVO.setUserId(sessionUserVO.getUserId());
-//            loginHistVO.setMemberId(sessionUserVO.getMemberId());
-           //this.loginHistDo(loginHistVO, LoginHistEnum.LogInFail);
+            this.loginHistDo(loginHistVO, LoginHistEnum.LogInFail);
 //            int failCnt = this.setLoginFailCntPlus(loginId, this.getLoginFailCnt(loginId) + 1);
 //            if (failCnt > 2) {
 //                this.userService.udtLoginUserStopDo(loginId);
@@ -141,6 +142,7 @@ public class LoginController  {
                 return modelMap;
 //            }
         }
+        this.loginHistDo(loginHistVO, LoginHistEnum.LogIn);
 
         this.setSessionContextFactory(sessionUserVO, session);
 
@@ -148,6 +150,12 @@ public class LoginController  {
         modelMap.put("msg", this.egovMessageSource.getMessage("lgn.common.msgD"));
         modelMap.put("code", "0000");
         return modelMap; // 성공했습니다.");
+    }
+
+
+    private void loginHistDo(LoginHistVO loginHistVO, LoginHistEnum loginHistEnum) {
+        loginHistVO.setStatus(loginHistEnum.getCode() +"");
+        this.lgnService.insLoginHistDo(loginHistVO);
     }
 
     private void setSessionContextFactory(SessionUserVO sessionUserVO, HttpSession session) {
@@ -217,9 +225,9 @@ public class LoginController  {
 
     @RequestMapping(path = "logOut.bt")
     public ModelAndView logOut(LoginHistVO loginHistVO, HttpSession httpSession,HttpServletRequest req, HttpServletResponse res) {
-//        if (!CmsSessionUtils.getId().equals("")) {
-//            this.loginHistDo(loginHistVO, LoginHistEnum.logOut);
-//        }
+        if (!FrntSessionUtils.getId().equals("")) {
+            this.loginHistDo(loginHistVO, LoginHistEnum.logOut);
+        }
         httpSession.invalidate();
         return new ModelAndView("redirect:" + "/web/main/index.bt?lang="+loginHistVO.getLocale());
     }

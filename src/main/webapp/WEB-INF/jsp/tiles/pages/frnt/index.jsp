@@ -27,24 +27,22 @@
 <script src="<c:url value='/resources/lib/crypto-js/aes.js'/>"></script>
 <script src="<c:url value='/resources/lib/crypto-js/sha256.js'/>"></script>
 <script src="<c:url value='/resources/lib/jquery/messagebox.js'/>"></script>
-
 <script src="<c:url value='/resources/lib/jquery/jquery.validate.min.js'/>"></script>
-
 </head>
 <body>
 	<div class="site-container">
 <%-- ${_sessionKey} --%>
 		<jsp:include page="/WEB-INF/jsp/tiles/layouts/frnt/head.jsp" flush="true" />
-		 <main class="main-container">
-      <div class="main-content main-bg">
-        <div class="main-img">
-          <div class="main-text-wrap">
-            <span class="main-text-title">Product Sourcing Marketplace</span>
-            <span>글로벌 소비재 시장 진출을 위한 필수 관문</span>
+		<main class="main-container">
+			<div class="main-content main-bg">
+				<div class="main-img">
+					<div class="main-text-wrap">
+						<span class="main-text-title">Product Sourcing Marketplace</span>
+						<span>글로벌 소비재 시장 진출을 위한 필수 관문</span>
 <!--              <a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무 료 상 담</a> -->
-            <a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무료제품등록</a>
-            <!-- <div class="coming-timer">
-              <span id="dd">00
+						<a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무료상담신청 </a>
+						<!-- <div class="coming-timer">
+							<span id="dd">00
 						<p>DAYS</p>
 					</span> <span id="hh">00
 						<p>HOURS</p>
@@ -53,55 +51,53 @@
 					</span> <span id="ss">00
 						<p>SECONDS</p>
 					</span>
-            </div> -->
-          </div>
-          <div class="main-text-bottom">
-            <span>글로벌 셀러 및 소비자에게 당신의 제품을 소개하고 경험할 수 있는 기회를 제공</span>
-          </div>
-        </div>
-        <div class="main-form-wrap">
-          <div class="main-form">
-            <div class="main-form-img"><img src="/resources/images/sample1.jpg" alt=""></div>
-            <div class="main-form-text">
-              <span class="main-form-title">커스텀 브랜드 페이지</span>
-              <span>브랜드페이지를 꾸미고 제품의 특장점을 강조하여 매력 어필 자유로운 브랜드 및 제품 페이지 공유</span>
-            </div>
-          </div>
-          <div class="main-form reverse">
-            <div class="main-form-img"><img src="/resources/images/sample2.jpg" alt=""></div>
-            <div class="main-form-text">
-              <span class="main-form-title">바이어 맞춤 큐레이션</span>
-              <span>바이어가 필요로하는 필수 정보 위주 제품 쇼케이스 바이어 맞춤형 카테고리 큐레이션 및 필터링</span>
-            </div>
-          </div>
-          <div class="main-form">
-            <div class="main-form-img"><img src="/resources/images/sample3.jpg" alt=""></div>
-            <div class="main-form-text">
-              <span class="main-form-title">다채널 제품 홍보 및 판매</span>
-              <span>다양한 글로벌 바이어에게 직접 브랜드 제안 글로벌 마케팅 채널 구축</span>
-            </div>
-          </div>
-          <div class="main-fotter-btn">
-            <a href="<c:url value='/web/main/brandMain.bt'/>" class="brand-btn">
-              <i class="wn-icon brand">브랜드</i>
-              <span class="brand-color"><b>Brand</b> 더 알아보기</span>
-            </a>
-            <a href="<c:url value='/web/main/buyerMain.bt'/>"  class="buyer-btn">
-              <i class="wn-icon buyer">바이어</i>
-              <span class="buyer-color"><b>Buyer</b> 더 알아보기</span>
-            </a>
-          </div>
-        </div>
+						</div> -->
+					</div>
+					<div class="main-text-bottom">
+						<span>글로벌 셀러 및 소비자에게 당신의 제품을 소개하고 경험할 수 있는 기회를 제공</span>
+					</div>
+				</div>
+				<div class="main-form-wrap">
+					<div class="main-form">
+						<div class="main-form-img"><img src="/resources/images/main1.png" alt=""></div>
+						<div class="main-form-text">
+							<span class="main-form-title">커스텀 브랜드 페이지</span>
+							<span>브랜드페이지를 꾸미고 제품의 특장점을 강조하여 매력 </span>
+							<span>어필 자유로운 브랜드 및 제품 페이지 공유</span>
+						</div>
+					</div>
+					<div class="main-form reverse">
+						<div class="main-form-img"><img src="/resources/images/main2.png" alt=""></div>
+						<div class="main-form-text">
+							<span class="main-form-title">바이어 맞춤 큐레이션</span>
+							<span>바이어가 필요로하는 필수 정보 위주 제품 쇼케이스</span>
+							<span> 바이어 맞춤형 카테고리 큐레이션 및 필터링</span>
+						</div>
+					</div>
+					<div class="main-form">
+						<div class="main-form-img"><img src="/resources/images/main3.png" alt=""></div>
+						<div class="main-form-text">
+							<span class="main-form-title">다채널 제품 홍보 및 판매</span>
+							<span>다양한 글로벌 바이어에게 직접 브랜드 제안 </span>
+							<span>글로벌 마케팅 채널 구축</span>
+						</div>
+					</div>
+					<div class="main-fotter-btn">
+						<a href="<c:url value='/web/main/brandMain.bt'/>" class="brand-btn">
+							<i class="wn-icon brand">브랜드</i>
+							<span class="brand-color"><b>Brand</b> 더 알아보기</span>
+						</a>
+						<a href="<c:url value='/web/main/buyerMain.bt'/>"  class="buyer-btn">
+							<i class="wn-icon buyer">바이어</i>
+							<span class="buyer-color"><b>Buyer</b> 더 알아보기</span>
+						</a>
+					</div>
+				</div>
 
-        <hr class="spacer-bottom">
-      </div><!-- /.main-content -->
-    </main>
-
-		<footer class="global-footer">
-			<div class="footer-content">
-				<h1 class="header-logo" title="BLENDING TREND"></h1>
-			</div>
-		</footer>
+				<hr class="spacer-bottom">
+			</div><!-- /.main-content -->
+		</main>
+		<jsp:include page="/WEB-INF/jsp/tiles/layouts/frnt/foot.jsp" flush="true" />
 	</div>
 	<!-- /.site-container -->
 
@@ -160,9 +156,9 @@
 						</div>
 						<div class="select-type">
 							<a href="javascript:void(0)" class="userType active" > <img src="/resources/images/brand.png" alt=""> <img src="/resources/images/brand_bw.png" alt="">
-								<p>Brand</p>
+								<!-- <p>Brand</p> -->
 							</a> <a href="javascript:void(0)" class="userType"> <img src="/resources/images/buyer.png" alt=""> <img src="/resources/images/buyer_bw.png" alt="">
-								<p>Buyer</p>
+								<!-- <p>Buyer</p> -->
 							</a>
 						</div>
 						<section class="join-form">
@@ -176,7 +172,10 @@
 								<input type="text" class="input-text" name="email" placeholder="Email" value="" id="email" />
 							</div>
 							<div class="form-field">
-								<input type="password" class="input-text" name="password" placeholder="password" value="" id="password">
+								<input type="password" class="input-text" name="password" placeholder="password 영문대소+숫자+특수문자 8~20" value="" id="password">
+							</div>
+							<div class="form-field">
+								<input type="password" class="input-text" name="cpassword" placeholder="confirm password" value="" id="cpassword">
 							</div>
 							<div class="form-field">
 								<div class="input-add add-right2">
@@ -193,8 +192,10 @@
 							</div>
 							<div class="form-field">
 								<label class="checkbox">
-									<input type="checkbox" name="" id="">
-									 <span class="label"><span class="t-blue">서비스 약관</span> 및 <span class="t-blue">개인 정보 보호 정책</span>을 읽었으며<br>이에 동의합니다.</span>
+									<input type="checkbox" id="checkAgree" name="checkAgree" id="" disabled >
+									<span class="label">
+									<span class="t-blue"><a href="javascript:void(0)" onclick="$('#popTermsA').modal('show')">서비스 약관</a></span> 및
+									<span class="t-blue"><a href="javascript:void(0)" onclick="$('#popTermsA').modal('show')">개인 정보 보호 정책</a></span>을 읽었으며<br>이에 동의합니다.</span>
 								</label>
 							</div>
 							<div class="mt-30">
@@ -210,6 +211,16 @@
 <script>
 
 	$( document ).ready(function() {
+			$(".checkAgree").click(function(){
+				if($("input:checkbox[name='terms']").is(':checked') == true &&
+				$("input:checkbox[name='terms2']").is(':checked') == true){
+					$("input:checkbox[id='checkAgree']").prop("checked", true);
+					$('#popTermsA').modal('hide');
+				}else{
+					alert("개인정보 처리 약관에 동의해 주세요 ");
+				}
+			});
+
 
 			if(getCookie("idSaveCheck") == "true"){
 				$("#idSaveCheck").prop("checked",true);
@@ -224,19 +235,19 @@
 
 
 
-		    $("#userPasswordTmp").keydown(function(key) {
-			    if (key.keyCode == 13) {
-				    loginDo();
-			    }
-		    });
+				$("#userPasswordTmp").keydown(function(key) {
+					if (key.keyCode == 13) {
+						loginDo();
+					}
+				});
 
-		    $.validator.addMethod("pw_regexp", function(value, element) {
+				$.validator.addMethod("pw_regexp", function(value, element) {
 				// return this.optional(element) ||  /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(value);
-				return this.optional(element) ||  /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+]).*$/.test(value);
+				return this.optional(element) ||  /^.*(?=^.{8,20}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+]).*$/.test(value);
 
 			});
 
-		    $.validator.addMethod("telnum", function(telnum, element) {
+				$.validator.addMethod("telnum", function(telnum, element) {
 				var pattern = /^[0-9]{2,3}[0-9]{3,4}[0-9]{4}$/;
 				if (!pattern.test(telnum)) {
 					return this.optional(element) || false;
@@ -247,9 +258,9 @@
 
 			jQuery.validator.addMethod("notEqual", function(value, element, param) {
 				if(value == $(param).val()){
-				  return this.optional(element) || false;
+					return this.optional(element) || false;
 				}
-			  return true;
+				return true;
 			});
 
 			$("#saveFm").validate({
@@ -268,10 +279,17 @@
 						telnum : true
 					},
 					password : {
-						 pw_regexp : true // 정규식
+						pw_regexp : true // 정규식
 						,required  : true // 정규식
 						,minlength : 8 // 최소입력글수  4자
-						,maxlength : 12
+						,maxlength : 20
+					},
+					cpassword : {
+						pw_regexp : true // 정규식
+						,required  : true // 정규식
+						,minlength : 8 // 최소입력글수  4자
+						,maxlength : 20
+						,equalTo : '#password'
 					},
 					cmpyNm : {
 						required : true
@@ -290,7 +308,18 @@
 						required : "<code:msg code='validate.msg.common'/>"
 					},
 					password : {
-						required  : "<code:msg code='valid.pwd.nine'/>"
+						required 	: "패스워드를 입력해 주세요"
+						,pw_regexp 	: "영문 대소문자, 숫자, 특수문자를 반드시 입력해 주시기 바랍니다."
+						,minlength 	: "{0}자 이상 입력해 주시기 바랍니다."
+						,maxlength 	: "{0}자 이하로 입력해 주시기 바랍니다."
+
+					},
+					cpassword : {
+						required 	: "패스워드를 입력해 주세요"
+						,pw_regexp 	: "영문 대소문자, 숫자, 특수문자를 반드시 입력해 주시기 바랍니다."
+						,minlength 	: "{0}자 이상 입력해 주시기 바랍니다."
+						,maxlength 	: "{0}자 이하로 입력해 주시기 바랍니다."
+						,equalTo : "패스워드가 일치하지 않습니다."
 					},
 					phone : {
 						required  : "<code:msg code='valid.pwd.nine'/>"
@@ -316,7 +345,9 @@
 			});
 
 			$(".saveBtn").click(function() {
-				$("#saveFm").submit();
+				if($("input:checkbox[id='checkAgree']").is(':checked') == true){
+					$("#saveFm").submit();
+				}
 			});
 
 	});
@@ -338,21 +369,21 @@
 
 
 	function loginSubmit(urls){
-         if($("#idSaveCheck").is(":checked") == true){
-           	setCookie("idSaveCheck", "true", 31);
-         	setCookie("loginId", $("#loginId").val(), 31);
-  	        setCookie("userPasswordTmp",$("#userPasswordTmp").val() , 31);
-         }else{
-        	 deleteCookie("idSaveCheck");
-        	 deleteCookie("loginId");
-        	 deleteCookie("userPasswordTmp");
-         }
+				if($("#idSaveCheck").is(":checked") == true){
+						setCookie("idSaveCheck", "true", 31);
+					setCookie("loginId", $("#loginId").val(), 31);
+						setCookie("userPasswordTmp",$("#userPasswordTmp").val() , 31);
+				}else{
+					deleteCookie("idSaveCheck");
+					deleteCookie("loginId");
+					deleteCookie("userPasswordTmp");
+				}
 
-         if($("#auto_login").is(":checked") == true){
-            setCookie("auto_login", "true", 31);
-         }else{
-         	 deleteCookie("auto_login");
-         }
+				if($("#auto_login").is(":checked") == true){
+						setCookie("auto_login", "true", 31);
+				}else{
+						deleteCookie("auto_login");
+				}
 
 
 		var encrypt = CryptoJS.AES.encrypt($("#userPasswordTmp").val(), "${_symtcKey}");
@@ -442,5 +473,7 @@
 </body>
 
 </html>
+
+
 
 

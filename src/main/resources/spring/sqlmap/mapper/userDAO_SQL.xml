@@ -6,18 +6,23 @@
 		SELECT
 			A.*
 			,(SELECT MAX(FILE_ID) FROM TB_FILE WHERE PARNTS_DTA_ID=A.USER_ID AND UPLOAD_FILE_NM = 'myImg') AS FILE_ID
+			,(SELECT BRAND_NM FROM TB_CMPY  WHERE USER_ID = A.USER_ID ) AS BRAND_NM
+			,(SELECT CMPY_NM FROM TB_CMPY  WHERE USER_ID = A.USER_ID ) AS CMPY_NM
 		FROM
 			BLENDING.TB_USER A
 	</sql>
 
 	<sql id="basicQry_where">
 		<where>
-		<if test="srchEmail != '' and srchEmail != null">
-			AND EMAIL = #{srchEmail}
-		</if>
-		<if test="srchPhone != '' and srchPhone != null">
-			AND PHONE = #{srchPhone}
-		</if>
+			<if test="srchTxt != '' and srchTxt != null">
+				AND ( EMAIL like #{srchTxt}||'%' or FIRST_NM like #{srchTxt}||'%' or LAST_NM like #{srchTxt}||'%' )
+			</if>
+			<if test="srchEmail != '' and srchEmail != null">
+				AND EMAIL = #{srchEmail}
+			</if>
+			<if test="srchPhone != '' and srchPhone != null">
+				AND PHONE = #{srchPhone}
+			</if>
 		</where>
 	</sql>
 
@@ -58,7 +63,7 @@
 				USING
 				(
 				SELECT
-				 #{userId}			AS USER_ID
+				#{userId}			AS USER_ID
 				,#{firstNm}			AS FIRST_NM
 				,#{lastNm}			AS LAST_NM
 				,#{status}			AS STATUS
@@ -80,7 +85,7 @@
 		THEN
 		UPDATE
 		SET
-			 tgt.FIRST_NM 		= src.FIRST_NM
+			tgt.FIRST_NM 		= src.FIRST_NM
 			,tgt.LAST_NM 		= src.LAST_NM
 			,tgt.USER_TYPE 		= src.USER_TYPE
 			,tgt.PHONE 			= src.PHONE
@@ -100,7 +105,7 @@
 			REGIST_DT,
 			UPDT_DT)
 		VALUES (
-			 src.USER_ID
+			src.USER_ID
 			,src.PHONE
 			,src.EMAIL
 			,src.FIRST_NM
@@ -116,7 +121,7 @@
 	<update id="udtUserInfoDo" parameterType="net.app.front.mypage.vo.UserVO" >
 		UPDATE BLENDING.TB_USER
 			SET
-				 FIRST_NM 		= #{firstNm}
+				FIRST_NM 		= #{firstNm}
 				,LAST_NM 		= #{lastNm}
 				,USER_TYPE 		= #{userType}
 				,EMAIL 			= #{email}
@@ -139,8 +144,17 @@
 
 	<update id="uptPasswordDo" parameterType="net.app.front.mypage.vo.UserVO" >
 		UPDATE TB_USER SET USER_PASSWORD = #{userPassword}
-		<include refid="basicQry_pk" />
+		WHERE EMAIL = #{email}
 	</update>
+
+
+
+	<update id="expireChg" parameterType="net.app.front.mypage.vo.UserVO" >
+		UPDATE TB_USER SET USE_YN = 'N'
+		WHERE EMAIL = #{email}
+	</update>
+
+
 
 	<update id="uptEmailDo" parameterType="net.app.front.mypage.vo.UserVO" >
 		UPDATE TB_USER SET EMAIL = #{email} , STATUS =#{status}, EMAIL_CHECK_YN = #{emailCheckYn}

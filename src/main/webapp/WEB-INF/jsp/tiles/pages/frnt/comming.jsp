@@ -37,12 +37,7 @@
 <script src="/resources/lib/crypto-js/sha256.js"></script>
 <script src="/resources/lib/jquery/messagebox.js"></script>
 <script>
-	var now = new Date(); //현재 날짜 가져오기
-	let date1 = new Date(2022, 02, 22, 13, 00, 00);
-
-	if (date1.getTime() < now.getTime()){
-		location.href='/web/main/index.bt'
-	}
+location.href='/web/main/index.bt'
 </script>
 </head>
 <body>
@@ -75,7 +70,7 @@
             <span class="main-text-title">Product Sourcing Marketplace</span>
             <span>글로벌 소비재 시장 진출을 위한 필수 관문</span>
 <!--              <a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무 료 상 담</a> -->
-            <a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무료제품등록</a>
+            <a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무료상담신청 </a>
             <div class="coming-timer">
               <span id="dd">00
 						<p>DAYS</p>
@@ -130,12 +125,7 @@
         <hr class="spacer-bottom">
       </div><!-- /.main-content -->
     </main>
-
-		<footer class="global-footer">
-			<div class="footer-content">
-				<h1 class="header-logo" title="BLENDING TREND"></h1>
-			</div>
-		</footer>
+<jsp:include page="/WEB-INF/jsp/tiles/layouts/frnt/foot.jsp" flush="true" />
 	</div>
 	<!-- /.site-container -->
 

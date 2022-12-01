@@ -71,9 +71,26 @@ $(function () {
   })
 });//jquery ready
 
+// info 구독 팝업 선택 클릭
+$(function () {
+  $('.subscribe-select a').click(function(){
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+  })
+});//jquery ready
+
 // help 버튼 클릭
 $(function () {
   $('.wn-icon.help').hover(function(){
+    $(this).next('.help-cont').css('display','flex');
+  },function(){
+    $(this).next('.help-cont').css('display','none');
+  })
+});//jquery ready
+
+// exclamation 버튼 클릭
+$(function () {
+  $('.wn-icon.exclamation').hover(function(){
     $(this).next('.help-cont').css('display','flex');
   },function(){
     $(this).next('.help-cont').css('display','none');
@@ -114,5 +131,19 @@ $(function () {
   $('.select-type a').click(function(){
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
+  })
+}); //jQuery Ready
+
+/* buyer scroll */
+$(function () {
+  $('.buyer-scroll').click(function(){
+    $(this).parents().next('.buyer-form-wrap').toggleClass('active');
+  })
+}); //jQuery Ready
+
+/* buyer - Category Groups */
+$(function () {
+  $('.buyer-group-bt').click(function(){
+    $(this).parents('.group-title').next('.group-content').slideToggle();
   })
 }); //jQuery Ready

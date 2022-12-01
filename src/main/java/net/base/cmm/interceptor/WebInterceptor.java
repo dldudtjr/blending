@@ -18,7 +18,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import egov.cmm.util.EgovBasicLogger;
 import egov.utl.inno.CryptoUtils;
 import net.app.lgn.annotation.PassAuth;
-import net.app.lgn.util.CmsSessionUtils;
+import net.app.lgn.util.FrntSessionUtils;
 import net.base.utl.str.CommStringUtil;
 
 public class WebInterceptor extends HandlerInterceptorAdapter {
@@ -49,20 +49,20 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
             localeResolver.setLocale(req, res, locale);
         }
 
-        if (CmsSessionUtils.isLoginChk() && (req.getRequestURI().indexOf("login.bt") > -1)) {
-            try {
-                res.sendRedirect(req.getContextPath() + "/web/main/index.bt");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return false;
-        }
+      if (FrntSessionUtils.isLoginChk() && (req.getRequestURI().indexOf("login.bt") > -1)) {
+          try {
+              res.sendRedirect(req.getContextPath() + "/web/main/index.bt");
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+          return false;
+      }
 
         if (this.annotationLoginChk(handler) || (req.getRequestURI().indexOf(".ax") > -1)) {
             return true;
         }
 
-        if (!CmsSessionUtils.isLoginChk()) {
+        if (!FrntSessionUtils.isLoginChk()) {
             return this.loginPage(req, res);
         }
 

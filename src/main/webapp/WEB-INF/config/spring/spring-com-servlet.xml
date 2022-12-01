@@ -89,19 +89,20 @@
 				<property name="paramName" value="lang" />
 			</bean>
 		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
+
+
+ 		 <mvc:interceptor>
+			<mvc:mapping path="/back/**" />
+			<bean class="net.base.cmm.interceptor.CmsInterceptor" />
+		</mvc:interceptor>
+		 <mvc:interceptor>
+			<mvc:mapping path="/web/**" />
 			<bean class="net.base.cmm.interceptor.WebInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="net.base.cmm.interceptor.BaseInterceptor" />
 		</mvc:interceptor>
-		<!-- <mvc:interceptor>
-			<mvc:mapping path="/cms/**" />
-			<bean class="net.cmsm.lgn.interceptor.CmsmInterceptor" />
-		</mvc:interceptor>
 
-		 -->
 	</mvc:interceptors>
 </beans>

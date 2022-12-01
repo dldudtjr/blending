@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-<display-name>blending</display-name>
+<display-name>InnoVoting</display-name>
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -25,7 +25,8 @@
   </filter>
   <filter-mapping>
     <filter-name>multipartFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>*.bt</url-pattern>
+    <url-pattern>*.ax</url-pattern>
   </filter-mapping>
   <filter>
     <filter-name>xssEscapeServletFilter</filter-name>
@@ -33,7 +34,8 @@
   </filter>
   <filter-mapping>
     <filter-name>xssEscapeServletFilter</filter-name>
-   <url-pattern>/*</url-pattern>
+    <url-pattern>*.bt</url-pattern>
+    <url-pattern>*.ax</url-pattern>
   </filter-mapping>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -49,7 +51,8 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>spring-action</servlet-name>
-   <url-pattern>/</url-pattern>
+    <url-pattern>*.bt</url-pattern>
+    <url-pattern>*.ax</url-pattern>
   </servlet-mapping>
   <listener>
     <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
@@ -57,7 +60,7 @@
   <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>
-      <include-prelude>/WEB-INF/jsp/com/include/taglib.jspf</include-prelude>
+      <include-prelude>/WEB-INF/com/include/taglib.jspf</include-prelude>
     </jsp-property-group>
   </jsp-config>
   <session-config>

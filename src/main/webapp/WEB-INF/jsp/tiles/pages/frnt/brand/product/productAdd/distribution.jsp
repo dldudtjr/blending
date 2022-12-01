@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
   <div class="sidebar-main">
-            <header class="sidebar-main-header">
+            <!-- <header class="sidebar-main-header">
               <h3 class="tit">유통현황</h3>
-            </header>
+            </header> -->
             <sf:form commandName="srchFm" cssClass="form-horizontal" >
 				<input type="hidden" name="productId" id="makingProductId" />
 			</sf:form>
@@ -34,7 +34,7 @@
 						</c:if>
                   </div>
                 </div>
-                <div class="mt-30">
+                <%-- <div class="mt-30">
                   <h4 class="detail-wrap-title">제품이 제조되는 주/도시가 어디입니까?</h4>
                   <div class="form-field">
                     <div class="form-field">
@@ -53,21 +53,21 @@
                       <span class="tag-pill">China <a href="#" class="btn-remove"><i class="wn-icon close"></i></a></span> -->
                     </div>
                   </div>
-                </div>
+                </div> --%>
                 <div class="mt-30">
                   <h4 class="detail-wrap-title">이 제품은 현재 판매 가능합니까?</h4>
                   <div class="form-field">
                     <label class="radio">
-                    	<sf:radiobutton path="sellYn" class="input-text" value="Y" />
+                    	<sf:radiobutton path="sellYn" class="input-text divYn" value="Y" />
                       <span class="label">Yes</span>
                     </label>
                     <label class="radio">
-                    	<sf:radiobutton path="sellYn" class="input-text" value="N" />
+                    	<sf:radiobutton path="sellYn" class="input-text divYn" value="N" />
                       <span class="label">No</span>
                     </label>
                   </div>
                 </div>
-                <div class="mt-30">
+                <div class="mt-30 sellYnDiv">
                   <div class="form-field">
                     <h4 class="detail-wrap-title">이 제품은 현재 어디에서 판매되고 있습니까?</h4>
                     <div class="form-field">
@@ -91,16 +91,16 @@
                   <h4 class="detail-wrap-title">이 제품은 유통업자를 통해 구매 가능한가요?</h4>
                   <div class="form-field">
                     <label class="radio">
-                      <sf:radiobutton path="purchaseYn" class="input-text" value="Y" />
+                      <sf:radiobutton path="purchaseYn" class="input-text divYn" value="Y" />
                       <span class="label">Yes</span>
                     </label>
                     <label class="radio">
-                      <sf:radiobutton path="purchaseYn" class="input-text" value="N" />
+                      <sf:radiobutton path="purchaseYn" class="input-text divYn" value="N" />
                       <span class="label">No</span>
                     </label>
                   </div>
                 </div>
-                <div class="mt-30">
+                <div class="mt-30 purchaseYnDiv">
                   <div class="form-field">
                     <h4 class="detail-wrap-title">어떤 유통업자인가요?</h4>
                     <div class="form-field">
@@ -120,7 +120,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="mt-30">
+                <div class="mt-30 purchaseYnDiv">
                   <h4 class="detail-wrap-title">당신의 제품을 어디에서 유통할 수 있나요? (e.g. 전체/국가명, 서울/대한민국 등)</h4>
                   <div class="form-field">
                     <div class="input-add add-right">
@@ -213,38 +213,13 @@
                 </div>
 
                 <div class="mt-30 bt-right">
+                <a href="#" class="button bt-blue w-140 pauseBtn">저장 </a>
                   <a href="#" class="button bt-blue w-140 saveBtn">다음</a>
                 </div>
               </div>
-              <!-- <aside class="detail-side">
-                <div class="detail-side-container">
-                  <div class="detail-side-wrapper">
-                    <div class="detail-side-content">
-                      <section class="detail-right-container">
-                        <div class="detail-img"><img src="/resources/images/info_img.png" alt=""></div>
-                        <div class="detail-img-text">
-                          <span>SeSi Lever</span>
-                          <span class="detail-img-text-title">SeSi Leggings</span>
-                          <div class="add-r mt-10">
-                            <span>$20.00</span>
-                            <span>Cost/item</span>
-                            <span>58.00%</span>
-                            <span>Margin</span>
-                          </div>
-                        </div>
-                      </section>
-                      <div class="detail-preview">
-                        <i class="wn-icon eye"></i><span class="ml-5">Preview Product Profile</span>
-                      </div>
-                      <div class="detail-help mt-20">
-                        <span class="detail-help-title"><i class="wn-icon help blue mr-5"></i>Need help?</span>
-                        <span>We will help guide you along the process.</span>
-                        <a href="#" class="link">Find more information</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </aside> -->
+              <aside class="detail-side">
+
+              </aside>
             </div>
             </sf:form>
           </div>
@@ -257,6 +232,43 @@
 	prductRegMap.set('003', 'maketing');
 
 	$(document).ready(function() {
+		if($("#productId").val()){
+			var url = "<c:url value='/web/brand/productLatestDo.ax'/>";
+			var sendData = {"productId" : $("#productId").val() };
+
+				$.ajax({
+					url: url,
+					data: sendData,
+					type: 'POST',
+					success: function(data) {
+						$(".detail-side").html(data);
+					},
+					error: function(e) {
+						console.log(JSON.stringify(e));
+					}
+			});
+		}
+
+		$(".divYn").click(function() {
+			if($(this).val() == "Y" ){
+				$("."+$(this).attr("name")+"Div").show()
+			}else{
+				$("."+$(this).attr("name")+"Div").hide()
+			}
+		});
+
+
+
+
+		 if($("input:radio[name=sellYn]:checked").val() == "N"){
+				$(".sellYnDiv").hide()
+		}
+
+		 if($("input:radio[name=purchaseYn]:checked").val() == "N"){
+				$(".purchaseYnDiv").hide()
+		}
+
+
 		$(".detail-top-wrap").remove();
 		$("#saveFm").validate({
 			rules : {
@@ -295,6 +307,12 @@
 			$("#saveFm").submit();
 		});
 
+		$(".pauseBtn").click(function() {
+			$("#saveFm").append("<input type='text' name='saveMode' id='saveMode' value='A''>");
+			$("#saveFm").submit();
+		});
+
+
 		const savedRegStatus = "${savedRegStatus}"
 			if (savedRegStatus == "004" ){
 				$(".wn-icon").removeClass("check3").addClass("check1");
@@ -320,6 +338,13 @@
 	}
 
 	function rtnFunction(typ, data) {
+		if(	$("#saveMode").val() == "A" ){
+			alert("저장되었습니다.");
+			location.reload();
+			return false;
+		}
+
+
 		var nextPg = "maketing";
 		$("#makingProductId").val(data.productId);
 		var url = "<c:url value='/web/brand/"+ nextPg+ "/productAdd.bt'/>";

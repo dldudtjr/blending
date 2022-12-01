@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import egov.utl.fcc.service.EgovStringUtil;
 import net.app.lgn.enu.SessionTypeEnum;
 import net.app.lgn.vo.SessionUserVO;
 import net.sf.ehcache.Cache;
@@ -24,7 +23,7 @@ public class FrntSessionUtils {
     }
 
     public static String getId() {
-        return isLoginChk() ? getUserInfo().getLoginId() : "";
+        return isLoginChk() ? getUserInfo().getEmail() : "";
     }
 
     public static String getUserId() {
@@ -40,7 +39,7 @@ public class FrntSessionUtils {
     }
 
     public static boolean isLoginChk() {
-        if ((getUserInfo() != null) && (getUserInfo().getLoginId() != null)) {
+        if ((getUserInfo() != null) && (getUserInfo().getUserId() != null)) {
             return true;
         } else {
             return false;

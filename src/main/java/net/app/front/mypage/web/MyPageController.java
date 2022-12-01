@@ -27,7 +27,7 @@ import net.app.front.mypage.vo.UserVO;
 import net.app.lgn.enu.SessionTypeEnum;
 import net.app.lgn.enu.UserStatusEnum;
 import net.app.lgn.service.LgnService;
-import net.app.lgn.util.CmsSessionUtils;
+import net.app.lgn.util.FrntSessionUtils;
 import net.app.lgn.vo.SessionContext;
 import net.app.lgn.vo.SessionUserVO;
 import net.app.vo.MailVO;
@@ -71,12 +71,20 @@ public class MyPageController {
     }
 
     @RequestMapping(path = "userInfo.bt")
-    public String userInfo(SrchVO srchVO, @ModelAttribute("saveFm") UserVO userVO, ModelMap model) {
+    public String userInfo(SrchVO srchVO, @ModelAttribute("saveFm") UserVO userVO,@ModelAttribute("cmpyFm") CmpyVO cmpyVO, ModelMap model) {
 
-        if (CmsSessionUtils.getUserId() != null && !"".equals(CmsSessionUtils.getUserId())) {
-            userVO.setUserId(CmsSessionUtils.getUserId());
+//        System.out.println(">>>>>>FrntSessionUtils="+FrntSessionUtils.getUserInfo().toString());
+
+        if (FrntSessionUtils.getUserId() != null && !"".equals(FrntSessionUtils.getUserId())) {
+            userVO.setUserId(FrntSessionUtils.getUserId());
             model.addAttribute("saveFm", mypageService.getUserDtl(userVO));
+
+
+            cmpyVO.setUserId(FrntSessionUtils.getUserId());
+            cmpyVO.setCmpyId(FrntSessionUtils.getUserInfo().getCmpyId());
+            model.addAttribute("cmpyFm", mypageService.getCmpyDtl(cmpyVO));
         }
+
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/userInfo");
     }
 
@@ -87,8 +95,6 @@ public class MyPageController {
         userVO.setStatus(UserStatusEnum.USE.getCode());
 
         ModelMap modelMap = new ModelMap();
-
-        // userVO.setUserPassword(SHA256EncryptUtil.getSHA256(userVO.getPassword()));
 
         String rtnId = mypageService.udtUserInfoDo(userVO);
 
@@ -104,7 +110,7 @@ public class MyPageController {
         }
 
         if ("1".equals(rtnId)) {
-            sessionUserVO.setLoginId(CmsSessionUtils.getUserInfo().getEmail());
+            sessionUserVO.setLoginId(FrntSessionUtils.getUserInfo().getEmail());
             sessionUserVO = lgnService.getLoginDtl(sessionUserVO);
 
             this.setSessionContextFactory(sessionUserVO, session);
@@ -149,9 +155,9 @@ public class MyPageController {
 
     @RequestMapping(path = "cmpyInfo.bt")
     public String cmpyInfo(SrchVO srchVO, CmpyVO cmpyVO, ModelMap model) {
-        cmpyVO.setUserId(CmsSessionUtils.getUserId());
-        cmpyVO.setCmpyId(CmsSessionUtils.getUserInfo().getCmpyId());
-        model.addAttribute("saveFm", mypageService.getCmpyDtl(cmpyVO));
+        cmpyVO.setUserId(FrntSessionUtils.getUserId());
+        cmpyVO.setCmpyId(FrntSessionUtils.getUserInfo().getCmpyId());
+        model.addAttribute("cmpyFm", mypageService.getCmpyDtl(cmpyVO));
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/cmpyInfo");
     }
 
@@ -161,7 +167,7 @@ public class MyPageController {
 
         ModelMap modelMap = new ModelMap();
 
-        cmpyVO.setUserId(CmsSessionUtils.getUserId());
+        cmpyVO.setUserId(FrntSessionUtils.getUserId());
         String rtn = mypageService.insCmpyInfoDo(cmpyVO);
 
         List<FileVO> list;
@@ -204,7 +210,7 @@ public class MyPageController {
                 ,ModelMap model) {
 
         srchVO.setSrchMappingType("usr");
-        srchVO.setSrchUserId(CmsSessionUtils.getUserId());
+        srchVO.setSrchUserId(FrntSessionUtils.getUserId());
         model.put("authLst",  mypageService.getMappingLst(srchVO));
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/loginInfo");
     }
@@ -217,7 +223,7 @@ public class MyPageController {
         String rtn ="";
 
         if( userVO.getChgPassWdChk().equals(userVO.getChgPassWd())) {
-            userVO.setUserId(CmsSessionUtils.getUserId());
+            userVO.setUserId(FrntSessionUtils.getUserId());
             userVO.setUserPassword(SHA256EncryptUtil.getSHA256(userVO.getChgPassWd()));
             rtn = mypageService.uptPasswordDo(userVO);
         }
@@ -239,7 +245,7 @@ public class MyPageController {
     public ModelMap findIdPwDo(UserVO vo,HttpSession session) throws IOException {
         ModelMap modelMap = new ModelMap();
 
-        if(vo.getEmail() != CmsSessionUtils.getUserInfo().getEmail()) {
+        if(vo.getEmail() != FrntSessionUtils.getUserInfo().getEmail()) {
 
 
         try {
@@ -279,6 +285,10 @@ public class MyPageController {
         return modelMap;// success";
     }
 
+
+
+
+
     @RequestMapping(path = "/udtConnectAuthDo.ax")
     @ResponseBody
     public ModelMap udtConnectAuthDo(MappingVO vo) throws IOException {
@@ -305,7 +315,7 @@ public class MyPageController {
 
         if ("1".equals(rtn)) {
 
-            sessionUserVO.setLoginId(CmsSessionUtils.getUserInfo().getEmail());
+            sessionUserVO.setLoginId(FrntSessionUtils.getUserInfo().getEmail());
             sessionUserVO = lgnService.getLoginDtl(sessionUserVO);
 
             session.setAttribute(SessionTypeEnum._sessionKey.toString(), sessionUserVO);
@@ -332,14 +342,13 @@ public class MyPageController {
     }
 
     private void setSessionContextFactory(SessionUserVO sessionUserVO, HttpSession session) {
-        session.invalidate();
         SessionContext sessionContext = (SessionContext) this.sessionContextFactory.getObject();
         sessionContext.setAuthenticated(true);
         sessionContext.setSessionUserVO(sessionUserVO);
         session.setAttribute(SessionTypeEnum._siteChk.toString(), "frnt");
         session.setAttribute(SessionTypeEnum._logInChk.toString(), true);
         session.setAttribute(SessionTypeEnum._sessionKey.toString(), sessionUserVO);
-        // session.setAttribute(SessionTypeEnum._loginTime.toString(), this.lgnService.getLastLoginTime(CmsSessionUtils.getId()));
+        // session.setAttribute(SessionTypeEnum._loginTime.toString(), this.lgnService.getLastLoginTime(FrntSessionUtils.getId()));
     }
 
 }

@@ -1,12 +1,17 @@
 package net.app.lgn.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
+import egovframework.rte.psl.dataaccess.util.EgovMap;
 import net.app.lgn.service.LgnService;
+import net.app.lgn.vo.LoginHistVO;
 import net.app.lgn.vo.SessionUserVO;
+import net.app.vo.SrchVO;
 
 @Service("lgnService")
 public class LgnServiceImpl extends EgovAbstractServiceImpl implements LgnService {
@@ -25,12 +30,15 @@ public class LgnServiceImpl extends EgovAbstractServiceImpl implements LgnServic
     }
 
 
+    @Override
+    public String insLoginHistDo(LoginHistVO loginHistVO) {
+        return lgnDAO.insLoginHistDo(loginHistVO);
+    }
 
-
-//    @Override
-//    public String insLoginHistDo(LoginHistVO loginHistVO) {
-//        return lgnDAO.insLoginHistDo(loginHistVO);
-//    }
+  @Override
+  public List<EgovMap> getLoginHistPageLst(SrchVO vo) {
+      return lgnDAO.getLoginHistPageLst(vo);
+  }
 //
 //    @Override
 //    public List<EgovMap> getSysAuthChk(String loginId) {

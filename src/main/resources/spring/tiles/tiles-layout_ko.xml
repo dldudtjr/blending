@@ -29,4 +29,28 @@
 		<put-attribute name="content" value="/WEB-INF/jsp/tiles/pages/frnt/{1}/{2}/{3}/{4}.jsp" />
 	</definition>
 
+
+	<definition name="backLayout" template="/WEB-INF/jsp/tiles/layouts/back/template.jsp">
+		<put-attribute name="head" 		value="/WEB-INF/jsp/tiles/layouts/back/head.jsp" />
+		<put-attribute name="gnb" 		value="/WEB-INF/jsp/tiles/layouts/back/gnb.jsp" />
+		<put-attribute name="lnb" 		value="/WEB-INF/jsp/tiles/layouts/back/lnb.jsp" />
+		<put-attribute name="navi" 		value="/WEB-INF/jsp/tiles/layouts/back/navi.jsp" />
+		<put-attribute name="content" 	value="" />
+		<put-attribute name="foot" 		value="/WEB-INF/jsp/tiles/layouts/back/foot.jsp" />
+	</definition>
+
+	<definition name="back:*" extends="backLayout">
+		<put-attribute name="content" value="/WEB-INF/jsp/tiles/pages/back/{1}.jsp" />
+	</definition>
+	<definition name="back:*/*" extends="backLayout">
+		<put-attribute name="content" value="/WEB-INF/jsp/tiles/pages/back/{1}/{2}.jsp" />
+	</definition>
+
+	<definition name="back:*/*/*" extends="backLayout">
+		<put-attribute name="content" value="/WEB-INF/jsp/tiles/pages/back/{1}/{2}/{3}.jsp" />
+	</definition>
+	<definition name="back:*/*/*/*" extends="backLayout">
+		<put-attribute name="content" value="/WEB-INF/jsp/tiles/pages/back/{1}/{2}/{3}/{4}.jsp" />
+	</definition>
+
 </tiles-definitions>

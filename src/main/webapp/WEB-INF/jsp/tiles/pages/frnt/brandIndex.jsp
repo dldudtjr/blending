@@ -39,7 +39,7 @@
         </div>
         <div class="main-form-wrap">
           <div class="main-form">
-            <div class="main-form-img"><img src="/resources/images/sample1.jpg" alt=""></div>
+            <div class="main-form-img"><img src="/resources/images/main_brand1.png" alt=""></div>
             <div class="main-form-text">
               <span class="main-form-title sub">제품 & 브랜드 준비</span>
               <span>수출에 필요한 필수 정보 준비<br>
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="main-form reverse">
-            <div class="main-form-img"><img src="/resources/images/sample2.jpg" alt=""></div>
+            <div class="main-form-img"><img src="/resources/images/main_brand2.png" alt=""></div>
             <div class="main-form-text">
               <span class="main-form-title sub">채널 확인 & 바이어 연결</span>
               <span>진출 가능한 국가 및 해외 유통채널 확인<br>
@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="main-form">
-            <div class="main-form-img"><img src="/resources/images/sample3.jpg" alt=""></div>
+            <div class="main-form-img"><img src="/resources/images/main_brand3.jpeg" alt=""></div>
             <div class="main-form-text">
               <span class="main-form-title sub">브랜드 데이터 확보</span>
               <span>내 브랜드의 관심도 확인<br>
@@ -69,12 +69,7 @@
         <hr class="spacer-bottom">
       </div><!-- /.main-content -->
     </main>
-
-		<footer class="global-footer">
-			<div class="footer-content">
-				<h1 class="header-logo" title="BLENDING TREND"></h1>
-			</div>
-		</footer>
+	<jsp:include page="/WEB-INF/jsp/tiles/layouts/frnt/foot.jsp" flush="true" />
 	</div>
 	<!-- /.site-container -->
 
@@ -84,13 +79,7 @@
 			<div class="modal-content">
 				<button class="btn-close" data-dismiss="modal" title="닫기"></button>
 				<div class="wn-modal-body pa-30">
-					<div class="select-type">
-						<a href="javascript:void(0)" class="active"> <img src="/resources/images/brand.png" alt=""> <img src="/resources/images/brand_bw.png" alt="">
-							<p>Brand</p>
-						</a> <a href="javascript:void(0)"> <img src="/resources/images/buyer.png" alt=""> <img src="/resources/images/buyer_bw.png" alt="">
-							<p>Buyer</p>
-						</a>
-					</div>
+
 					<section class="login-form pa-30">
 						<sf:form commandName="loginFm" action="loginDo.lp">
 								<input type="hidden" id="sessKey" 		name="sessKey" 		value="${_ssesKey}" />
@@ -105,7 +94,7 @@
 						</div>
 						<div class="login-menu">
 							<label class="checkbox"> <input type="checkbox" id="idSaveCheck" name="idSaveCheck" value="true" checked> <span class="label">아이디 저장</span>
-							</label> <label class="checkbox"> <input type="checkbox" id="auto_login"> <span class="label">자동 로그인</span>
+							</label> <label class="checkbox"> <input type="checkbox" id="auto_login" name="auto_login" value="true"> <span class="label">자동 로그인</span>
 							</label>
 						</div>
 						</sf:form>
@@ -130,39 +119,45 @@
 			<div class="modal-content">
 				<button class="btn-close" data-dismiss="modal" title="닫기"></button>
 				<sf:form commandName="saveFm" action="joinDo.lp">
+					<input type="hidden" id="userType"  name="userType" />
 					<div class="wn-modal-body pa-30">
 						<div class="join-title">
 							<!-- class="green" 추가 -->
 							<p>다양한 글로벌 바이어를 만나보세요.</p>
 							<p>무료 브랜드 프로파일 등록</p>
 						</div>
+						<div class="select-type">
+							<a href="javascript:void(0)" class="userType active" > <img src="/resources/images/brand.png" alt=""> <img src="/resources/images/brand_bw.png" alt="">
+								<p>Brand</p>
+							</a> <a href="javascript:void(0)" class="userType"> <img src="/resources/images/buyer.png" alt=""> <img src="/resources/images/buyer_bw.png" alt="">
+								<p>Buyer</p>
+							</a>
+						</div>
 						<section class="join-form">
 							<div class="form-field">
 								<div class="d-flex">
-									<input type="text" class="input-text input-detail" placeholder="이름" name="lastNm">
-									<input type="text" class="input-text input-detail" placeholder="성" name="firstNm">
+									<input type="text" class="input-text input-detail" placeholder="이름" name="lastNm" id="lastNm" />
+									<input type="text" class="input-text input-detail" placeholder="성"   name="firstNm" id="firstNm" />
 								</div>
 							</div>
 							<div class="form-field">
-								<input type="text" class="input-text" name="email" placeholder="Email" value="">
+								<input type="text" class="input-text" name="email" placeholder="Email" value="" id="email" />
 							</div>
 							<div class="form-field">
-								<input type="password" class="input-text" name="password" placeholder="password" value="">
+								<input type="password" class="input-text" name="password" placeholder="password" value="" id="password">
 							</div>
 							<div class="form-field">
 								<div class="input-add add-right2">
 									<div class="custom-select wd-100">
 										<select>
 											<option value="">+82</option>
-											<option value="">+82</option>
-											<option value="">+82</option>
 										</select>
 									</div>
-									<input type="text" class="input-text" name="phone" placeholder="Phone">
+									<input type="text" class="input-text" name="phone" placeholder="Phone" id="phone">
 								</div>
 							</div>
 							<div class="form-field">
-								<input type="text" class="input-text" name="cmpyNm" placeholder="회사명" value="">
+								<input type="text" class="input-text" name="cmpyNm" placeholder="회사명" value="" id="cmpyNm">
 							</div>
 							<div class="form-field">
 								<label class="checkbox">
@@ -171,7 +166,7 @@
 								</label>
 							</div>
 							<div class="mt-30">
-								<a href="#" class="button bt-blue d-block" onclick="joinDo();return false;">계속</a>
+								<a href="#" class="button bt-blue d-block saveBtn">계속</a>
 								<!-- bt-blue 또는 bt-green -->
 							</div>
 						</section>
@@ -182,20 +177,116 @@
 	</section>
 <script>
 
-$( document ).ready(function() {
+	$( document ).ready(function() {
 
-		if(getCookie("idSaveCheck") == "true"){
-			$("#idSaveCheck").prop("checked",true);
-			$("#loginId").val(getCookie("loginId"));
-			$("#userPasswordTmp").val(getCookie("userPasswordTmp"));
-		}
+			if(getCookie("idSaveCheck") == "true"){
+				$("#idSaveCheck").prop("checked",true);
+				$("#loginId").val(getCookie("loginId"));
+				$("#userPasswordTmp").val(getCookie("userPasswordTmp"));
+			}
+
+			if(getCookie("auto_login") == "true"){
+				$("#auto_login").prop("checked",true);
+			}
 
 
-	    $("#userPasswordTmp").keydown(function(key) {
-		    if (key.keyCode == 13) {
-			    loginDo();
-		    }
-	    });
+
+
+		    $("#userPasswordTmp").keydown(function(key) {
+			    if (key.keyCode == 13) {
+				    loginDo();
+			    }
+		    });
+
+		    $.validator.addMethod("pw_regexp", function(value, element) {
+				// return this.optional(element) ||  /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(value);
+				return this.optional(element) ||  /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*()_+]).*$/.test(value);
+
+			});
+
+		    $.validator.addMethod("telnum", function(telnum, element) {
+				var pattern = /^[0-9]{2,3}[0-9]{3,4}[0-9]{4}$/;
+				if (!pattern.test(telnum)) {
+					return this.optional(element) || false;
+				}
+				return true;
+			});
+
+
+			jQuery.validator.addMethod("notEqual", function(value, element, param) {
+				if(value == $(param).val()){
+				  return this.optional(element) || false;
+				}
+			  return true;
+			});
+
+			$("#saveFm").validate({
+				rules : {
+					lastNm : {
+						required : true
+					},
+					firstNm : {
+						required : true
+					},
+					email : {
+						required : true
+					},
+					phone : {
+						required : false,
+						telnum : true
+					},
+					password : {
+						 pw_regexp : true // 정규식
+						,required  : true // 정규식
+						,minlength : 8 // 최소입력글수  4자
+						,maxlength : 12
+					},
+					cmpyNm : {
+						required : true
+					},
+
+
+				},
+				messages : {
+					lastNm : {
+						required : "<code:msg code='validate.msg.common'/>"
+					},
+					firstNm : {
+						required : "<code:msg code='validate.msg.common'/>"
+					},
+					email : {
+						required : "<code:msg code='validate.msg.common'/>"
+					},
+					password : {
+						required  : "<code:msg code='valid.pwd.nine'/>"
+					},
+					phone : {
+						required  : "<code:msg code='valid.pwd.nine'/>"
+					},
+					cmpyNm : {
+						required : "<code:msg code='validate.msg.common'/>"
+					},
+				},
+				errorPlacement : function(error, element) {
+					if (element.is(":radio") || element.is(":checkbox")) {
+					} else if (element.is('select')) {
+						element.attr("placeholder", error[0].outerText);
+						element.css("border", "red solid 1px");
+						element.css("width", "500px");
+					} else {
+						element.attr("placeholder", error[0].outerText);
+					}
+				},
+				submitHandler : function() {
+					$(".modal_bg_sub").show();
+					joinDo();
+				}
+			});
+
+			$(".saveBtn").click(function() {
+				$("#saveFm").submit();
+			});
+
 	});
 
 	function loginDo() {
@@ -224,6 +315,13 @@ $( document ).ready(function() {
         	 deleteCookie("loginId");
         	 deleteCookie("userPasswordTmp");
          }
+
+         if($("#auto_login").is(":checked") == true){
+            setCookie("auto_login", "true", 31);
+         }else{
+         	 deleteCookie("auto_login");
+         }
+
 
 		var encrypt = CryptoJS.AES.encrypt($("#userPasswordTmp").val(), "${_symtcKey}");
 		$("#userPassword").val(encrypt)
@@ -257,17 +355,11 @@ $( document ).ready(function() {
 
 
 	function joinDo() {
-		/* if ($.trim($('#loginId').val()) == '') {
-			alert("<code:msg code='valid.id'/>"); // '아이디를 입력해주세요!'
-			$('#loginId').focus();
-			return;
+		if($(".userType:eq(0)").hasClass("active")){
+			$("#userType").val("001");
+		}else{
+			$("#userType").val("002");
 		}
-		if ($.trim($('#userPasswordTmp').val()) == '') {
-			alert("<code:msg code='valid.pw'/>"); // '패스워드를 입력해주세요!'
-			$('#userPasswordTmp').focus();
-			return;
-		} */
-
 		var url = "<c:url value='/web/lgn/joinSubmitDo.ax'/>";
 		var sendData = $("#saveFm").serialize();
 		fn_submitRtnAjax(url, sendData, '')
@@ -318,5 +410,3 @@ $( document ).ready(function() {
 </body>
 
 </html>
-
-

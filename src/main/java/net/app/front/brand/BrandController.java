@@ -24,7 +24,7 @@ import net.app.front.mypage.service.MypageService;
 import net.app.front.mypage.vo.CmpyVO;
 import net.app.lgn.enu.SessionTypeEnum;
 import net.app.lgn.service.LgnService;
-import net.app.lgn.util.CmsSessionUtils;
+import net.app.lgn.util.FrntSessionUtils;
 import net.app.lgn.vo.SessionContext;
 import net.app.lgn.vo.SessionUserVO;
 import net.app.vo.SrchVO;
@@ -77,7 +77,7 @@ public class BrandController {
 
     @RequestMapping(path = "manage.bt")
     public String manage(@ModelAttribute("srchFm") SrchVO srchVO, ModelMap model,ProductVO productVO) {
-        productVO.setRegtId(CmsSessionUtils.getUserId());
+        productVO.setRegtId(FrntSessionUtils.getUserId());
         model.addAttribute("productLatest", productService.getProductLatestDtl(productVO));
 
         srchVO.setSrchUserType("002"); // buyer
@@ -99,13 +99,13 @@ public class BrandController {
         try {
             list = EgovFileUpload.fileUploads(request, this.path); // 파일 업로드
             if (list.size() > 0) {
-                this.fileService.insFileDo(list, CmsSessionUtils.getUserInfo().getCmpyId());
+                this.fileService.insFileDo(list, FrntSessionUtils.getUserInfo().getCmpyId());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        sessionUserVO.setLoginId(CmsSessionUtils.getUserInfo().getUserId());
+        sessionUserVO.setLoginId(FrntSessionUtils.getUserInfo().getUserId());
         sessionUserVO = this.lgnService.getLoginDtl(sessionUserVO);
 
         if (sessionUserVO != null) {
@@ -127,7 +127,7 @@ public class BrandController {
         session.setAttribute(SessionTypeEnum._siteChk.toString(), "frnt");
         session.setAttribute(SessionTypeEnum._logInChk.toString(), true);
         session.setAttribute(SessionTypeEnum._sessionKey.toString(), sessionUserVO);
-//        session.setAttribute(SessionTypeEnum._loginTime.toString(), this.lgnService.getLastLoginTime(CmsSessionUtils.getId()));
+//        session.setAttribute(SessionTypeEnum._loginTime.toString(), this.lgnService.getLastLoginTime(FrntSessionUtils.getId()));
     }
 
 

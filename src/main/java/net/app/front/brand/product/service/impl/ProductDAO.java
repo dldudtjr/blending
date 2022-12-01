@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import egov.cmm.service.impl.EgovComAbstractDAO;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
+import net.app.front.brand.product.vo.ProductCateVO;
 import net.app.front.brand.product.vo.ProductVO;
 import net.app.vo.SrchVO;
 
@@ -48,6 +49,31 @@ public class ProductDAO extends EgovComAbstractDAO {
 
     public String getProductId(ProductVO vo) {
         return this.selectOne("productDAO.getProductId", vo);
+    }
+
+
+
+    public String delProductCateDo(String productId) {
+        return this.update("productDAO.delProductCateDo", productId)+"";
+
+    }
+
+    public String udtCateDo(String cateNm) {
+        return this.update("productDAO.udtCateDo", cateNm)+"";
+
+    }
+
+    public String getCateDo(String cateNm) {
+        return this.selectOne("productDAO.getCateDo", cateNm);
+    }
+
+    public String insProductCateDo(ProductVO vo) {
+        return this.update("productDAO.insProductCateDo", vo)+"";
+
+    }
+
+    public List<EgovMap> getProductPageForCateLst(ProductCateVO vo) {
+        return this.selectList("productDAO.getProductPageForCateLst", vo);
     }
 
 
