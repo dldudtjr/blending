@@ -7,8 +7,8 @@ import net.app.vo.SessEtdVO;
 public class PayVO extends SessEtdVO{
     private String serviceId;
     private String userId;
-    private int periodUse;
-    private int servicePrice;
+    private int periodUse = 1;
+    private int servicePrice = 100000;
     private String serviceStDt;
     private String serviceEdDt;
     private String paymentDt;

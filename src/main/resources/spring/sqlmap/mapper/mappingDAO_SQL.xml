@@ -82,6 +82,17 @@
 	</insert>
 
 
+	<select  id="getPayInfo" parameterType="net.app.front.mypage.vo.PayVO" resultType="net.app.front.mypage.vo.PayVO">
+		SELECT
+				 MIN(SERVICE_ST_DT) AS SERVICE_ST_DT
+				,SUM(PERIOD_USE) AS PERIOD_USE
+				,ADD_MONTHS(MIN(SERVICE_ST_DT),SUM(PERIOD_USE)) AS SERVICE_ED_DT
+				,MAX(PRICE_CODE) PRICE_CODE
+			FROM TBSM_SERVICE WHERE USER_ID = #{userId}
+			AND SERVICE_ED_DT >= SYSDATE
+			AND STATUS = '002'
+	</select>
+
 	<insert id="insPayInfoDo" parameterType="net.app.front.mypage.vo.PayVO" >
 		<selectKey resultType="string" keyProperty="serviceId" order="BEFORE">
 			SELECT 'SV' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') || LPAD(NVL(Max(SUBSTR(SERVICE_ID,17))+1,1),4,'0') FROM TBSM_SERVICE WHERE TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') = SUBSTR(SERVICE_ID,3,14)
@@ -93,17 +104,17 @@
 				PAYMENT_DT, REFUND_DT, ORDER_CODE, PRICE_CODE, STATUS, REGIST_DT)
 				VALUES
 				(
-				 #serviceId}
+				 #{serviceId}
 				,#{userId}
 				,#{periodUse}
 				,#{servicePrice}
 				,sysdate
-				,ADD_MONTHS(sysdate,-#{periodUse})
-				,#{paymentDt}
+				,ADD_MONTHS(sysdate,+#{periodUse})
+				,sysdate
 				,#{refundDt}
 				,#{orderCode}
 				,#{priceCode}
-				,#{status}
+				,002
 				,sysdate
 				)
 	</insert>

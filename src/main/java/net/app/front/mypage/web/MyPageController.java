@@ -333,7 +333,9 @@ public class MyPageController {
 
 
     @RequestMapping(path = "payInfo.bt")
-    public String payInfo(SrchVO srchVO, @ModelAttribute("saveFm") UserVO UserVO, ModelMap model) {
+    public String payInfo(SrchVO srchVO, @ModelAttribute("saveFm") PayVO vo, ModelMap model) {
+
+        model.put("saveFm", mypageService.getPayInfo(vo));
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/payInfo");
     }
 

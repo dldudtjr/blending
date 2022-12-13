@@ -68,6 +68,11 @@ public interface MypageService {
 
 
 
+    PayVO getPayInfo(PayVO vo);
+
+
+
+
 
 
 

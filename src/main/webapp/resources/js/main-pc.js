@@ -77,6 +77,7 @@ $(function () {
 	$("#periodUse").val( $(this).data("id"));
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
+	cal();
   })
 });//jquery ready
 
@@ -85,10 +86,21 @@ $(function () {
 	$("#priceCode").val( $(this).data("id"));
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
+	cal();
   })
 });//jquery ready
 
+function cal(){
+	var price;
 
+
+    if($("#priceCode").val() == "001") price = 100000 * $("#periodUse").val();
+   	if($("#priceCode").val() == "002") price = 300000 * $("#periodUse").val();
+   	if($("#priceCode").val() == "003") price = 1500000 * $("#periodUse").val();
+
+   	$("#servicePrice").val(price);
+   	$(".servicePrice").text(price);
+}
 
 
 

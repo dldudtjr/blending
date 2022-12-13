@@ -167,6 +167,12 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
         return this.mypageDAO.insPayInfoDo(vo);
     }
 
+    @Override
+    public PayVO getPayInfo(PayVO vo) {
+        vo.setUserId(FrntSessionUtils.getUserId());
+        return this.mypageDAO.getPayInfo(vo);
+    }
+
 
 
     @Override

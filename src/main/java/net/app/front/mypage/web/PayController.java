@@ -35,9 +35,6 @@ public class PayController {
     String path = "tiles/pages/frnt/mypage";
 
 
-
-
-
     @RequestMapping(path = "appServiceInsDo.ax")
     @ResponseBody
     public ModelMap appServiceInsDo(PayVO payVO, Model model, HttpSession session) {
@@ -67,9 +64,7 @@ public class PayController {
             e.printStackTrace();
         }
 
-        payVO.setOrderCode(path);
         session.setAttribute("payVO", payVO);
-
         return modelMap;
 
     }
@@ -80,6 +75,7 @@ public class PayController {
     @RequestMapping(path = "success")
     public String successPayment(PayVO payVO, Model model, HttpSession session) throws Exception {
         PayVO vo  = (PayVO) session.getAttribute("payVO");
+        vo.setUserId(FrntSessionUtils.getUserInfo().getUserId());
         String rtn = mypageService.insPayInfoDo(vo);
         session.removeAttribute("payVO");
         return "success";

@@ -104,5 +104,9 @@ public class MypageDAO extends EgovComAbstractDAO {
         return this.update("mappingDAO.cancelPayInfoDo", vo)+"";
     }
 
+    public PayVO getPayInfo(PayVO vo) {
+        return this.selectOne("mappingDAO.getPayInfo", vo);
+    }
+
 
 }

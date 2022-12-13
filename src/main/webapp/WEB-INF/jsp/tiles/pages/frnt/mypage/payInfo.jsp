@@ -190,7 +190,7 @@ $( document ).ready(function() {
             <div class="d-flex align-items-center">
               <span class="t-18 mr-15">￦</span>
               <span class="t-18 mr-15 servicePrice">0</span>
-	              <sf:hidden path="periodUse" />
+	              <sf:hidden path="servicePrice" />
             </div>
 
             <div class="t-18 ml-100">결제 후 서비스 종료일</div>
@@ -280,10 +280,21 @@ function submitDo(){
 			console.log(JSON.stringify(e));
 		}
 	});
-
-
-
-	fn_submitReloadAjax(url, sendData);
 }
+
+
+
+$(document).ready(function(){
+    //스크롤 발생 이벤트 처리
+    window.onscroll = function () {
+
+    if (getScrollTop() < getDocumentHeight() - window.innerHeight - 5) return;
+    // 스크롤이 페이지 하단에 도달할 경우 새 페이지 로드
+
+    };
+
+});
+
+
 
 </script>
