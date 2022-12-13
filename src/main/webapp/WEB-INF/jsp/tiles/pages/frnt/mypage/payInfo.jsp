@@ -7,15 +7,15 @@
             <div class="info-subscribe mt-10">
               <h4 class="info-wrap-title">사용중인 상품</h4>
               <div class="d-flex mt-20">
-                <span class="info-subscribe-box">BASIC</span>
+                <span class="info-subscribe-box">${saveFm.priceCodeTxt}</span>
                 <div class="ml-auto wd-700">
                   <div class="input-add align-items-center">
                     <div class="t-18 gray-5 wd-130 mr-10">마지막 결제</div>
-                    <input type="text" class="input-text" name="" value="2022.03.18" readonly>
+                    <input type="text" class="input-text" name="" value="${saveFm.paymentDt}" readonly>
                   </div>
                   <div class="input-add align-items-center mt-10">
                     <div class="t-18 gray-5 wd-130 mr-10">서비스 종료</div>
-                    <input type="text" class="input-text wd-520" name="" value="2022.06.18" readonly>
+                    <input type="text" class="input-text wd-520" name="" value="${saveFm.serviceEdDt}" readonly>
                     <button class="button bt-blue w-140">종료 날짜 연장</button>
                   </div>
                 </div>
@@ -52,7 +52,7 @@
 	                <img src="/resources/images/free.png">
                 </div>
               </div>
-              <div class="info-select active">
+              <div class="info-select ${saveFm.priceCodeA}">
                 <div class="info-select-form">
                   <span class="info-select-title">BASIC</span>
                   <span class="mt-40">수출 준비를 위한<br>브랜드 관리 서비스<br>및 제품 인증 서비스</span>
@@ -62,7 +62,7 @@
                   <span>6개월 구독 – 55만원 (10% 할인)<br>1년 구독 – 100만원 (20% 할인)</span>
                 </div>
               </div>
-              <div class="info-select">
+              <div class="info-select ${saveFm.priceCodeB}">
                 <div class="info-select-form">
                   <span class="info-select-title">PRIMIUM</span>
                   <div class="info-select-cont">
@@ -76,7 +76,7 @@
                   <span>6개월 구독 – 165만원 (10% 할인)<br>1년 구독 – 300만원 (20% 할인)</span>
                 </div>
               </div>
-              <div class="info-select">
+              <div class="info-select ${saveFm.priceCodeC}">
                 <div class="info-select-form">
                   <span class="info-select-title">EXCLUSIVE</span>
                   <div class="info-select-cont">
@@ -97,12 +97,8 @@
 
 <script>
 $( document ).ready(function() {
-
 	$(".detail-top").hide();
-
-
 });
-
 
 </script>
 
@@ -116,9 +112,9 @@ $( document ).ready(function() {
         <div class="wn-modal-body">
           <div class="pop-subscribe">
             <div class="d-flex justify-content-between">
-              <div class="gray-9"><span class="mr-15">사용중인 서비스</span><b class="serviceNm">BASIC</b></div>
-              <div class="gray-9"><span class="mr-15">서비스 시작</span><b class="serviceStDt">2022. 03. 18</b></div>
-              <div class="gray-9"><span class="mr-15">서비스 종료</span><b class="serviceEdDt">2022. 06. 18</b></div>
+              <div class="gray-9"><span class="mr-15">사용중인 서비스</span><b class="serviceNm">${saveFm.priceCodeTxt}</b></div>
+              <div class="gray-9"><span class="mr-15">서비스 시작</span><b class="serviceStDt">${saveFm.serviceStDt}</b></div>
+              <div class="gray-9"><span class="mr-15">서비스 종료</span><b class="serviceEdDt">${saveFm.serviceEdDt}</b></div>
             </div>
           </div>
           <sf:hidden path="priceCode" />

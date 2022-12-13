@@ -15,6 +15,10 @@ public class PayVO extends SessEtdVO{
     private String refundDt;
     private String orderCode;
     private String priceCode;
+    private String priceCodeA;
+    private String priceCodeB;
+    private String priceCodeC;
+    private String priceCodeTxt;
     private String status;
     private String registDt;
 }
