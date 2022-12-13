@@ -53,4 +53,9 @@ public class BuyerDAO extends EgovComAbstractDAO {
     }
 
 
+    public List<EgovMap> getBuyerPageLst(SrchVO srchVO) {
+        return this.selectList("buyerDAO.getBuyerPageLst", srchVO);
+    }
+
+
 }

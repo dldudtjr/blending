@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
 <div class="sidebar-main">
             <header class="sidebar-main-header">
               <h3 class="tit">구독정보</h3>
@@ -48,7 +49,7 @@
             <div class="info-wrap-select mt-30">
               <div class="info-select">
                 <div class="info-select-form free">
-                  <img src="images/free.png" alt="">
+	                <img src="/resources/images/free.png">
                 </div>
               </div>
               <div class="info-select active">
@@ -80,7 +81,6 @@
                   <span class="info-select-title">EXCLUSIVE</span>
                   <div class="info-select-cont">
                     <span class="wd-100p mb-10">프리미엄<br>서비스</span>
-                    <span class="px-15 plus">+</span>
                     <span class="t-left t-16">1. 팀 로그인<br>2. 브랜드 담당 매니저<br>3. 독점 브랜드 서비스</span>
                   </div>
                 </div>
@@ -94,13 +94,21 @@
               <a href="javascript:void(0)" class="button bt-blue wd-200" onclick="$('#popSubscribe').modal('show')">구독 변경하기</a>
             </div>
           </div>
+
 <script>
 $( document ).ready(function() {
+
 	$(".detail-top").hide();
+
+
 });
+
+
 </script>
 
- <!-- 팝업: 구독변경하기 -->
+
+<!-- 팝업: 구독변경하기 -->
+<sf:form commandName="saveFm" cssClass="form-horizontal">
   <section class="modal fade wn-modal subscribe" id="popSubscribe">
     <div class="modal-dialog modal-dialog-centered modal-slide">
       <div class="modal-content">
@@ -108,17 +116,18 @@ $( document ).ready(function() {
         <div class="wn-modal-body">
           <div class="pop-subscribe">
             <div class="d-flex justify-content-between">
-              <div class="gray-9"><span class="mr-15">사용중인 서비스</span><b>BASIC</b></div>
-              <div class="gray-9"><span class="mr-15">서비스 시작</span><b>2022. 03. 18</b></div>
-              <div class="gray-9"><span class="mr-15">서비스 종료</span><b>2022. 06. 18</b></div>
+              <div class="gray-9"><span class="mr-15">사용중인 서비스</span><b class="serviceNm">BASIC</b></div>
+              <div class="gray-9"><span class="mr-15">서비스 시작</span><b class="serviceStDt">2022. 03. 18</b></div>
+              <div class="gray-9"><span class="mr-15">서비스 종료</span><b class="serviceEdDt">2022. 06. 18</b></div>
             </div>
           </div>
+          <sf:hidden path="priceCode" />
           <div class="d-flex align-items-center mt-30">
             <div class="subscribe-title">상품명<br><span class="t-13">가격(VAT별도)</span></div>
-            <div class="subscribe-select">
-              <a href="javascript:void(0)" class="t-24 active"><b>BASIC</b><br><p class="t-16 mt-5">￦100,000</p></a>
-              <a href="javascript:void(0)" class="t-24"><b>PRIMIUM</b><br><p class="t-16 mt-5">￦300,000</p></a>
-              <a href="javascript:void(0)" class="t-24">
+            <div class="subscribe-select priceCode">
+              <a href="javascript:void(0)" data-id="001" class="t-24 active"><b>BASIC</b><br><p class="t-16 mt-5">￦100,000</p></a>
+              <a href="javascript:void(0)" data-id="002" class="t-24"><b>PRIMIUM</b><br><p class="t-16 mt-5">￦300,000</p></a>
+              <a href="javascript:void(0)" data-id="003" class="t-24">
                 <b>EXCLUSIVE</b><br><p class="t-16 mt-5">￦1,500,000</p>
                 <div class="help-wrap">
                   <i class="wn-icon exclamation ml-5"></i>
@@ -129,21 +138,25 @@ $( document ).ready(function() {
               </a>
             </div>
           </div>
+          <sf:hidden path="periodUse" />
           <div class="d-flex align-items-center mt-30">
             <div class="subscribe-title">기간</div>
-            <div class="subscribe-select">
-              <a href="javascript:void(0)" class="t-18 active"><b>1개월</b></a>
-              <a href="javascript:void(0)" class="t-18"><b>3개월</b></a>
-              <a href="javascript:void(0)" class="t-18"><b>6개월</b><br><p class="t-16 mt-5">10% 할인</p></a>
-              <a href="javascript:void(0)" class="t-18"><b>12개월</b><br><p class="t-16 mt-5">2개월 무료</p></a>
+            <div class="subscribe-select periodUse">
+              <a href="javascript:void(0)" data-id="1"  class="t-18 active"><b>1개월</b></a>
+              <a href="javascript:void(0)" data-id="3"  class="t-18"><b>3개월</b></a>
+              <a href="javascript:void(0)" data-id="6"  class="t-18"><b>6개월</b><br><p class="t-16 mt-5">10% 할인</p></a>
+              <a href="javascript:void(0)" data-id="12" class="t-18"><b>12개월</b><br><p class="t-16 mt-5">2개월 무료</p></a>
             </div>
           </div>
+
+
+
           <div class="d-flex align-items-center mt-30">
             <div class="subscribe-title">BTM 포인트</div>
             <div class="d-flex align-items-center">
               <span class="mr-15">10,000(보유)</span>
               <div class="input-add add-right">
-                <input type="text" class="input-text wd-130" name="" placeholder="" value="10,000">
+                <input type="text" class="input-text wd-130" name="" placeholder="" value="10,000"><!--  -->
                 <button class="button bt-blue wd-80">적용</button>
               </div>
             </div>
@@ -168,11 +181,18 @@ $( document ).ready(function() {
               </div>
             </div>
           </div>
+
+
+
+
           <div class="d-flex align-items-center mt-30">
             <div class="subscribe-title">총 결제금액</div>
             <div class="d-flex align-items-center">
-              <span class="t-18 mr-15">￦100,000</span>
+              <span class="t-18 mr-15">￦</span>
+              <span class="t-18 mr-15 servicePrice">0</span>
+	              <sf:hidden path="periodUse" />
             </div>
+
             <div class="t-18 ml-100">결제 후 서비스 종료일</div>
             <div class="d-flex ml-50">
               <span>2022. 09. 16</span>
@@ -182,15 +202,88 @@ $( document ).ready(function() {
             <div class="subscribe-title">결제방법</div>
             <div class="subscribe-select">
               <a href="javascript:void(0)" class="t-18 active"><b>신용카드</b></a>
-              <a href="javascript:void(0)" class="t-18"><b>계좌이체</b></a>
+              <!-- <a href="javascript:void(0)" class="t-18"><b>계좌이체</b></a> -->
             </div>
           </div>
           <div class="mt-30 bt-center">
-            <a href="javascript:void(0)" class="button bt-gray wd-200">취소</a>
-            <a href="javascript:void(0)" class="button bt-blue wd-200">결제하기</a>
+            <a href="#" class="button bt-gray wd-200 closeBtn">취소</a>
+            <a href="#" class="submitPay button bt-blue wd-200">결제하기</a>
           </div>
         </div>
 
       </div>
     </div>
   </section>
+</sf:form>
+
+  <script>
+var cnt = 0;
+
+$(function() {
+
+
+
+	$(document).on("click",".closeBtn",function() {
+		$('#popSubscribe').modal('hide')
+	});
+
+
+	$(document).on("click",".submitPay",function() {
+		var url = "<c:url value='/web/mypage/appServiceInsDo.ax'/>";
+		paySubmit(url,"결제");
+	});
+
+});
+
+	function paySubmit(url, msg) {
+		$.ajax({
+			url : url,
+			data : $("#saveFm").serialize(),
+			type : 'POST',
+			success : function(data) {
+				if(data.msg){
+					submitDo()
+//					payPopup(data.msg, data.loginId);
+				}
+			},
+			error : function(e) {
+				console.log(JSON.stringify(e));
+			}
+		});
+	}
+
+	function payPopup (orderCode, loginId){
+		var sUrl = window.location.origin + "/success";
+		var eUrl = window.location.origin + "/errorr";
+		var cUrl = window.location.origin + "/cancel";
+		var url = "https://api.steppay.kr/api/public/orders/" + orderCode + "/pay?successUrl=" + sUrl + "&errorUrl=" + eUrl + "&cancelUrl=" + cUrl;
+		var name = "appPopup test";
+		var option = "width =625, height = 812, top = 100, left = 200, location = no";
+		window.open(url, name, option);
+	}
+
+
+
+function submitDo(){
+	var url = "<c:url value='/web/mypage/success.ax'/>";
+	var sendData = $("#saveFm").serialize();
+
+	$.ajax({
+		url : url,
+		data : $("#saveFm").serialize(),
+		type : 'POST',
+		success : function(data) {
+			alert("결제 되었습니다");
+			location.reload();
+		},
+		error : function(e) {
+			console.log(JSON.stringify(e));
+		}
+	});
+
+
+
+	fn_submitReloadAjax(url, sendData);
+}
+
+</script>

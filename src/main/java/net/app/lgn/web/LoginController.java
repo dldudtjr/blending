@@ -38,6 +38,7 @@ import net.app.lgn.util.FrntSessionUtils;
 import net.app.lgn.vo.LoginHistVO;
 import net.app.lgn.vo.SessionContext;
 import net.app.lgn.vo.SessionUserVO;
+import net.app.steppay.StepPay;
 import net.app.vo.MailVO;
 import net.app.vo.SrchVO;
 import net.base.cmm.CmsMailUtil;
@@ -45,6 +46,7 @@ import net.base.utl.fcc.SHA256EncryptUtil;
 
 @Controller
 @PassAuth
+
 @RequestMapping(path = "web/lgn")
 public class LoginController  {
 
@@ -55,6 +57,10 @@ public class LoginController  {
 
     @Resource(name = "lgnService")
     private LgnService lgnService;
+
+    @Resource(name = "stepPay")
+    private StepPay stepPay;
+
 
 
     @Resource(name = "egovMessageSource")
@@ -184,7 +190,7 @@ public class LoginController  {
             ,SrchVO srchVO
             , HttpSession session, HttpServletRequest req
             , SessionUserVO sessionUserVO
-            ) throws IOException {
+            ) throws IOException, InterruptedException {
 
         ModelMap modelMap = new ModelMap();
         String rtnId  ="";
@@ -217,6 +223,11 @@ public class LoginController  {
     //            this.setSessionContextFactory(sessionUserVO, session);
                 modelMap.put("code","0001");
                 modelMap.put("msg", this.egovMessageSource.getMessage("success.common.join"));
+
+                // 결제자 생
+                //stepPay.createUsers(userVO.getFirstNm(),userVO.getEmail(),userVO.getPhone());
+
+
             }else {
                 modelMap.put("code","9999");
                 modelMap.put("msg", this.egovMessageSource.getMessage("success.common.fail"));

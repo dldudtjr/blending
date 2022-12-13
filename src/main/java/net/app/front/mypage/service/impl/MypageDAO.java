@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import egov.cmm.service.impl.EgovComAbstractDAO;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 import net.app.front.mypage.vo.CmpyVO;
+import net.app.front.mypage.vo.PayVO;
 import net.app.front.mypage.vo.UserVO;
 import net.app.vo.SrchVO;
 
@@ -93,6 +94,14 @@ public class MypageDAO extends EgovComAbstractDAO {
 
     public String udtConnectAuthDo(UserVO insVO) {
         return this.update("mappingDAO.udtConnectAuthDo", insVO)+"";
+    }
+
+    public String insPayInfoDo(PayVO vo) {
+        return this.update("mappingDAO.insPayInfoDo", vo)+"";
+    }
+
+    public String cancelPayInfoDo(PayVO vo) {
+        return this.update("mappingDAO.cancelPayInfoDo", vo)+"";
     }
 
 

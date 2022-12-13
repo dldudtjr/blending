@@ -20,6 +20,7 @@ import net.app.file.service.FileService;
 import net.app.file.vo.FileVO;
 import net.app.front.brand.product.service.ProductService;
 import net.app.front.brand.product.vo.ProductVO;
+import net.app.front.buyer.service.BuyerService;
 import net.app.front.mypage.service.MypageService;
 import net.app.front.mypage.vo.CmpyVO;
 import net.app.lgn.enu.SessionTypeEnum;
@@ -57,23 +58,33 @@ public class BrandController {
     @Resource(name = "lgnService")
     private LgnService lgnService;
 
-
-
+    @Resource(name = "buyerService")
+    private BuyerService buyerService;
 
     String path = "tiles/pages/frnt/";
 
 
 
     @RequestMapping(path = "buyerLst.bt")
-    public String productLst(@ModelAttribute("srchFm") SrchVO srchVO, ModelMap model) {
+    public String buyerLst(@ModelAttribute("srchFm") SrchVO srchVO, ModelMap model) {
 
         srchVO.setSrchUserType("002"); // buyer
-        List<EgovMap> eMap = this.mypageService.getCmpyPageLst(srchVO);
+        List<EgovMap> eMap = this.buyerService.getBuyerPageLst(srchVO);
         srchVO.setTotalRecordCount(eMap.size() > 0 ? Integer.parseInt(eMap.get(0).get("totCnt") + "") : 0);
         model.addAttribute("srchLst", eMap);
 
         return commUtils.tiles(commUtils.TILES_FRNT, "brand/buyer/brandNbuyerLst");
     }
+
+    @RequestMapping(path = "buyerLst.ax")
+    public String buyerLstAx(SrchVO srchVO, ModelMap model) {
+        srchVO.setSrchUserType("002"); // buyer
+        System.out.println("srchVO.getCurrentPageNo()="+srchVO.getCurrentPageNo());
+
+        model.addAttribute("srchLst", this.buyerService.getBuyerPageLst(srchVO));
+        return path+"/brand/buyer/brandNbuyerLstAx";
+    }
+
 
     @RequestMapping(path = "manage.bt")
     public String manage(@ModelAttribute("srchFm") SrchVO srchVO, ModelMap model,ProductVO productVO) {

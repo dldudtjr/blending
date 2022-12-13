@@ -73,11 +73,24 @@ $(function () {
 
 // info 구독 팝업 선택 클릭
 $(function () {
-  $('.subscribe-select a').click(function(){
+  $('.periodUse a').click(function(){
+	$("#periodUse").val( $(this).data("id"));
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
   })
 });//jquery ready
+
+$(function () {
+  $('.priceCode a').click(function(){
+	$("#priceCode").val( $(this).data("id"));
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+  })
+});//jquery ready
+
+
+
+
 
 // help 버튼 클릭
 $(function () {

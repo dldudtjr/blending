@@ -82,6 +82,33 @@
 	</insert>
 
 
+	<insert id="insPayInfoDo" parameterType="net.app.front.mypage.vo.PayVO" >
+		<selectKey resultType="string" keyProperty="serviceId" order="BEFORE">
+			SELECT 'SV' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') || LPAD(NVL(Max(SUBSTR(SERVICE_ID,17))+1,1),4,'0') FROM TBSM_SERVICE WHERE TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') = SUBSTR(SERVICE_ID,3,14)
+		</selectKey>
+
+			INSERT INTO BLENDING.TBSM_SERVICE
+				(SERVICE_ID, USER_ID, PERIOD_USE, SERVICE_PRICE,
+				SERVICE_ST_DT,SERVICE_ED_DT,
+				PAYMENT_DT, REFUND_DT, ORDER_CODE, PRICE_CODE, STATUS, REGIST_DT)
+				VALUES
+				(
+				 #serviceId}
+				,#{userId}
+				,#{periodUse}
+				,#{servicePrice}
+				,sysdate
+				,ADD_MONTHS(sysdate,-#{periodUse})
+				,#{paymentDt}
+				,#{refundDt}
+				,#{orderCode}
+				,#{priceCode}
+				,#{status}
+				,sysdate
+				)
+	</insert>
+
+
 <!--
 	<insert id="insMappingInfoDo" parameterType="net.app.vo.MappingVO" >
 		MERGE

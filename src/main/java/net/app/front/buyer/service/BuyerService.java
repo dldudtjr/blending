@@ -18,5 +18,7 @@ public interface BuyerService {
 
     String delProductCateSubmitDo(ProductCateVO productCateVO);
 
+    List<EgovMap> getBuyerPageLst(SrchVO srchVO);
+
 
 }

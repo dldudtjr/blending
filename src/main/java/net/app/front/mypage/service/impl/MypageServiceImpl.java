@@ -11,6 +11,7 @@ import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 import net.app.front.mypage.service.MypageService;
 import net.app.front.mypage.vo.CmpyVO;
+import net.app.front.mypage.vo.PayVO;
 import net.app.front.mypage.vo.UserVO;
 import net.app.lgn.enu.UserStatusEnum;
 import net.app.lgn.util.FrntSessionUtils;
@@ -74,6 +75,8 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
         cmpyVO.setRegtId(userVO.getUserId());
         return this.insCmpyInfoDo(cmpyVO);
     }
+
+
 
 
 
@@ -158,6 +161,20 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
     public List<EgovMap> getMappingLst(SrchVO vo) {
         return this.mypageDAO.getMappingLst(vo);
     }
+
+    @Override
+    public String insPayInfoDo(PayVO vo) {
+        return this.mypageDAO.insPayInfoDo(vo);
+    }
+
+
+
+    @Override
+    public String cancelPayInfoDo(PayVO vo) {
+        return this.mypageDAO.cancelPayInfoDo(vo);
+    }
+
+
 
 
 }

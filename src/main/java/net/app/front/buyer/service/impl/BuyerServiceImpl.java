@@ -78,4 +78,9 @@ public class BuyerServiceImpl extends EgovAbstractServiceImpl implements BuyerSe
 
     }
 
+    @Override
+    public List<EgovMap> getBuyerPageLst(SrchVO srchVO) {
+        return this.buyerDAO.getBuyerPageLst(srchVO);
+    }
+
 }

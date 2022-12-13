@@ -23,6 +23,7 @@ import net.app.file.service.FileService;
 import net.app.file.vo.FileVO;
 import net.app.front.mypage.service.MypageService;
 import net.app.front.mypage.vo.CmpyVO;
+import net.app.front.mypage.vo.PayVO;
 import net.app.front.mypage.vo.UserVO;
 import net.app.lgn.enu.SessionTypeEnum;
 import net.app.lgn.enu.UserStatusEnum;
@@ -336,10 +337,6 @@ public class MyPageController {
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/payInfo");
     }
 
-    @RequestMapping(path = "insPayInfoDo.ax")
-    public String insPayInfoDo(SrchVO srchVO, @ModelAttribute("saveFm") UserVO UserVO, ModelMap model) {
-        return commUtils.tiles(commUtils.TILES_FRNT, "mypage/payInfo");
-    }
 
     private void setSessionContextFactory(SessionUserVO sessionUserVO, HttpSession session) {
         SessionContext sessionContext = (SessionContext) this.sessionContextFactory.getObject();

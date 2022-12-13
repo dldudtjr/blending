@@ -4,6 +4,7 @@ import java.util.List;
 
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 import net.app.front.mypage.vo.CmpyVO;
+import net.app.front.mypage.vo.PayVO;
 import net.app.front.mypage.vo.UserVO;
 import net.app.vo.MappingVO;
 import net.app.vo.SrchVO;
@@ -59,6 +60,10 @@ public interface MypageService {
 
 
     CmpyVO getCmpyIdDtl(String cmpyId);
+
+    String insPayInfoDo(PayVO vo);
+
+    String cancelPayInfoDo(PayVO vo);
 
 
 

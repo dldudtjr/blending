@@ -36,11 +36,11 @@ public class ProductVO extends SessEtdVO{
 
     private String costInfo;
 
-	private String bcdYn;
+	private String bcdYn ="N";
 	private String bcdSlt;
 	private String bcdNo;
 
-	private String pkgYn;
+	private String pkgYn ="N";
 	private String pkgStdCode;
 	private String pkgStdX;
 	private String pkgStdY;
@@ -86,28 +86,28 @@ public class ProductVO extends SessEtdVO{
 	private String expireDt;
 
 
-	private String  ingredientsYn;
+	private String  ingredientsYn ="N";
 	private String  ingredients;
 
-	private String  labelYn;
+	private String  labelYn ="N";
 
 	private String  manuFacturedCountry;
 	private String  manuFacturedCity;
 
 
-	private String  sellYn;
+	private String  sellYn ="N";
 	private String  sellWhere;
 
-	private String  purchaseYn;
+	private String  purchaseYn ="N";
 	private String  distributorType;
 	private String  distributedWhere;
 
 
 
-	private String  deliveryYn;
-	private String  pbOrderYn;
-	private String  coldStorageYn;
-	private String  storageMethodYn;
+	private String  deliveryYn ="N";
+	private String  pbOrderYn ="N";
+	private String  coldStorageYn ="N";
+	private String  storageMethodYn ="N";
 
 	private String  marketingBudget;
 //    private File    anotherImg;
