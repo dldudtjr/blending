@@ -37,7 +37,7 @@
 			<div class="main-content main-bg">
 				<div class="main-img">
 					<div class="main-text-wrap">
-						<span class="main-text-title">Product Sourcing Marketplace</span>
+						<span class="main-text-title">Connecting Brands with Global Retail and Wholesale Buyers</span>
 						<span>글로벌 소비재 시장 진출을 위한 필수 관문</span>
 <!--              <a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무 료 상 담</a> -->
 						<a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무료상담신청 </a>
