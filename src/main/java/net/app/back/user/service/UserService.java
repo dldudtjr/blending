@@ -28,6 +28,8 @@ public interface UserService {
 
     String expireChg(UserVO userVO);
 
+    String udtBuyerViewChgDo(UserVO userVO);
+
 
 
 }

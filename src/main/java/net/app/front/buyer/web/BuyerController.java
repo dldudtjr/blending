@@ -76,7 +76,7 @@ public class BuyerController {
             i++;
         }
 
-        System.out.println(">>>>>>>>>>>>> newMap.get(0).getSubMap()="+cateEMaps.get(0).getSubMap());
+//        System.out.println(">>>>>>>>>>>>> newMap.get(0).getSubMap()="+cateEMaps.get(0).getSubMap());
 
 
         model.addAttribute("cateLst",cateEMaps);

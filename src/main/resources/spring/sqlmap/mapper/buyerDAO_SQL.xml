@@ -90,12 +90,14 @@
 
 	<select id="getBuyerPageLst" parameterType="net.app.vo.SrchVO" resultType="egovMap">
 		<include refid="include.page_cnt_start" />
-			SELECT * FROM (
+			SELECT A.*
+				,(SELECT CMPY_NM FROM TB_CMPY WHERE USER_ID=A.USER_ID ) AS CMPY_NM
+				,(SELECT MAX(FILE_ID) FROM TB_FILE WHERE PARNTS_DTA_ID=A.USER_ID AND UPLOAD_FILE_NM = 'cmpyImg') AS FILE_ID
+			 FROM (
 				SELECT
 				A.*
-				,(SELECT MAX(FILE_ID) FROM TB_FILE WHERE PARNTS_DTA_ID=A.USER_ID AND UPLOAD_FILE_NM = 'cmpyImg') AS FILE_ID
 				FROM TB_USER A WHERE USER_TYPE ='002'
-			)
+			) A
 		<include refid="include.page_cnt_end" />
 	</select>
 

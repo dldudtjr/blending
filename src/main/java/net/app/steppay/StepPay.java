@@ -26,8 +26,9 @@ public class StepPay {
 
 	// 고객 코드 조회 api (고객 아이디 또는 이름)
 	public String getCustomers(String name) throws IOException, InterruptedException {
-		HttpRequest request = HttpRequest.newBuilder()
-			    .uri(URI.create("https://api.steppay.kr/api/v1/customers"))
+
+	    HttpRequest request = HttpRequest.newBuilder()
+			    .uri(URI.create("https://api.steppay.kr/api/v1/customers?keyword="+name))
 			    .header("accept", "*/*")
 			    .header("Secret-Token", payToken)
 			    .method("GET", HttpRequest.BodyPublishers.noBody())

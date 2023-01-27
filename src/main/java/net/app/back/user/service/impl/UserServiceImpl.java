@@ -92,6 +92,12 @@ public class UserServiceImpl extends EgovAbstractServiceImpl implements UserServ
         return null;
     }
 
+    @Override
+    public String udtBuyerViewChgDo(UserVO vo) {
+        return this.userDAO.udtBuyerViewChgDo(vo);
+    }
+
+
 
 
 

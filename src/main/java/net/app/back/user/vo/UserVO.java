@@ -13,7 +13,9 @@ public class UserVO extends SessEtdVO{
     private String preferredTimeZone;
     private String emailCheckYn ="N";
     private String phoneCheckYn ="N";
+    private String payCheckYn ="N";
 
+    private String[] userIdArr;
     private String userId;
     private String userType = "001"; // 001 :brand 002 :buyer
     private String status = "001"; // 001 : ready 002 : use  003: fail

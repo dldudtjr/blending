@@ -75,7 +75,7 @@ public class ProductController {
         List<FileVO>  fileLst = this.fileService.getFileLst(fileVO);
         model.addAttribute("fileLst",fileLst);
 
-        model.addAttribute("productImgLst",fileLst.stream().filter(c -> "productImg[]".equals(c.getUploadFileNm())).collect(Collectors.toList()));
+        model.addAttribute("productImgLst",fileLst.stream().filter(c -> "productImg".equals(c.getUploadFileNm())).collect(Collectors.toList()));
         model.addAttribute("labelImgLst",fileLst.stream().filter(c -> "labelImg[]".equals(c.getUploadFileNm())).collect(Collectors.toList()));
         model.addAttribute("productImgAnotherLst",fileLst.stream().filter(c -> "productImgAnother[]".equals(c.getUploadFileNm())).collect(Collectors.toList()));
 
@@ -120,7 +120,7 @@ public class ProductController {
         List<FileVO>  fileLst = this.fileService.getFileLst(fileVO);
         model.addAttribute("fileLst",fileLst);
 
-        model.addAttribute("productImgLst",fileLst.stream().filter(c -> "productImg[]".equals(c.getUploadFileNm())).collect(Collectors.toList()));
+        model.addAttribute("productImgLst",fileLst.stream().filter(c -> "productImg".equals(c.getUploadFileNm())).collect(Collectors.toList()));
         model.addAttribute("labelImgLst",fileLst.stream().filter(c -> "labelImg[]".equals(c.getUploadFileNm())).collect(Collectors.toList()));
         model.addAttribute("productImgAnotherLst",fileLst.stream().filter(c -> "productImgAnother[]".equals(c.getUploadFileNm())).collect(Collectors.toList()));
 

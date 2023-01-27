@@ -380,4 +380,14 @@ $(function() {
 	}).ajaxError(function() {
 		$(".mask").hide();
 	});
+
+	$('input.allIdx').on('change', function() {
+		$('input.rowIdx').prop('checked', $(this).is(":checked"));
+	});
+
+	// 하나만선택
+	$('input.oneIdx').on('change', function() {
+		$('input.rowIdx').prop('checked', $(this).is(":checked"));
+	});
+
 });

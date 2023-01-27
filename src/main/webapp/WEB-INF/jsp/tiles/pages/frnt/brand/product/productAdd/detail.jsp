@@ -6,7 +6,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 					<!-- 	<header class="sidebar-main-header">
 							<h3 class="tit">제품상세</h3>
 						</header> -->
-						<sf:form commandName="srchFm" cssClass="form-horizontal" >
+			<sf:form commandName="srchFm" cssClass="form-horizontal" >
 				<input type="hidden" name="productId" id="makingProductId" />
 			</sf:form>
 			<sf:form commandName="saveFm" cssClass="form-horizontal" enctype="multipart/form-data">
@@ -31,14 +31,14 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 											</label>
 											<div id="productImgLst" class="attach-list" data-attach-role="attach-list">
 												 <c:forEach items="${productImgLst}" var="row" varStatus="cnt">
-								<div class="column img-file" width="150px">
-													<a href="#"><i class="wn-icon remove upload-file-delete"  data-value="${row.parntsDtaId}" data-fileId="${row.fileId}">취소</i></a>
-									<div style="width: 150px;">
-										<img class="image fileDown" data-value="${row.parntsDtaId}" data-fileId="${row.fileId}" src="<c:url value="/util/fileDownload.ax"/>?parntsDtaId=${row.parntsDtaId}&fileId=${row.fileId}" width="150">
-										<label class="image-label">${row.realFileNm}</label>
-									</div>
-								</div>
-							</c:forEach>
+													<div class="column img-file" width="150px">
+																		<a href="#"><i class="wn-icon remove upload-file-delete"  data-value="${row.parntsDtaId}" data-fileId="${row.fileId}">취소</i></a>
+														<div style="width: 150px;">
+															<img class="image fileDown" data-value="${row.parntsDtaId}" data-fileId="${row.fileId}" src="<c:url value="/util/fileDownload.ax"/>?parntsDtaId=${row.parntsDtaId}&fileId=${row.fileId}" width="150">
+															<label class="image-label">${row.realFileNm}</label>
+														</div>
+													</div>
+												</c:forEach>
 											</div>
 										</div>
 									</div>
@@ -631,7 +631,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 								</c:forEach>
 							</c:if>
 						</div>
-						<sf:input path="ingredients" class="input-text ingredientsYnDiv" placeholder="제품 전성분을 입역하십시오. 콤마(,) 사용하여 분리" />
+						<input type="text" id="ingredients" name="ingredients" class="input-text ingredientsYnDiv" placeholder="제품 전성분을 입역하십시오. 콤마(,) 사용하여 분리" />
 					</div>
 								</div>
 								<div class="mt-30">

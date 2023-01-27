@@ -152,8 +152,11 @@ $(function(){
 	  <c:if test="${not empty _sessionKey.brandFileId}">
 	  var src = "<c:url value='/util/fileDownload.ax'/>?parntsDtaId=${_sessionKey.cmpyId}&fileId=${_sessionKey.brandFileId}";
 	  $("#brandImg").css({
-          "background-image": "url(" + src + ")",
-          "background-color": "#fff",
+		  "background-image"	:	"url(" + src + ")",
+	      "background-color"	:	"#fff",
+	      "background-size" 	:	"contain",
+	      "background-repeat"	:	"no-repeat",
+	      "width"				:	"480px",
         });
 	  </c:if>
 
@@ -171,9 +174,22 @@ $(function(){
     		fn_submitReloadAjax(url,sendData,"popProduct");
     		}, 500);
      }); */
+
+
+
+
+
      $(".mvUrlBtn").click(function(){
+
+    	 	var sendData ={"mvUrl" : $("#mvUrl").val()};
+
+	    	 var srcChgTxt = $("#mvUrl").val();
+	    	 if(srcChgTxt.indexOf("src") > -1){
+	    		 var splitTxt = srcChgTxt.split('src="')[1];
+	    		 sendData ={"mvUrl" : splitTxt.split('"')[0] };
+	    	 }
+
      		var url	 ="<c:url value='/web/mypage/udtCmpyMvUrlSubmit.ax' />";
-     		var sendData ={"mvUrl" : $("#mvUrl").val()};
      		fn_submitReloadAjax(url,sendData,"popProduct");
       });
 

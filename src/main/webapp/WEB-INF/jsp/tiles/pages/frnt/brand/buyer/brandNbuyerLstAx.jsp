@@ -2,12 +2,13 @@
 <c:forEach items="${srchLst}" var="row" varStatus="cnt">
 	<div class="buyerCard-form">
 		<div class="buyerCard-img">
-			<c:if test="${not empty row.fileId}" >
+			<%-- <c:if test="${not empty row.fileId}" >
 				<img src="<c:url value="/util/fileDownload.ax"/>?parntsDtaId=${row.cmpyId}&fileId=${row.fileId}">
 			</c:if>
 			<c:if test="${empty row.fileId}" >
 				<img src="/resources/images/bt_logo@2x.png" alt="">
-			</c:if>
+			</c:if> --%>
+			${row.cmpyNm}
 		</div>
 		 <div class="buyerCard-text">
 			<a href="#" class="buyerCard-title mt-15"><b>${row.firstNm} ${row.lastNm}</b></a>

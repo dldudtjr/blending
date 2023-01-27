@@ -109,6 +109,9 @@ $( document ).ready(function() {
 		  $("#myImgLst").css({
 		      "background-image": "url(" + src + ")",
 		      "background-color": "#fff",
+		      "background-size" : "contain",
+		      "background-repeat": "no-repeat",
+		      "width"			:"278px",
 		    });
 
 	  </c:if>

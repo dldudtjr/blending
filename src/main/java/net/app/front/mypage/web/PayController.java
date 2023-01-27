@@ -42,6 +42,7 @@ public class PayController {
         ModelMap modelMap = new ModelMap();
 
         try {
+            System.out.println(">>>>FrntSessionUtils.getUserInfo().getEmail()"+FrntSessionUtils.getUserInfo().getEmail());
             String customerCode = stepPay.getCustomers(FrntSessionUtils.getUserInfo().getEmail());
             payVO.setServicePrice(1000);
             payVO.setPriceCode("001");

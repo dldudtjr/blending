@@ -163,11 +163,13 @@ $( document ).ready(function() {
 
 	 <c:if test="${not empty cmpyFm.fileId}">
 		var src = "<c:url value='/util/fileDownload.ax'/>?parntsDtaId=${cmpyFm.cmpyId}&fileId=${cmpyFm.fileId}";
-		  $("#cmpyImgLst").css({
+		 $("#cmpyImgLst").css({
 		      "background-image": "url(" + src + ")",
 		      "background-color": "#fff",
+		      "background-size" : "contain",
+		      "background-repeat": "no-repeat",
+		      "width"			:"278px",
 		    });
-
 	  </c:if>
 
 

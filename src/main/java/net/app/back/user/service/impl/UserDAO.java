@@ -49,6 +49,10 @@ public class UserDAO extends EgovComAbstractDAO {
         return this.update("userDAO.expireChg", vo)+"";
     }
 
+    public String udtBuyerViewChgDo(UserVO vo) {
+        return this.update("userDAO.udtBuyerViewChgDo", vo)+"";
+    }
+
 
 
 }
