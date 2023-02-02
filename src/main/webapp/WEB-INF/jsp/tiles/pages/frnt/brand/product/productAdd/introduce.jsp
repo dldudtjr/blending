@@ -113,7 +113,7 @@
 				</div>
 				<div class="mt-30">
 					<div class="form-field">
-						<h4 class="detail-wrap-title important">USP (Unique Selling Propositions)</h4>
+						<h4 class="detail-wrap-title important">USP (Unique Selling Point)</h4>
 						<div class="form-field">
 							<div class="input-add add-right">
 								<input class="input-text uspTmp" placeholder="Unique Selling Propositions" />

@@ -564,7 +564,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 								</div>
 								<h4 class="detail-wrap-title strong">제품 성분 및 유통기한</h4>
 								<div class="mt-30">
-									<h4 class="detail-wrap-title">제품 유통기한이 있나요?
+									<h4 class="detail-wrap-title">제품 유통기한
 										<div class="help-wrap">
 											<i class="wn-icon help">QnA</i>
 											<div class="help-cont">
@@ -601,7 +601,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 									</div>
 								</div>
 								<div class="mt-30">
-									<h4 class="detail-wrap-title">제품 전성분이 있나요?
+									<h4 class="detail-wrap-title">제품 전성분
 										<div class="help-wrap">
 											<i class="wn-icon help">QnA</i>
 											<div class="help-cont">
@@ -635,7 +635,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 					</div>
 								</div>
 								<div class="mt-30">
-									<h4 class="detail-wrap-title">영양사실 라벨 여부
+									<h4 class="detail-wrap-title">영양사실 라벨
 										<div class="help-wrap">
 											<i class="wn-icon help">QnA</i>
 											<div class="help-cont">
