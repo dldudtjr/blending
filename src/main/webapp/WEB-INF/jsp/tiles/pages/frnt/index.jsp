@@ -37,8 +37,8 @@
 			<div class="main-content main-bg">
 				<div class="main-img">
 					<div class="main-text-wrap">
-						<span class="main-text-title">Connecting Brands with Global Retail and Wholesale Buyers</span>
-						<span>글로벌 소비재 시장 진출을 위한 필수 관문</span>
+						<span class="main-text-title">Connecting Brands with Global Retail Buyers</span>
+						<span>Brand 와 Buyer 를 연결하는 신개념 B2B 마켓플레이스</span>
 <!--              <a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무 료 상 담</a> -->
 						<a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무료상담신청 </a>
 						<!-- <div class="coming-timer">
@@ -72,7 +72,7 @@
 						<div class="main-form-text">
 							<span class="main-form-title">바이어 맞춤 큐레이션</span>
 							<span>바이어가 필요로하는 필수 정보 위주 제품 쇼케이스</span>
-							<span> 바이어 맞춤형 카테고리 큐레이션 및 필터링</span>
+							<span>바이어 맞춤형 카테고리 큐레이션 및 필터링</span>
 						</div>
 					</div>
 					<div class="main-form">

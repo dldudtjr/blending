@@ -131,7 +131,7 @@
 				</div>
 				<div class="mt-30">
 					<h4 class="detail-wrap-title">
-						간략한 제품 소개
+						제품 소개
 						<div class="help-wrap">
 							<i class="wn-icon help">QnA</i>
 							<div class="help-cont">
