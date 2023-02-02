@@ -159,7 +159,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 								<div class="mt-30">
 									<div class="d-flex">
 										<div class="form-field">
-											<h4 class="detail-wrap-title important">공급가(Cost)
+											<h4 class="detail-wrap-title important">공급가(FOB)
 												<div class="help-wrap">
 													<i class="wn-icon help">QnA</i>
 													<div class="help-cont">
@@ -173,7 +173,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 											</div>
 										</div>
 										<div class="form-field">
-											<h4 class="detail-wrap-title important">권장소비자가(MSRP)
+											<h4 class="detail-wrap-title important">권장소비자가(SRP)
 												<div class="help-wrap">
 													<i class="wn-icon help">QnA</i>
 													<div class="help-cont">
@@ -194,7 +194,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 								<div class="mt-30">
 									<div class="d-flex">
 											<div class="form-field">
-												<h4 class="detail-wrap-title important">샘플오더
+												<h4 class="detail-wrap-title important">최소주문수량
 													<div class="help-wrap">
 														<i class="wn-icon help">QnA</i>
 														<div class="help-cont">
@@ -635,7 +635,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 					</div>
 								</div>
 								<div class="mt-30">
-									<h4 class="detail-wrap-title">제품 여양사실 라벨이 있나요?
+									<h4 class="detail-wrap-title">영양사실 라벨 여부
 										<div class="help-wrap">
 											<i class="wn-icon help">QnA</i>
 											<div class="help-cont">
