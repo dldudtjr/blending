@@ -62,8 +62,9 @@
 						<div class="main-form-img"><img src="/resources/images/main1.png" alt=""></div>
 						<div class="main-form-text">
 							<span class="main-form-title">커스텀 브랜드 페이지</span>
-							<span>브랜드페이지를 꾸미고 제품의 특장점을 강조하여 매력 </span>
-							<span>어필 자유로운 브랜드 및 제품 페이지 공유</span>
+							<span>브랜드 아이덴티티를 어필할 수있는 브랜드 전용페이지</span>
+             				<span>바이어의 구매결정에 필요한 제품의 특장점을 강조할수있는 제품 제안서</span>
+              				<span>외부로 자유롭 브랜드 페이지 및 제품 제안서 공유</span>
 						</div>
 					</div>
 					<div class="main-form reverse">
