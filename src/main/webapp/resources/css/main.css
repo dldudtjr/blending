@@ -1011,7 +1011,7 @@ hr {
 .main-form-img{
   display: flex;
   align-items: center;
-  width: 150%;
+  width: 120%;
   height: 530px;
   border-radius: 20px;
   box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
@@ -1043,12 +1043,12 @@ hr {
 }
 .main-form-text .main-form-title::before{
   position: absolute;
-  top: -24px;
+  top: -20px;
   left: 0;
   display: block;
   content: '';
   width: 60px;
-  height: 100px;
+  height: 80px;
   background-color: #F0C200;
   z-index: -1;
 }
