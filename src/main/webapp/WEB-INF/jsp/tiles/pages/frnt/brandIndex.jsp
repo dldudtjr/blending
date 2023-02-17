@@ -42,7 +42,7 @@
             <div class="main-form-img"><img src="/resources/images/main_brand1.png" alt=""></div>
             <div class="main-form-text">
               <span class="main-form-title sub">브랜드 랜딩 페이지</span>
-              <span>브랜드 홍보용 전용 페이지<br>
+              <span>브랜드 전용 홍보용 페이지<br>
                 브랜드가 보유한 전제품 및 브랜드 아이덴티티 확인<br>
                 검증된 브랜드/기업 상세정보 노출</span>
             </div>
@@ -51,7 +51,7 @@
             <div class="main-form-img"><img src="/resources/images/main_brand2.png" alt=""></div>
             <div class="main-form-text">
               <span class="main-form-title sub">카드식 제품제안서</span>
-              <span>바이어에게 필요한 필수 제품 정보 확인<br>
+              <span>바이어에게 필요한 필수 제품 정보 강조<br>
                 제품의 유통현황 및 인증 상태 확인</span>
             </div>
           </div>
