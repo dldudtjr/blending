@@ -59,7 +59,7 @@
 				</div>
 				<div class="main-form-wrap">
 					<div class="main-form">
-						<div class="main-form-img"><img src="/resources/images/main1.png" alt=""></div>
+						<div class="main-form-img"><img src="/resources/images/main1.jpg" alt=""></div>
 						<div class="main-form-text">
 							<span class="main-form-title">해외 수출시장 진입</span>
 							<span>제품을 수출할 수 있는 다양한 국가 확인</br>
@@ -68,7 +68,7 @@
 						</div>
 					</div>
 					<div class="main-form reverse">
-						<div class="main-form-img"><img src="/resources/images/main2.png" alt=""></div>
+						<div class="main-form-img"><img src="/resources/images/main2.jpg" alt=""></div>
 						<div class="main-form-text">
 							<span class="main-form-title">신제품 소싱</span>
 							<span>바이어 맞춤형 정보 표기된 제품카드</br>
@@ -76,7 +76,7 @@
 						</div>
 					</div>
 					<div class="main-form">
-						<div class="main-form-img"><img src="/resources/images/main3.png" alt=""></div>
+						<div class="main-form-img"><img src="/resources/images/main3.jpg" alt=""></div>
 						<div class="main-form-text">
 							<span class="main-form-title">해외 마케팅</span>
 							<span>해외 인플루언서 및 셀럽 콜라보</br>
