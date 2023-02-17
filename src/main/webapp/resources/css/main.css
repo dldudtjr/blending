@@ -999,7 +999,7 @@ hr {
 
 .main-form-wrap{
   margin: 100px auto 0;
-  width: 1200px;
+  width: 1700px;
 }
 .main-form{
   display: flex;
@@ -1011,8 +1011,8 @@ hr {
 .main-form-img{
   display: flex;
   align-items: center;
-  width: 50%;
-  height: 380px;
+  width: 150%;
+  height: 700px;
   border-radius: 20px;
   box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -1021,34 +1021,34 @@ hr {
   width: 100%;
 }
 .main-form-text{
-  width: 50%;
-  margin-left: 120px;
+  width: 87%;
+  margin-left: 1px;
   padding: 20px;
 }
 .main-form-text span{
   display: block;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 30px;
+  line-height: 50px;
   padding-left: 20px;
   color: #222;
   letter-spacing: -0.3px;
 }
 .main-form-text .main-form-title{
   position: relative;
-  font-size: 30px;
-  line-height: 33px;
+  font-size: 60px;
+  line-height: 50px;
   font-weight: 600;
   margin-bottom: 30px;
   z-index: 1;
 }
 .main-form-text .main-form-title::before{
   position: absolute;
-  top: -12px;
+  top: -24px;
   left: 0;
   display: block;
   content: '';
   width: 60px;
-  height: 60px;
+  height: 100px;
   background-color: #F0C200;
   z-index: -1;
 }
