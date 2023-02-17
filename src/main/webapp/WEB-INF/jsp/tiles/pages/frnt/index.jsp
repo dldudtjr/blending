@@ -61,26 +61,26 @@
 					<div class="main-form">
 						<div class="main-form-img"><img src="/resources/images/main1.png" alt=""></div>
 						<div class="main-form-text">
-							<span class="main-form-title">커스텀 브랜드 페이지</span>
-							<span>브랜드 아이덴티티를 어필할 수있는 브랜드 전용페이지</br>
-             				  바이어의 구매결정에 필요한 제품의 특장점을 강조할수있는 제품 제안서</br>
-              				  브랜드 페이지 및 제품 제안서 외부 공유</span>
+							<span class="main-form-title">해외 수출시장 진입</span>
+							<span>제품을 수출할 수 있는 다양한 국가 확인</br>
+             				  국가별 판매채널 확인 및 바이어에게 직접 제안 </br>
+              				  수출에 필요한 인증/포워딩/통관 등 정보 확인</span>
 						</div>
 					</div>
 					<div class="main-form reverse">
 						<div class="main-form-img"><img src="/resources/images/main2.png" alt=""></div>
 						<div class="main-form-text">
-							<span class="main-form-title">바이어 맞춤 큐레이션</span>
-							<span>바이어가 필요로하는 필수 정보 위주 제품 쇼케이스</br>
-							  바이어 맞춤형 카테고리 큐레이션 및 필터링</span>
+							<span class="main-form-title">신제품 소싱</span>
+							<span>바이어 맞춤형 정보 표기된 제품카드</br>
+							  제품 조건 필터링이 가능한 바이어 맞춤형 데시보드</span>
 						</div>
 					</div>
 					<div class="main-form">
 						<div class="main-form-img"><img src="/resources/images/main3.png" alt=""></div>
 						<div class="main-form-text">
-							<span class="main-form-title">다채널 제품 홍보 및 판매</span>
-							<span>다양한 글로벌 바이어에게 직접 브랜드 제안 </br>
-							  글로벌 마케팅 채널 구축</span>
+							<span class="main-form-title">해외 마케팅</span>
+							<span>해외 인플루언서 및 셀럽 콜라보</br>
+							  해외 구독박스 브랜드 콜라보</span>
 						</div>
 					</div>
 					<div class="main-fotter-btn">
