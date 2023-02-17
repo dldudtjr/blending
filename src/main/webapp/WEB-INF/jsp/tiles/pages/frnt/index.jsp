@@ -40,7 +40,7 @@
 						<span class="main-text-title">Connecting Brands with Global Retail Buyers</span>
 						<span>Brand 와 Buyer 를 연결하는 신개념 B2B 마켓플레이스</span>
 <!--              <a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무 료 상 담</a> -->
-						<a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무료상담신청 </a>
+						<a href="https://forms.gle/fFpZn9qAV7cs2RLJ9">무료등록신청 </a>
 						<!-- <div class="coming-timer">
 							<span id="dd">00
 						<p>DAYS</p>
