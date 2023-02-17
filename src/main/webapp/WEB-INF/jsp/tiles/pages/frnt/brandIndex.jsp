@@ -41,27 +41,27 @@
           <div class="main-form">
             <div class="main-form-img"><img src="/resources/images/main_brand1.png" alt=""></div>
             <div class="main-form-text">
-              <span class="main-form-title sub">제품 & 브랜드 준비</span>
-              <span>수출에 필요한 필수 정보 준비<br>
-                바이어가 원하는 중요 정보로 제품 쇼케이스<br>
-                브랜드페이지를 통해 브랜드 홍보</span>
+              <span class="main-form-title sub">브랜드 랜딩 페이지</span>
+              <span>브랜드 홍보용 전용 페이지<br>
+                브랜드가 보유한 전제품 및 브랜드 아이덴티티 확인<br>
+                검증된 브랜드/기업 상세정보 노출</span>
             </div>
           </div>
           <div class="main-form reverse">
             <div class="main-form-img"><img src="/resources/images/main_brand2.png" alt=""></div>
             <div class="main-form-text">
-              <span class="main-form-title sub">채널 확인 & 바이어 연결</span>
-              <span>진출 가능한 국가 및 해외 유통채널 확인<br>
-                채널 별 바이어에게 제품 제안</span>
+              <span class="main-form-title sub">카드식 제품제안서</span>
+              <span>바이어에게 필요한 필수 제품 정보 확인<br>
+                제품의 유통현황 및 인증 상태 확인</span>
             </div>
           </div>
           <div class="main-form">
             <div class="main-form-img"><img src="/resources/images/main_brand3.jpeg" alt=""></div>
             <div class="main-form-text">
-              <span class="main-form-title sub">브랜드 데이터 확보</span>
-              <span>내 브랜드의 관심도 확인<br>
-                다른 제품/브랜드와 비교 검토<br>
-                제품을 개선하여 경쟁력 확보</span>
+              <span class="main-form-title sub">기타 수출 서비스</span>
+              <span>글로벌 유통 시장 확인<br>
+                국가별 판매채널 및 바이어 검색<br>
+                해외 인증, 포워딩 및 통관 정보</span>
             </div>
           </div>
         </div>

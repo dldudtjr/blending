@@ -62,25 +62,25 @@
 						<div class="main-form-img"><img src="/resources/images/main1.png" alt=""></div>
 						<div class="main-form-text">
 							<span class="main-form-title">커스텀 브랜드 페이지</span>
-							<span>브랜드 아이덴티티를 어필할 수있는 브랜드 전용페이지</span>
-             				<span>바이어의 구매결정에 필요한 제품의 특장점을 강조할수있는 제품 제안서</span>
-              				<span>외부로 자유롭 브랜드 페이지 및 제품 제안서 공유</span>
+							<span>브랜드 아이덴티티를 어필할 수있는 브랜드 전용페이지</br>
+             				  바이어의 구매결정에 필요한 제품의 특장점을 강조할수있는 제품 제안서</br>
+              				  브랜드 페이지 및 제품 제안서 외부 공유</span>
 						</div>
 					</div>
 					<div class="main-form reverse">
 						<div class="main-form-img"><img src="/resources/images/main2.png" alt=""></div>
 						<div class="main-form-text">
 							<span class="main-form-title">바이어 맞춤 큐레이션</span>
-							<span>바이어가 필요로하는 필수 정보 위주 제품 쇼케이스</span>
-							<span>바이어 맞춤형 카테고리 큐레이션 및 필터링</span>
+							<span>바이어가 필요로하는 필수 정보 위주 제품 쇼케이스</br>
+							  바이어 맞춤형 카테고리 큐레이션 및 필터링</span>
 						</div>
 					</div>
 					<div class="main-form">
 						<div class="main-form-img"><img src="/resources/images/main3.png" alt=""></div>
 						<div class="main-form-text">
 							<span class="main-form-title">다채널 제품 홍보 및 판매</span>
-							<span>다양한 글로벌 바이어에게 직접 브랜드 제안 </span>
-							<span>글로벌 마케팅 채널 구축</span>
+							<span>다양한 글로벌 바이어에게 직접 브랜드 제안 </br>
+							  글로벌 마케팅 채널 구축</span>
 						</div>
 					</div>
 					<div class="main-fotter-btn">
