@@ -142,7 +142,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 
 								</script>
 
-								<div class="mt-30">
+								<!-- <div class="mt-30">
 									<div class="form-field">
 										<h4 class="detail-wrap-title">Variant
 											<div class="help-wrap">
@@ -154,12 +154,12 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 										</h4>
 										<sf:input path="productStyleNo" class="input-text" placeholder="Enter number" />
 									</div>
-								</div>
-								<h4 class="detail-wrap-title strong">제품가격</h4>
+								</div> -->
+								<h4 class="detail-wrap-title strong important">제품가격</h4>
 								<div class="mt-30">
 									<div class="d-flex">
 										<div class="form-field">
-											<h4 class="detail-wrap-title important">공급가(FOB)
+											<h4 class="detail-wrap-title">공급가(FOB)
 												<div class="help-wrap">
 													<i class="wn-icon help">QnA</i>
 													<div class="help-cont">
@@ -173,7 +173,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 											</div>
 										</div>
 										<div class="form-field">
-											<h4 class="detail-wrap-title important">권장소비자가(SRP)
+											<h4 class="detail-wrap-title">권장소비자가(SRP)
 												<div class="help-wrap">
 													<i class="wn-icon help">QnA</i>
 													<div class="help-cont">
@@ -194,11 +194,11 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 								<div class="mt-30">
 									<div class="d-flex">
 											<div class="form-field">
-												<h4 class="detail-wrap-title important">최소주문수량
+												<h4 class="detail-wrap-title">최소주문수량
 													<div class="help-wrap">
 														<i class="wn-icon help">QnA</i>
 														<div class="help-cont">
-															<span>세부내용 설명입니다. 세부내용 설명입니다.</span>
+															<span>본 제품의 해외발주용 최소수량</span>
 														</div>
 													</div>
 												</h4>
@@ -207,7 +207,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 												</div>
 											</div>
 											<div class="form-field">
-												<h4 class="detail-wrap-title important">Margin
+												<h4 class="detail-wrap-title">Margin
 													<div class="help-wrap">
 														<i class="wn-icon help">QnA</i>
 														<div class="help-cont">
@@ -236,9 +236,9 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 										<textarea class="textarea" name="costInfo" rows="4" placeholder="이 공간을 사용하여 구매자에게 가격 요인 및 협상 가능한 요율과 같은 추가 정보를 알립니다.">${saveFm.costInfo}</textarea>
 									</div>
 								</div> --%>
-								<h4 class="detail-wrap-title strong">제품 바코드</h4>
+								<h4 class="detail-wrap-title strong important">제품 바코드</h4>
 								<div class="mt-30">
-									<h4 class="detail-wrap-title">제품바코드가 있나요?
+									<!-- <h4 class="detail-wrap-title">제품바코드가 있나요?
 										<div class="help-wrap">
 											<i class="wn-icon help">QnA</i>
 											<div class="help-cont">
@@ -255,7 +255,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 											<sf:radiobutton path="bcdYn" class="input-text divYn" value="N" />
 											<span class="label">No</span>
 										</label>
-									</div>
+									</div> -->
 									<div class="form-field bcdYnDiv">
 										<div class="input-add add-right2">
 											<%-- <div class="custom-select wd-130">
@@ -272,16 +272,16 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 										</div>
 									</div>
 								</div>
-								<h4 class="detail-wrap-title strong">제품 패키지</h4>
+								<h4 class="detail-wrap-title strong">제품 패키지 여부</h4>
 								<div class="mt-30">
-									<h4 class="detail-wrap-title">제품 패키지가 있습니까?
+									<!-- <h4 class="detail-wrap-title">제품 패키지가 있습니까?
 										<div class="help-wrap">
 											<i class="wn-icon help">QnA</i>
 											<div class="help-cont">
 												<span>세부내용 설명입니다. 세부내용 설명입니다.</span>
 											</div>
 										</div>
-									</h4>
+									</h4> -->
 									<div class="form-field">
 										<label class="radio">
 											<sf:radiobutton path="pkgYn" class="input-text divYn" value="Y" />
@@ -332,7 +332,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 											<div class="help-wrap">
 												<i class="wn-icon help">QnA</i>
 												<div class="help-cont">
-													<span>세부내용 설명입니다. 세부내용 설명입니다.</span>
+													<span>내용물의 무게/함량</span>
 												</div>
 											</div>
 										</h4>
@@ -352,7 +352,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 											<div class="help-wrap">
 												<i class="wn-icon help">QnA</i>
 												<div class="help-cont">
-													<span>세부내용 설명입니다. 세부내용 설명입니다.</span>
+													<span>제품 패키지를 포함하는 무게</span>
 												</div>
 											</div>
 										</h4>
@@ -364,7 +364,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 							</c:forEach>
 												</sf:select>
 											</div>
-											<sf:input path="productWt" class="input-text" placeholder="무게" />
+											<sf:input path="productWt" class="input-text" placeholder="Product Weight" />
 										</div>
 									</div>
 								</div>
@@ -374,7 +374,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 										<div class="help-wrap">
 											<i class="wn-icon help">QnA</i>
 											<div class="help-cont">
-												<span>세부내용 설명입니다. 세부내용 설명입니다.</span>
+												<span>해외 배송을 위한 아웃 박스</span>
 											</div>
 										</div>
 									</h4>
@@ -452,11 +452,11 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 														<sf:option value="001" label="fl oz" /> --%>
 													</sf:select>
 												</div>
-												 <sf:input path="cartonWt" class="input-text" placeholder="무게"  />
+												 <sf:input path="cartonWt" class="input-text" placeholder="Gross Weight"  />
 											</div>
 										</div>
 									</div>
-									<div class="d-flex mt-30">
+									<!-- <div class="d-flex mt-30">
 										<div class="form-field">
 											<h4 class="detail-wrap-title">Pallet TI</h4>
 											<sf:input path="palletTi" class="input-text"  placeholder="Pallet 1단 박스 수"  />
@@ -472,14 +472,14 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 											<sf:input path="cartonTot" class="input-text"  readonly="true" />
 										</div>
 										<div class="form-field"></div>
-									</div>
+									</div> -->
 								</div>
 								<div class="mt-30">
 									<h4 class="detail-wrap-title">인박스가 있습니까?
 										<div class="help-wrap">
 											<i class="wn-icon help">QnA</i>
 											<div class="help-cont">
-												<span>세부내용 설명입니다. 세부내용 설명입니다.</span>
+												<span>카튼박스에 포장 전 제품을 소분하여 카튼박스에 담는 이너 박스</span>
 											</div>
 										</div>
 									</h4>
@@ -538,7 +538,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 														<option >fl oz</option>
 														<option >기타</option> -->
 													</sf:select>
-												</div>
+												</div> 
 											 <sf:input path="inboxCbmVol" class="input-text" placeholder="Volume " />
 											</div>
 										</div>
@@ -568,7 +568,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 										<div class="help-wrap">
 											<i class="wn-icon help">QnA</i>
 											<div class="help-cont">
-												<span>세부내용 설명입니다. 세부내용 설명입니다.</span>
+												<span>개봉전 제품의 유통기한을 입력</span>
 											</div>
 										</div>
 									</h4>
@@ -605,7 +605,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 										<div class="help-wrap">
 											<i class="wn-icon help">QnA</i>
 											<div class="help-cont">
-												<span>세부내용 설명입니다. 세부내용 설명입니다.</span>
+												<span>제품의 전성분을 콤마로구분하여 기입</span>
 											</div>
 										</div>
 									</h4>
@@ -620,17 +620,17 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 										</label>
 									</div>
 									<div class="form-field">
-						<div class="input-add add-right ingredientsYnDiv">
+						<!-- <div class="input-add add-right ingredientsYnDiv">
 							<input type="text" class="input-text ingredientsTmp" name="ingredientsTmp" placeholder="직접입력" value="">
 							<button type="button" class="button bt-blue-light w-140 ingredientsAdd">등록</button>
-						</div>
-						<div class="detail-tag ingredientsLst ingredientsYnDiv">
+						</div> -->
+						<!-- <div class="detail-tag ingredientsLst ingredientsYnDiv">
 							<c:if test="${not empty saveFm.ingredients}" >
 								<c:forEach var="item" items="${fn:split(saveFm.ingredients,'||')}">
 									<span class="tag-pill">${item}<input type="hidden" name="ingredientsArr" value="${item}"> <a href="#" class="btn-remove"><i class="wn-icon close"></i></a></span>
 								</c:forEach>
 							</c:if>
-						</div>
+						</div> -->
 						<input type="text" id="ingredients" name="ingredients" class="input-text ingredientsYnDiv" placeholder="제품 전성분을 입역하십시오. 콤마(,) 사용하여 분리" />
 					</div>
 								</div>
@@ -639,7 +639,7 @@ const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input fi
 										<div class="help-wrap">
 											<i class="wn-icon help">QnA</i>
 											<div class="help-cont">
-												<span>세부내용 설명입니다. 세부내용 설명입니다.</span>
+												<span>식품 혹은 건강기능식품과 같이 해당사항이 있는 품목</span>
 											</div>
 										</div>
 									</h4>

@@ -20,11 +20,11 @@
 				<div class="d-flex">
                   <div class="form-field">
                     <h4 class="detail-wrap-title important">제품명</h4>
-					<sf:input path="productNm" class="input-text" placeholder="직접입력" />
+					<sf:input path="productNm" class="input-text" placeholder="제품명 입력" />
                   </div>
                   <div class="form-field">
                     <h4 class="detail-wrap-title important">제품 출시</h4>
-                    <sf:input path="productRelDt" class="input-text" placeholder="2021.09" />
+                    <sf:input path="productRelDt" class="input-text" placeholder="년-월" />
                   </div>
                 </div>
 				<div class="mt-30">
@@ -40,14 +40,11 @@
 						</h4>
 						<!-- <a href="#" class="link">모든 카테고리 찾아보기</a> -->
 						<div class="input-add add-right">
-							<input type="text" class="input-text categoryTmp" name="categoryTmp" placeholder="직접입력" value="">
+							<input type="text" class="input-text categoryTmp" name="categoryTmp" placeholder="제품이 해당하는 카테고리 (예)스킨케어 = 뷰티" value="">
 							<button type="button" class="button bt-blue-light w-140 categoryAdd">등록</button>
 						</div>
 					</div>
 
-					<div class="form-field">
-						<h4 class="form-label">1개 이상 입력</h4>
-					</div>
 					<div class="detail-tag categoryLst">
 						<c:if test="${not empty saveFm.cateNm}" >
 							<c:forEach var="item" items="${fn:split(saveFm.cateNm,'||')}">
@@ -83,13 +80,10 @@
 				</div>
 				<div class="mt-30">
 					<div class="form-field">
-						<h4 class="detail-wrap-title">제품인증현황</h4>
+						<h4 class="detail-wrap-title">해외인증현황</h4>
 						<div class="input-add add-right">
-							<input type="text" class="input-text certStatusTmp" name="certStatusTmp" placeholder="직접입력" value="">
+							<input type="text" class="input-text certStatusTmp" name="certStatusTmp" placeholder="FDA/CPNP 등 해당 인증 전부" value="">
 							<button type="button" class="button bt-blue-light w-140 certStatusAdd">등록</button>
-						</div>
-						<div class="form-field">
-							<h4 class="form-label">1개 이상 입력</h4>
 						</div>
 						<div class="detail-tag certStatusLst">
 							<c:if test="${not empty saveFm.certStatus}" >
@@ -140,7 +134,7 @@
 						</div>
 						<div class="ml-auto gray-6">
 							<ul class="list-v-bar t-14">
-								<li><span class="strong">101</span></li>
+								<li><span class="strong">0</span></li>
 								<li><span>200</span></li>
 							</ul>
 						</div>

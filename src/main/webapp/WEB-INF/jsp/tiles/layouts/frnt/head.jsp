@@ -72,7 +72,7 @@
 							</a>
 							<div class="gtm-item-sub hover-sub">
 								<ul class="sub-list com-sub-list">
-									<li class="sub-item"><a href="<c:url value='/web/mypage/registGuide.bt'/>">등록가이드</a></li>
+									<!-- <li class="sub-item"><a href="<c:url value='/web/mypage/registGuide.bt'/>">등록가이드</a></li> -->
 									<li class="sub-item"><a href="<c:url value='/web/mypage/userInfo.bt'/>">설정</a></li>
 									<li class="sub-item"><a href="<c:url value='/web/lgn/logOut.bt'/>">로그아웃</a></li>
 								</ul>
