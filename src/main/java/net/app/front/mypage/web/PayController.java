@@ -79,12 +79,12 @@ public class PayController {
         vo.setUserId(FrntSessionUtils.getUserInfo().getUserId());
         String rtn = mypageService.insPayInfoDo(vo);
         session.removeAttribute("payVO");
-        return "success";
+        return "paySuccess";
     }
 
-    @RequestMapping(path = "errorr")
+    @RequestMapping(path = "error")
     public String errorPayment(HttpSession session) {
-        return "errorr";
+        return "error";
     }
 
     @RequestMapping(path = "cancel")

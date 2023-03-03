@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class StepPay {
 
-	private String payToken = "aa9940916492075b347401318e68c3437bda8dfa5259fa5914631205ccd3e868";
+	private String payToken = "79c55d979e6024cef45bf0e1cc9a8965bc22895bb80d9da0c2bdb8d4a317bc04";
     private String productCode = "product_LoggT2Tz5";
     private int productId = 4318;
 
@@ -72,16 +72,16 @@ public class StepPay {
 
 	// 사용자 가격 플랜 코드 생성 api (가격, 플랜이름(영문), 서비스 건, 기기 수)
 	public String createPricePlan(int Price, String planName, String serviceCount, int iotGearNum) throws IOException, InterruptedException {
-		switch (planName) {
-		    case "001" : planName = "regular";
+		
+	    switch (planName) {
+		    case "001" : planName = "basic";
 		                 break;
-		    case "002" : planName = "prime";
+		    case "002" : planName = "priemium";
 		                 break;
-		    case "003" : planName = "primeplus";
-		                 break;
-		    case "004" : planName = "platinum";
+		    case "003" : planName = "exclucive";
 		                 break;
 		}
+		
 		HttpRequest request = HttpRequest.newBuilder()
 			    .uri(URI.create("https://api.steppay.kr/api/v1/products/4318/prices"))
 			    .header("accept", "*/*")

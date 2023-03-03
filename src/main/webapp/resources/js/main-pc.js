@@ -75,6 +75,7 @@ $(function () {
 $(function () {
   $('.periodUse a').click(function(){
 	$("#periodUse").val( $(this).data("id"));
+	$("#periodUse").data("percent", $(this).data("percent"));
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
 	cal();
@@ -84,22 +85,17 @@ $(function () {
 $(function () {
   $('.priceCode a').click(function(){
 	$("#priceCode").val( $(this).data("id"));
+	$("#price").val( $(this).data("price"));
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
 	cal();
   })
 });//jquery ready
 
+	
 function cal(){
-	var price;
-
-
-    if($("#priceCode").val() == "001") price = 100000 * $("#periodUse").val();
-   	if($("#priceCode").val() == "002") price = 300000 * $("#periodUse").val();
-   	if($("#priceCode").val() == "003") price = 1500000 * $("#periodUse").val();
-
-   	$("#servicePrice").val(price);
-   	$(".servicePrice").text(price);
+   	$("#servicePrice").val($("#price").val()  * $("#periodUse").val() * $("#periodUse").data("percent"));
+   	$(".servicePrice").text(($("#servicePrice").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 }
 
 

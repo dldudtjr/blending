@@ -64,7 +64,7 @@
               </div>
               <div class="info-select ${saveFm.priceCodeB}">
                 <div class="info-select-form">
-                  <span class="info-select-title">PREMIUM</span>
+                  <span class="info-select-title">PRIMIUM</span>
                   <div class="info-select-cont">
                     <span class="wd-100p mb-10">기본<br>서비스</span>
                     <span class="px-15 plus">+</span>
@@ -91,7 +91,7 @@
               </div>
             </div>
             <div class="mt-60 bt-center">
-              <a href="javascript:void(0)" class="button bt-blue wd-200 " onclick="payPop();">구독 변경하기</a>
+              <a href="javascript:void(0)" class="button bt-blue wd-200" onclick="$('#popSubscribe').modal('show')">구독 변경하기</a>
             </div>
           </div>
 
@@ -118,14 +118,14 @@ $( document ).ready(function() {
             </div>
           </div>
           <sf:hidden path="priceCode" />
-          <input type="hidden" id="price" value="">
           <div class="d-flex align-items-center mt-30">
             <div class="subscribe-title">상품명<br><span class="t-13">가격(VAT별도)</span></div>
             <div class="subscribe-select priceCode">
             
-              <a href="javascript:void(0)" data-id="001" data-price="100000"	class="t-24 active" ><b>BASIC</b><br><p class="t-16 mt-5">￦100,000</p></a>
-              <a href="javascript:void(0)" data-id="002" data-price="300000"	class="t-24"		><b>PREMIUM</b><br><p class="t-16 mt-5">￦300,000</p></a>
-              <a href="javascript:void(0)" data-id="003" data-price="1500000"	class="t-24"		><b>EXCLUSIVE</b><br><p class="t-16 mt-5">￦1,500,000</p>
+              <a href="javascript:void(0)" data-id="001" class="t-24 active"><b>BASIC</b><br><p class="t-16 mt-5">￦100,000</p></a>
+              <a href="javascript:void(0)" data-id="002" class="t-24"><b>PRIMIUM</b><br><p class="t-16 mt-5">￦300,000</p></a>
+              <a href="javascript:void(0)" data-id="003" class="t-24">
+                <b>EXCLUSIVE</b><br><p class="t-16 mt-5">￦1,500,000</p>
                 <div class="help-wrap">
                   <i class="wn-icon exclamation ml-5"></i>
                   <div class="help-cont">
@@ -135,14 +135,14 @@ $( document ).ready(function() {
               </a>
             </div>
           </div>
-          <sf:hidden path="periodUse" data-percent="1" />
+          <sf:hidden path="periodUse" />
           <div class="d-flex align-items-center mt-30">
             <div class="subscribe-title">기간</div>
             <div class="subscribe-select periodUse">
-              <a href="javascript:void(0)" data-id="1"  data-percent="1"	class="t-18 active"><b>1개월</b></a>
-              <a href="javascript:void(0)" data-id="3"  data-percent="1"	class="t-18"><b>3개월</b></a>
-              <a href="javascript:void(0)" data-id="6"  data-percent="0.9"	class="t-18"><b>6개월</b><br><p class="t-16 mt-5">10% 할인</p></a>
-              <a href="javascript:void(0)" data-id="10" data-percent="1"	class="t-18"><b>12개월</b><br><p class="t-16 mt-5">2개월 무료</p></a>
+              <a href="javascript:void(0)" data-id="1"  class="t-18 active"><b>1개월</b></a>
+              <a href="javascript:void(0)" data-id="3"  class="t-18"><b>3개월</b></a>
+              <a href="javascript:void(0)" data-id="6"  class="t-18"><b>6개월</b><br><p class="t-16 mt-5">10% 할인</p></a>
+              <a href="javascript:void(0)" data-id="12" class="t-18"><b>12개월</b><br><p class="t-16 mt-5">2개월 무료</p></a>
             </div>
           </div>
 
@@ -185,8 +185,8 @@ $( document ).ready(function() {
             <div class="subscribe-title">총 결제금액</div>
             <div class="d-flex align-items-center">
               <span class="t-18 mr-15">￦</span>
-              <span class="t-18 mr-15 servicePrice">100000</span>
-	              <sf:hidden path="servicePrice" value="100000"/>
+              <span class="t-18 mr-15 servicePrice">0</span>
+	              <sf:hidden path="servicePrice" />
             </div>
 
             <div class="t-18 ml-100">결제 후 서비스 종료일</div>
@@ -217,7 +217,8 @@ var cnt = 0;
 
 $(function() {
 
-    
+
+
 	$(document).on("click",".closeBtn",function() {
 		$('#popSubscribe').modal('hide')
 	});
@@ -230,12 +231,6 @@ $(function() {
 
 });
 
-	function payPop() {
-		$('#popSubscribe').modal('show');
-		$('.periodUse a').eq(0).click();
-	    $('.priceCode a').eq(0).click();
-	}
-	
 	function paySubmit(url, msg) {
 		$.ajax({
 			url : url,
@@ -255,7 +250,7 @@ $(function() {
 
 	function payPopup (orderCode, loginId){
 		var sUrl = window.location.origin + "/success";
-		var eUrl = window.location.origin + "/fail";
+		var eUrl = window.location.origin + "/errorr";
 		var cUrl = window.location.origin + "/cancel";
 		var url = "https://api.steppay.kr/api/public/orders/" + orderCode + "/pay?successUrl=" + sUrl + "&errorUrl=" + eUrl + "&cancelUrl=" + cUrl;
 		var name = "appPopup test";
@@ -286,9 +281,14 @@ function submitDo(){
 
 
 $(document).ready(function(){
+    //스크롤 발생 이벤트 처리
+    window.onscroll = function () {
 
-    
-    
+    if (getScrollTop() < getDocumentHeight() - window.innerHeight - 5) return;
+    // 스크롤이 페이지 하단에 도달할 경우 새 페이지 로드
+
+    };
+
 });
 
 
