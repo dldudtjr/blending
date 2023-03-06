@@ -54,7 +54,7 @@
 						</div> -->
 					</div>
 					<div class="main-text-bottom">
-						<span>글로벌 셀러 및 소비자에게 당신의 제품을 소개하고 경험할 수 있는 기회를 제공</span>
+						<span>글로벌 바이어에게 당신의 제품을 소개하고 제안하여 해외시장 진출 기회를 확보</span>
 					</div>
 				</div>
 				<div class="main-form-wrap">
@@ -71,8 +71,8 @@
 						<div class="main-form-img"><img src="/resources/images/main2.jpg" alt=""></div>
 						<div class="main-form-text">
 							<span class="main-form-title">신제품 소싱</span>
-							<span>바이어 맞춤형 정보 표기된 제품카드</br>
-							  제품 조건 필터링이 가능한 바이어 맞춤형 데시보드</span>
+							<span>바이어 맞춤형 제품정보 및 조건으로 신제품 소싱</br>
+							  조건 필터링이 가능한 바이어 맞춤형 데시보드 제공</span>
 						</div>
 					</div>
 					<div class="main-form">

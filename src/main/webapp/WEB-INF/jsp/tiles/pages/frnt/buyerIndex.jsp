@@ -41,7 +41,7 @@
           <div class="main-form">
             <div class="main-form-img"><img src="/resources/images/main_buyer1.png" alt=""></div>
             <div class="main-form-text">
-              <span class="main-form-title sub">신제품 큐레이션</span>
+              <span class="main-form-title sub">신제품 소싱</span>
               <span>바이어 전용 데시보드로 소싱 시간 단축<br>
                 인기 신제품 및 트렌딩 제품을 실시간 확인</span>
             </div>
@@ -58,8 +58,8 @@
             <div class="main-form-img"><img src="/resources/images/main_buyer3.png" alt=""></div>
             <div class="main-form-text">
               <span class="main-form-title sub">커스텀 서비스</span>
-              <span>브랜드와 다이렉트 연결<br>
-                신제품 모집 일정 관리<br>
+              <span>신제품 모집 일정 관리<br>
+                PB 상풍 제조자 소싱<br>
                 해외 브랜드사 확인/검증</span>
             </div>
           </div>
