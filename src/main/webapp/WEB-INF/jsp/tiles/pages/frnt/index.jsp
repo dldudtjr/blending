@@ -54,7 +54,7 @@
 						</div> -->
 					</div>
 					<div class="main-text-bottom">
-						<span>글로벌 바이어에게 당신의 제품을 소개하고 제안하여 해외시장 진출 기회를 확보</span>
+						<span>글로벌 바이어에게 당신의 제품을 소개하고 제안하여 해외시장 진출 기회를 만들어보세요</span>
 					</div>
 				</div>
 				<div class="main-form-wrap">
