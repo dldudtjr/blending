@@ -3,6 +3,7 @@ package net.app.lgn.web;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -219,14 +220,9 @@ public class LoginController  {
             }
 
             if ("1".equals(rtnId)) {
-    //            sessionUserVO = lgnService.getLoginDtl(sessionUserVO);
-    //            this.setSessionContextFactory(sessionUserVO, session);
                 modelMap.put("code","0001");
                 modelMap.put("msg", this.egovMessageSource.getMessage("success.common.join"));
-
-                // 결제자 생
-                //stepPay.createUsers(userVO.getFirstNm(),userVO.getEmail(),userVO.getPhone());
-
+                stepPay.createUsers(userVO.getFirstNm()+""+userVO.getLastNm(),userVO.getEmail(),telNumber(userVO.getPhone()));
 
             }else {
                 modelMap.put("code","9999");
@@ -239,6 +235,29 @@ public class LoginController  {
 
         return modelMap;
     }
+
+    public static String telNumber(String number) {
+        // 전화번호 정규표현식으로 제한
+        String regEx = "(\\d{2,3})(\\d{3,4})(\\d{4})";
+          if(!Pattern.matches(regEx, number)){
+              return null;
+          }
+
+          // 070일때, 중간자리 3, 마지막자리 3자리 입력일 때 (ex. 070 123 123)
+          if(number.substring(0,3).contains("070") && number.length() == 9){
+            // 받은 값을 확인하고 싶다면
+            System.out.println(number.toString());
+            return null;
+          }
+          // 지역번호가 3자리수일 때, 중간자리 3, 마지막자리 3자리 입력일 때(ex. 031 123 123)
+          // 에러남 02-123-1234도 포함이 되기 때문에
+          // else if(number.substring(0,3).length() == 3 && number.length() == 9) {
+            // 받은 값을 확인하고 싶다면
+            //System.out.println(number.toString());
+            //return null;
+          //}
+         return number.replaceAll(regEx, "$1-$2-$3"); // 출력 xxx-xxxx-xxxx
+       }
 
 
     @RequestMapping(path = "logOut.bt")
