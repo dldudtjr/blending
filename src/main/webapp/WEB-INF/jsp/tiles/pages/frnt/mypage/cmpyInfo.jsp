@@ -205,7 +205,7 @@ $( document ).ready(function() {
 			}
 		},
 		submitHandler : function() {
-			var form = $('form')[1]
+			var form = $('form')[0]
 			var formData = new FormData(form);
 			$(".modal_bg_sub").show();
 			var url = "<c:url value='/web/mypage/cmpyInfoSubmitDo.ax'/>";

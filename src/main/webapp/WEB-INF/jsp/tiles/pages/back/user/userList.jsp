@@ -127,7 +127,7 @@
 							var url = "<c:url value='/back/lgn/udtBuyerViewChgDo.ax'/>";
 							$.ajax({
 								url : url,
-								data : { buyerViewYn : $(this).attr("data-view"),email : $(this).attr("data-email") },
+								data : { buyerViewYn : $(this).attr("data-view"),email : $(this).attr("data-userid") },
 								type : 'POST',
 								success : function(result) {
 									alert(result.msg);

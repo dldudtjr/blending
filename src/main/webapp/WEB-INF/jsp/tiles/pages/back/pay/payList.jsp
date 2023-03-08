@@ -49,14 +49,18 @@
 						<td>${row.firstNm}${row.lastNm}</td>
 						<td>${row.priceCodeTxt}</td>
 						<td>${row.periodUse}</td>
-						<td>${row.servicestDt}</td>
+						<td>${row.serviceStDt}</td>
 						<td>${row.serviceEdDt}</td>
 						<td>${row.paymentDt}</td>
 						<td>${row.servicePrice}</td>
 						<td>${row.refundDt}</td>
 						<td>${row.refundPrice}</td>
 						<td>${row.statusTxt}</td>
-						<td><a href="#" class="button bt-gray cancelPay" data-email="${row.email}" data-userid="${row.userId}">취소</a></td>
+						<td>
+							<c:if test="${row.status eq '002'}">
+								<a href="#" class="button bt-gray cancelPay" data-serviceid="${row.serviceId}" data-ordercode="${row.orderCode}" data-userid="${row.userId}">취소</a>
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -93,7 +97,8 @@
 			$.ajax({
 				url : url,
 				data : {
-					email : $(this).attr("data-email"),
+					orderCode : $(this).attr("data-orderCode"),
+					serviceId : $(this).attr("data-serviceid"),
 					userId : $(this).attr("data-userid")
 				},
 				type : 'POST',
