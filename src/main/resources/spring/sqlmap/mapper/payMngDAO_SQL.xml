@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Wed May 11 15:49:38 KST 2016 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="payMngDAO">
+	<sql id="basicQry">
+		SELECT A.*, FIRST_NM||' ' ||LAST_NM AS USER_NM FROM (
+		SELECT
+			A.*
+			,CASE
+				WHEN PRICE_CODE = '001' THEN ='BASIC'
+				WHEN PRICE_CODE = '002' THEN ='PREMIUM'
+				WHEN PRICE_CODE = '003' THEN ='EXCLUSIVE'
+			END AS PRICE_CODE_TXT
+			,(SELECT CMPY_NM FROM TB_CMPY  WHERE USER_ID = A.USER_ID ) AS CMPY_NM
+			,(SELECT FIRST_NM FROM TB_USER  WHERE USER_ID = A.USER_ID ) AS FIRST_NM
+			,(SELECT LAST_NM FROM TB_USER  WHERE USER_ID = A.USER_ID ) AS LAST_NM
+		FROM
+			BLENDING.TBSM_SERVICE A
+			) A
+	</sql>
+
+	<sql id="basicQry_where">
+		<where>
+			<if test="srchTxt != '' and srchTxt != null">
+				AND ( FIRST_NM like #{srchTxt}||'%' or LAST_NM like #{srchTxt}||'%' )
+			</if>
+			<if test="srchEmail != '' and srchEmail != null">
+				AND EMAIL = #{srchEmail}
+			</if>
+			<if test="srchPhone != '' and srchPhone != null">
+				AND PHONE = #{srchPhone}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="basicQry_pk">
+		WHERE  USER_ID = #{userId}
+	</sql>
+
+
+	<select id="getPayPageLst" parameterType="net.app.vo.SrchVO" resultType="egovMap">
+
+		<include refid="include.page_cnt_start" />
+			<include refid="basicQry" />
+			<include refid="basicQry_where" />
+		<include refid="include.page_cnt_end" />
+	</select>
+
+	<update id="cancelPayDo" parameterType="net.app.front.mypage.vo.PayVO" >
+		UPDATE BLENDING.TBSM_SERVICE
+			SET
+				 STATUS 		= '009'
+				,REFUND_PRICE 	= #{refundPrice}
+				,REFUND_DT 		= SYSDATE
+		WHERE SERVICE_ID 		= #{serviceId}
+	</update>
+
+
+	<select  id="getPaRemainInfo" parameterType="net.app.front.mypage.vo.PayVO" resultType="net.app.front.mypage.vo.PayVO">
+
+		SELECT
+			ORDER_CODE ,
+			SERVICE_ST_DT ,
+			SERVICE_ED_DT ,
+			CASE
+				WHEN DAYS_USE_PAY > 0 THEN DAYS_USE_PAY
+				ELSE SERVICE_PRICE
+			END AS REFUND_PRICE
+		FROM
+			(
+			SELECT
+				ORDER_CODE ,
+				SERVICE_ST_DT ,
+				SERVICE_ED_DT ,
+				SERVICE_PRICE ,
+				SERVICE_PRICE - (SERVICE_PRICE / DAYS * DAYS_M) AS DAYS_USE_PAY
+			FROM
+				(
+				SELECT
+				ORDER_CODE,
+					TO_CHAR(SERVICE_ST_DT, 'YYYY.mm.dd') AS SERVICE_ST_DT ,
+					TO_CHAR(SERVICE_ED_DT, 'YYYY.mm.dd') AS SERVICE_ED_DT ,
+					SERVICE_PRICE ,
+					TO_DATE(SERVICE_ED_DT, 'YYYY-MM-DD') - TO_DATE(SERVICE_ST_DT, 'YYYY-MM-DD') AS DAYS ,
+					TO_DATE(SYSDATE, 'YYYY-MM-DD') - TO_DATE(SERVICE_ST_DT, 'YYYY-MM-DD') AS DAYS_M
+				FROM
+					FROM TBSM_SERVICE WHERE SERVICE_ID = #{serviceId}
+					) A
+					) A
+	</select>
+
+
+
+</mapper>

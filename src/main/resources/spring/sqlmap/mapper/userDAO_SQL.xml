@@ -145,7 +145,7 @@
 
 	<update id="uptPasswordDo" parameterType="net.app.front.mypage.vo.UserVO" >
 		UPDATE TB_USER SET USER_PASSWORD = #{userPassword}
-		WHERE USER_ID = #{userId}
+		WHERE USER_ID = #{userId} or EMAIL = #{email}
 	</update>
 
 	<update id="expireChg" parameterType="net.app.front.mypage.vo.UserVO" >

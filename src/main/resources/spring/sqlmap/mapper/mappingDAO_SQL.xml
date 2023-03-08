@@ -40,6 +40,11 @@
 
 	</update>
 
+
+
+
+
+
 	<insert id="udtConnectAuthDo" parameterType="net.app.front.mypage.vo.UserVO" >
 		MERGE
 			INTO
@@ -86,20 +91,58 @@
 		SELECT A.*
 		,(SELECT COMM_CODE_NM FROM TBSM_CMMN_CODE WHERE CMMN_GROUP_CODE = 'P08' AND COMM_CODE =A.PRICE_CODE ) PRICE_CODE_TXT
 		 FROM (
-			SELECT
-					 TO_CHAR(MIN(SERVICE_ST_DT),'YYYY.mm.dd')  AS SERVICE_ST_DT
-					,TO_CHAR(MAX(PAYMENT_DT),'YYYY.mm.dd')  AS PAYMENT_DT
-					,SUM(PERIOD_USE) AS PERIOD_USE
-					,TO_CHAR(ADD_MONTHS(MIN(SERVICE_ST_DT),SUM(PERIOD_USE)),'YYYY.mm.dd')  AS SERVICE_ED_DT
-					,MAX(PRICE_CODE) PRICE_CODE
-					,DECODE(MAX(PRICE_CODE),'001','active','') PRICE_CODE_A
-					,DECODE(MAX(PRICE_CODE),'002','active','') PRICE_CODE_B
-					,DECODE(MAX(PRICE_CODE),'003','active','') PRICE_CODE_C
-				FROM TBSM_SERVICE WHERE USER_ID = #{userId}
-				AND SERVICE_ED_DT >= SYSDATE
-				AND STATUS = '002'
+				SELECT
+						 TO_CHAR(MIN(SERVICE_ST_DT),'YYYY.mm.dd')  AS SERVICE_ST_DT
+						,TO_CHAR(MAX(PAYMENT_DT),'YYYY.mm.dd')  AS PAYMENT_DT
+						,SUM(PERIOD_USE) AS PERIOD_USE
+						,TO_CHAR(MAX(SERVICE_ED_DT),'YYYY.mm.dd')  AS SERVICE_ED_DT
+						,MAX(PRICE_CODE) PRICE_CODE
+						,DECODE(MAX(PRICE_CODE),'001','active','') PRICE_CODE_A
+						,DECODE(MAX(PRICE_CODE),'002','active','') PRICE_CODE_B
+						,DECODE(MAX(PRICE_CODE),'003','active','') PRICE_CODE_C
+					FROM TBSM_SERVICE WHERE USER_ID = #{userId}
+					AND STATUS = '002'
+					GROUP BY USER_ID
 			) A
 	</select>
+
+	<select  id="getPaRemainInfo" parameterType="net.app.front.mypage.vo.PayVO" resultType="net.app.front.mypage.vo.PayVO">
+		SELECT
+	ORDER_CODE ,
+	SERVICE_ST_DT ,
+	SERVICE_ED_DT ,
+	CASE
+		WHEN DAYS_USE_PAY > 0 THEN DAYS_USE_PAY
+		ELSE SERVICE_PRICE
+	END AS REFUND_PRICE
+FROM
+	(
+	SELECT
+		ORDER_CODE ,
+		SERVICE_ST_DT ,
+		SERVICE_ED_DT ,
+		SERVICE_PRICE ,
+		SERVICE_PRICE - (SERVICE_PRICE / DAYS * DAYS_M) AS DAYS_USE_PAY
+	FROM
+		(
+		SELECT
+		ORDER_CODE,
+			TO_CHAR(SERVICE_ST_DT, 'YYYY.mm.dd') AS SERVICE_ST_DT ,
+			TO_CHAR(SERVICE_ED_DT, 'YYYY.mm.dd') AS SERVICE_ED_DT ,
+			SERVICE_PRICE ,
+			TO_DATE(SERVICE_ED_DT, 'YYYY-MM-DD') - TO_DATE(SERVICE_ST_DT, 'YYYY-MM-DD') AS DAYS ,
+			TO_DATE(SYSDATE, 'YYYY-MM-DD') - TO_DATE(SERVICE_ST_DT, 'YYYY-MM-DD') AS DAYS_M
+
+
+						FROM TBSM_SERVICE WHERE USER_ID = #{userId}
+						AND SERVICE_ED_DT > SYSDATE
+						AND STATUS = '002'
+						ORDER BY SERVICE_ID ASC
+					) A
+					) A
+	</select>
+
+
 
 	<insert id="insPayInfoDo" parameterType="net.app.front.mypage.vo.PayVO" >
 		<selectKey resultType="string" keyProperty="serviceId" order="BEFORE">
@@ -117,15 +160,23 @@
 				,#{periodUse}
 				,#{servicePrice}
 				,sysdate
-				,ADD_MONTHS(sysdate,+#{periodUse})
+				,ADD_MONTHS(NVL(TO_DATE(#{prvServiceEdDt},'YYYY-MM-DD'),sysdate),+#{periodUse})
 				,sysdate
 				,#{refundDt}
 				,#{orderCode}
 				,#{priceCode}
-				,002
+				,'002'
 				,sysdate
 				)
 	</insert>
+
+	<update id="udtServiceStatus" parameterType="net.app.front.mypage.vo.PayVO" >
+		UPDATE TBSM_SERVICE SET
+			STATUS ='004'
+			,REFUND_DT = TO_DATE(SYSDATE, 'YYYY-MM-DD')
+			,REFUND_PRICE = #{serviceRefund}
+		 WHERE ORDER_CODE = #{orderCode}
+	</update>
 
 
 <!--

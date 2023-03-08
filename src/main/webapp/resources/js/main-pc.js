@@ -64,13 +64,14 @@ function initGlobalHeader() {
 }
 
 // info 구독 선택 클릭
+/*
 $(function () {
   $('.info-select').click(function(){
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
   })
 });//jquery ready
-
+*/
 // info 구독 팝업 선택 클릭
 $(function () {
   $('.periodUse a').click(function(){
@@ -88,11 +89,13 @@ $(function () {
 	$("#price").val( $(this).data("price"));
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
+
+
 	cal();
   })
 });//jquery ready
 
-	
+
 function cal(){
    	$("#servicePrice").val($("#price").val()  * $("#periodUse").val() * $("#periodUse").data("percent"));
    	$(".servicePrice").text(($("#servicePrice").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));

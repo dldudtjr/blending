@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 
-<div class="sidebar-main">
+		<div class="sidebar-main">
             <header class="sidebar-main-header">
               <h3 class="tit">구독정보</h3>
             </header>
@@ -121,7 +121,7 @@ $( document ).ready(function() {
           <div class="d-flex align-items-center mt-30">
             <div class="subscribe-title">상품명<br><span class="t-13">가격(VAT별도)</span></div>
             <div class="subscribe-select priceCode">
-            
+
               <a href="javascript:void(0)" data-id="001" class="t-24 active"><b>BASIC</b><br><p class="t-16 mt-5">￦100,000</p></a>
               <a href="javascript:void(0)" data-id="002" class="t-24"><b>PRIMIUM</b><br><p class="t-16 mt-5">￦300,000</p></a>
               <a href="javascript:void(0)" data-id="003" class="t-24">
@@ -168,7 +168,7 @@ $( document ).ready(function() {
             <div class="d-flex">
               <span>￦30,000</span>
             </div>
-          </div> 
+          </div>
           <div class="d-flex align-items-center mt-30">
             <div class="subscribe-title">쿠폰</div>
             <div class="d-flex align-items-center">
@@ -211,13 +211,12 @@ $( document ).ready(function() {
     </div>
   </section>
 </sf:form>
-
   <script>
 var cnt = 0;
 
 $(function() {
 
-
+	alert("${msg}");
 
 	$(document).on("click",".closeBtn",function() {
 		$('#popSubscribe').modal('hide')
@@ -253,44 +252,29 @@ $(function() {
 		var eUrl = window.location.origin + "/errorr";
 		var cUrl = window.location.origin + "/cancel";
 		var url = "https://api.steppay.kr/api/public/orders/" + orderCode + "/pay?successUrl=" + sUrl + "&errorUrl=" + eUrl + "&cancelUrl=" + cUrl;
-		var name = "appPopup test";
+		var name = "pay";
 		var option = "width =625, height = 812, top = 100, left = 200, location = no";
 		window.open(url, name, option);
 	}
 
 
 
-function submitDo(){
-	var url = "<c:url value='/web/mypage/success.ax'/>";
-	var sendData = $("#saveFm").serialize();
+	function submitDo(){
+		var url = "<c:url value='/web/mypage/success.ax'/>";
+		var sendData = $("#saveFm").serialize();
 
-	$.ajax({
-		url : url,
-		data : $("#saveFm").serialize(),
-		type : 'POST',
-		success : function(data) {
-			alert("결제 되었습니다");
-			location.reload();
-		},
-		error : function(e) {
-			console.log(JSON.stringify(e));
-		}
-	});
-}
-
-
-
-$(document).ready(function(){
-    //스크롤 발생 이벤트 처리
-    window.onscroll = function () {
-
-    if (getScrollTop() < getDocumentHeight() - window.innerHeight - 5) return;
-    // 스크롤이 페이지 하단에 도달할 경우 새 페이지 로드
-
-    };
-
-});
-
-
+		$.ajax({
+			url : url,
+			data : $("#saveFm").serialize(),
+			type : 'POST',
+			success : function(data) {
+				alert("결제 되었습니다");
+				location.reload();
+			},
+			error : function(e) {
+				console.log(JSON.stringify(e));
+			}
+		});
+	}
 
 </script>
