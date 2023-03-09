@@ -43,7 +43,7 @@ public class PayController {
 
     @RequestMapping(path = "appServiceInsDo.ax")
     @ResponseBody
-    public ModelMap appServiceInsDo(PayVO payVO, Model model, HttpSession session) {
+    public ModelMap appServiceInsDo(PayVO payVO, HttpSession session) {
         ModelMap modelMap = new ModelMap();
         try {
             String orderCode = stepPay.getOrderPrice(payVO.getServicePrice(), payVO.getPriceCode());
@@ -68,12 +68,14 @@ public class PayController {
         PayVO vo  = (PayVO) session.getAttribute("payVO");
         vo.setUserId(FrntSessionUtils.getUserInfo().getUserId());
 
-        if(!"".equals(vo.getPrvPriceCode()) && vo.getPrvPriceCode() != null && vo.getPriceCode() != vo.getPrvPriceCode()) {
+        if(!"".equals(vo.getPrvPriceCode()) && vo.getPrvPriceCode() != null && !vo.getPriceCode().equals(vo.getPrvPriceCode())) {
             stepPay.changeProduct(vo); // 모둔 결제 취소
+            vo.setPrvServiceEdDt("");
         }
 
         mypageService.insPayInfoDo(vo);
         session.removeAttribute("payVO");
+
         return "redirect:/web/mypage/paySuccess.bt";
     }
 
@@ -82,7 +84,6 @@ public class PayController {
     @RequestMapping(path = "cancelOrder.ax")
     @ResponseBody
     public ModelMap cancelOrder(PayVO payVO, Model model, HttpSession session) {
-
         ModelMap modelMap = new ModelMap();
         try {
             String orderCode = stepPay.cancelOrderOnce(payVO.getServicePrice(), payVO.getOrderCode());
@@ -95,57 +96,55 @@ public class PayController {
     }
 
     @RequestMapping(path = "paySuccess.bt")
-    public String paySuccess( @ModelAttribute("saveFm") PayVO vo,HttpSession session) {
+    public String paySuccess( @ModelAttribute("saveFm") PayVO vo,HttpSession session,ModelMap model) {
         vo.setUserId(FrntSessionUtils.getUserInfo().getUserId());
-        ModelMap modelMap = new ModelMap();
-
         PayVO payVO = mypageService.getPayInfo(vo);
         if(payVO !=  null ){
-            System.out.println(">>>>>>"+payVO.getUserId());
-            modelMap.put("msg", "결제 되었습니다. ");
-            modelMap.put("saveFm", payVO);
+//            System.out.println(">>>>>>"+payVO.getUserId());
+            model.addAttribute("msg", "결제 되었습니다. ");
+            model.addAttribute("saveFm", payVO);
         }else {
-            modelMap.put("saveFm", vo);
+            model.addAttribute("saveFm", vo);
         }
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/payInfo");
     }
 
 
     @RequestMapping(path = "error.bt")
-    public String errorPayment( @ModelAttribute("saveFm") PayVO  vo,HttpSession session) {
+    public String errorPayment( @ModelAttribute("saveFm") PayVO  vo,HttpSession session,ModelMap model) {
         session.removeAttribute("payVO");
 
         ModelMap modelMap = new ModelMap();
         vo.setUserId(FrntSessionUtils.getUserInfo().getUserId());
-        vo.setPriceCode("active");
-        vo.setPriceCodeTxt("Free");
 
         PayVO payVO = mypageService.getPayInfo(vo);
         if(payVO !=  null ){
-            modelMap.put("saveFm", payVO);
+            model.addAttribute("saveFm", payVO);
         }else {
-            modelMap.put("saveFm", vo);
+            vo.setPriceCode("active");
+            vo.setPriceCodeTxt("Free");
+
+            model.addAttribute("saveFm", vo);
         }
-        modelMap.put("msg", "결제 도중 에러가 발생했습니다. ");
+        model.put("msg", "결제 도중 에러가 발생했습니다. ");
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/payInfo");
     }
 
     @RequestMapping(path = "cancel.bt")
-    public String cancelPayment( @ModelAttribute("saveFm") PayVO  vo,HttpSession session) {
+    public String cancelPayment( @ModelAttribute("saveFm") PayVO  vo,HttpSession session,ModelMap model) {
         session.removeAttribute("payVO");
-
-        ModelMap modelMap = new ModelMap();
         vo.setUserId(FrntSessionUtils.getUserInfo().getUserId());
-        vo.setPriceCode("active");
-        vo.setPriceCodeTxt("Free");
 
         PayVO payVO = mypageService.getPayInfo(vo);
+
         if(payVO !=  null ){
-            modelMap.put("saveFm", payVO);
+            model.addAttribute("saveFm", payVO);
         }else {
-            modelMap.put("saveFm", vo);
+            vo.setPriceCode("active");
+            vo.setPriceCodeTxt("Free");
+            model.addAttribute("saveFm", vo);
         }
-        modelMap.put("msg", "결제를 취소했습니다. ");
+//        model.addAttribute("msg", "결제를 취소했습니다. ");
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/payInfo");
     }
 

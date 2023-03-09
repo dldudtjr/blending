@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
 <div class="sidebar-main">
 	<header class="sidebar-main-header">
 		<h3 class="tit">구독정보</h3>
@@ -241,9 +242,17 @@
 		});
 
 		$(document).on("click", ".injuryBtn", function() {
-			$('#periodUse').val("1");
+			var price = 100000;
+			if($('#prvPriceCode').val() == "002"){
+				price = 300000;
+			}else if($('#prvPriceCode').val() == "003"){
+				price = 1500000;
+			}
+			$("#price").val(price);
 			$('#priceCode').val($('#prvPriceCode').val());
-			cal();
+			$('#periodUse').val("1");
+			$("#servicePrice").val($("#price").val()  * $("#periodUse").val() * $("#periodUse").data("percent"));
+
 			var url = "<c:url value='/web/mypage/appServiceInsDo.ax'/>";
 			paySubmit(url, "결제");
 		});

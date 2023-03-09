@@ -131,10 +131,10 @@ public class StepPay {
             case "001" : planName = "BASIC";
 //                         priceId ="product_ECIwyQ18l";
                          break;
-            case "002" : planName = "PRIEMIUM"; //product_H6ZNufAfE
+            case "002" : planName = "PREMIUM"; //product_H6ZNufAfE
 //                        priceId ="product_H6ZNufAfE";
                          break;
-            case "003" : planName = "EXCLUCIVE"; //product_gaCFaIZw8
+            case "003" : planName = "EXCLUSIVE"; //product_gaCFaIZw8
 //                        priceId ="product_gaCFaIZw8";
                          break;
         }
@@ -154,7 +154,7 @@ public class StepPay {
         orderVO.setProductId(JsonMap.get("content").get(0).get("id").asText());
         orderVO.setProductCode(JsonMap.get("content").get(0).get("code").asText());
 
-        price = 10;
+//        price = 10;
          Iterator<JsonNode> inner = JsonMap.get("content").get(0).get("prices").iterator();
          while (inner.hasNext()) {
              JsonNode innerElement = inner.next();
@@ -233,8 +233,18 @@ public class StepPay {
     public String changeProduct(PayVO payVO) throws IOException, InterruptedException {
         List<PayVO> refundVOs = mypageService.getPaRemainInfo(payVO);
         for(PayVO refundVO :  refundVOs) {
-            this.cancelOrderOnce(refundVO.getRefundPrice(), refundVO.getOrderCode());
             mypageService.udtServiceStatus(refundVO);
+//            this.cancelOrderOnce(refundVO.getRefundPrice(), refundVO.getOrderCode());
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://api.steppay.kr/api/v1/orders/"+ refundVO.getOrderCode() +"/cancel"))
+                    .header("accept", "*/*")
+                    .header("content-type", "application/json")
+                    .header("Secret-Token", payToken)
+                    .method("PATCH", HttpRequest.BodyPublishers.ofString("{\"requestPrice\":"+refundVO.getRefundPrice()+"}"))
+                    .build();
+                HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+                System.out.println(response.body()); // 환불이 완료되었습니다
         }
         return "001";
     }
