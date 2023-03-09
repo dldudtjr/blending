@@ -35,6 +35,7 @@ import net.app.lgn.util.CmsSessionUtils;
 import net.app.lgn.vo.LoginHistVO;
 import net.app.lgn.vo.SessionContext;
 import net.app.lgn.vo.SessionUserVO;
+import net.app.steppay.StepPay;
 import net.base.cmm.CmsMailUtil;
 import net.base.utl.fcc.SHA256EncryptUtil;
 import net.base.web.CommUtils;
@@ -70,6 +71,8 @@ public class AdminLoginController  {
     private UserService userService;
 
 
+   @Resource(name = "stepPay")
+   private StepPay stepPay;
 
 
 	@Resource(name = "mypageService")

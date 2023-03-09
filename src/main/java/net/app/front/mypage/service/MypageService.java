@@ -70,12 +70,12 @@ public interface MypageService {
 
     PayVO getPayInfo(PayVO vo);
 
+    List<PayVO> getPaRemainInfo(PayVO payVO);
 
 
 
 
-
-
+    String udtServiceStatus(PayVO vo);
 
 
 }

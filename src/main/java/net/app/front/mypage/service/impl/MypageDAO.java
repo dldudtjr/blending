@@ -108,5 +108,13 @@ public class MypageDAO extends EgovComAbstractDAO {
         return this.selectOne("mappingDAO.getPayInfo", vo);
     }
 
+    public List<PayVO> getPaRemainInfo(PayVO vo) {
+        return this.selectList("mappingDAO.getPaRemainInfo", vo);
+    }
+
+    public String udtServiceStatus(PayVO vo) {
+        return this.update("mappingDAO.udtServiceStatus", vo)+"";
+    }
+
 
 }

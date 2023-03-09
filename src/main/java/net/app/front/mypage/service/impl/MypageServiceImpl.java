@@ -175,12 +175,24 @@ public class MypageServiceImpl extends EgovAbstractServiceImpl implements Mypage
 
 
 
+
+    @Override
+    public List<PayVO> getPaRemainInfo(PayVO vo) {
+        return this.mypageDAO.getPaRemainInfo(vo);
+    }
+
     @Override
     public String cancelPayInfoDo(PayVO vo) {
         return this.mypageDAO.cancelPayInfoDo(vo);
     }
 
 
+
+    @Override
+    public String udtServiceStatus(PayVO vo) {
+        return this.mypageDAO.udtServiceStatus(vo);
+
+    }
 
 
 }

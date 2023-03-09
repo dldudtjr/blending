@@ -39,7 +39,7 @@
         </div>
         <div class="main-form-wrap">
           <div class="main-form">
-            <div class="main-form-img"><img src="/resources/images/main_brand1.png" alt=""></div>
+            <div class="main-form-img"><img src="<c:url value='/resources/images/main_brand1.png' />" alt=""></div>
             <div class="main-form-text">
               <span class="main-form-title sub">브랜드 랜딩 페이지</span>
               <span>브랜드 전용 홍보용 페이지<br>
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div class="main-form reverse">
-            <div class="main-form-img"><img src="/resources/images/main_brand2.png" alt=""></div>
+            <div class="main-form-img"><img src="<c:url value='/resources/images/main_brand2.png' />" alt=""></div>
             <div class="main-form-text">
               <span class="main-form-title sub">카드식 제품제안서</span>
               <span>바이어에게 필요한 필수 제품 정보 강조<br>
@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="main-form">
-            <div class="main-form-img"><img src="/resources/images/main_brand3.jpeg" alt=""></div>
+            <div class="main-form-img"><img src="<c:url value='/resources/images/main_brand3.jpeg' />" alt=""></div>
             <div class="main-form-text">
               <span class="main-form-title sub">기타 수출 서비스</span>
               <span>글로벌 유통 시장 확인<br>

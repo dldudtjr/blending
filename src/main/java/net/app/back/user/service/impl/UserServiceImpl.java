@@ -47,10 +47,6 @@ public class UserServiceImpl extends EgovAbstractServiceImpl implements UserServ
     }
 
 
-
-
-
-
     @Override
     public String getUserId(UserVO vo) {
         // TODO Auto-generated method stub

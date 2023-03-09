@@ -334,10 +334,21 @@ public class MyPageController {
 
     @RequestMapping(path = "payInfo.bt")
     public String payInfo(SrchVO srchVO, @ModelAttribute("saveFm") PayVO vo, ModelMap model) {
+        vo.setUserId(FrntSessionUtils.getUserInfo().getUserId());
+        vo.setPriceCode("active");
+        vo.setPriceCodeTxt("Free");
 
-        model.put("saveFm", mypageService.getPayInfo(vo));
+        PayVO payVO = mypageService.getPayInfo(vo);
+        if(payVO !=  null ){
+            model.put("saveFm", payVO);
+        }else {
+            model.put("saveFm", vo);
+        }
+
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/payInfo");
     }
+
+
 
 
     private void setSessionContextFactory(SessionUserVO sessionUserVO, HttpSession session) {
