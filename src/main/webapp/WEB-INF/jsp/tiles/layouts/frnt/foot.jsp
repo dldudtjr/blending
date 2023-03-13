@@ -9,8 +9,8 @@
 						<a href="#">사업자정보확인</a>
 					</div>
 					<p>(주)블렌딩트렌드 | 서울특별시 강남구 테헤란로79길 6, JS타워 4층 브이444 | Tel: 070-8064-8424 | Fax: 0504-236-5214<br>
-						대표이사: 신성훈 | 사업자등록번호: 191-81-02360 | 개인정보관리자: 신성훈 | email: connect@blendingtrend.com<br>
-						Copyright (C) BlendingTrend Co., Ltd. All Rights Reserved</p>
+						대표이사: 신성훈 | 사업자등록번호: 191-81-02360 | 개인정보관리자: 신성훈 | 통신판매신고번호: 2023-서울강남-00802 <br>
+						email: connect@blendingtrend.com | Copyright (C) BlendingTrend Co., Ltd. All Rights Reserved</p>
 				</div>
 				<div class="footer-banner ml-50">
 					<p class="t-16">CUSTOMER SERVICE</p>
