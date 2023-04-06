@@ -77,7 +77,9 @@ $(function () {
   $('.periodUse a').click(function(){
 	$("#periodUse").val( $(this).data("month"));
 //	$("#periodUse").data("percent", $(this).data("percent"));
-	$("#periodUse").data("paymonth", $(this).data("paymonth"));
+	$("#periodUse").data("paymonth", "1");
+	$("#periodMonth").val($(this).data("paymonth"));
+
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
 	cal();

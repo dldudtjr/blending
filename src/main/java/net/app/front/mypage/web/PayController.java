@@ -46,13 +46,11 @@ public class PayController {
     public ModelMap appServiceInsDo(PayVO payVO, HttpSession session) {
         ModelMap modelMap = new ModelMap();
         try {
-            String orderCode = stepPay.getOrderPrice(payVO.getServicePrice(), payVO.getPriceCode());
+            String orderCode = stepPay.getOrderPrice(payVO.getPeriodMonth(), payVO.getServicePrice(), payVO.getPriceCode());
             modelMap.addAttribute("msg", orderCode);
             modelMap.addAttribute("loginId", FrntSessionUtils.getUserInfo().getEmail());
             payVO.setOrderCode(orderCode);
-//            mypageService.insPayInfoDo(payVO);
         } catch (IOException | InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -62,8 +60,6 @@ public class PayController {
 
     @RequestMapping(path = "success.bt")
     public String successPayment( @ModelAttribute("saveFm") PayVO  payVO, Model model, HttpSession session) throws Exception {
-
-
 
         PayVO vo  = (PayVO) session.getAttribute("payVO");
         vo.setUserId(FrntSessionUtils.getUserInfo().getUserId());

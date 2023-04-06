@@ -8,6 +8,7 @@ public class PayVO extends SessEtdVO{
     private String  serviceId;
     private String  userId;
     private int     periodUse = 1;
+    private int     periodMonth = 1;
 
     private String  serviceStDt;
     private String  serviceEdDt;

@@ -124,7 +124,7 @@ public class StepPay {
 
 
 	// 주문시 상품의 가격 플랜 목록 조회
-    public String getOrderPrice(int price, String planName) throws IOException, InterruptedException {
+    public String getOrderPrice(int month,int price, String planName) throws IOException, InterruptedException {
         OrderVO orderVO = this.getCustomers(FrntSessionUtils.getUserInfo().getEmail());
 
         switch (planName) {
@@ -160,11 +160,17 @@ public class StepPay {
              JsonNode innerElement = inner.next();
              if (innerElement != null) {
                  System.out.println(">>>>>innerElement.get(\"price\").asInt()="+innerElement.get("price").asInt());
-                 if(innerElement.get("price").asInt() == price) {
+
+                 if(innerElement.get("planName").asText().indexOf(month+"") > -1 ) {
                      orderVO.setPriceId(innerElement.get("id").asText());
                      orderVO.setPriceCode(innerElement.get("code").asText());
                      break;
                  }
+//                 if(innerElement.get("price").asInt() == price) {
+//                     orderVO.setPriceId(innerElement.get("id").asText());
+//                     orderVO.setPriceCode(innerElement.get("code").asText());
+//                     break;
+//                 }
              }
          }
          return this.getOrders(orderVO);
@@ -223,7 +229,6 @@ public class StepPay {
     	return paidAmount;
     }
 
-    //
     /**
      * @param payVO
      * @return
@@ -235,7 +240,7 @@ public class StepPay {
         List<PayVO> refundVOs = mypageService.getPaRemainInfo(payVO);
         for(PayVO refundVO :  refundVOs) {
             mypageService.udtServiceStatus(refundVO);
-//            this.cancelOrderOnce(refundVO.getRefundPrice(), refundVO.getOrderCode());
+      //    this.cancelOrderOnce(refundVO.getRefundPrice(), refundVO.getOrderCode());
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.steppay.kr/api/v1/orders/"+ refundVO.getOrderCode() +"/cancel"))

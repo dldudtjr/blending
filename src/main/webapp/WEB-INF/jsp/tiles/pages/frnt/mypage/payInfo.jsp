@@ -138,9 +138,11 @@
 						<div class="subscribe-select priceCode">
 
 							<a href="javascript:void(0)" data-id="001" data-price="100000" class="t-24 active"><b>BASIC</b><br>
-							<p class="t-16 mt-5">￦100,000</p></a> <a href="javascript:void(0)" data-id="002" data-price="300000" class="t-24"><b>PREMIUM</b><br>
-							<p class="t-16 mt-5">￦300,000</p></a> <a href="javascript:void(0)" data-id="003" data-price="1500000" class="t-24"><b>EXCLUSIVE</b><br>
-							<p class="t-16 mt-5">￦1,500,000</p>
+								<p class="t-16 mt-5">￦100,000</p></a>
+							<a href="javascript:void(0)" data-id="002" data-price="300000" class="t-24"><b>PREMIUM</b><br>
+								<p class="t-16 mt-5">￦300,000</p></a>
+							<a href="javascript:void(0)" data-id="003" data-price="1500000" class="t-24"><b>EXCLUSIVE</b><br>
+			s					<p class="t-16 mt-5">￦1,500,000</p>
 								<div class="help-wrap">
 									<i class="wn-icon exclamation ml-5"></i>
 									<div class="help-cont">
@@ -150,14 +152,15 @@
 						</div>
 					</div>
 					<sf:hidden path="periodUse" data-percent="1" data-paymonth="1" />
+					<sf:hidden path="periodMonth"  />
 					<div class="d-flex align-items-center mt-30">
 						<div class="subscribe-title">구독기간</div>
 						<div class="subscribe-select periodUse">
 							<a href="javascript:void(0)" data-paymonth="1" 	data-month="1"	data-percent="1" class="t-18 active"><b>1개월</b></a>
-							<a href="javascript:void(0)" data-paymonth="1" 	data-month="3"	data-percent="1" class="t-18"><b>3개월</b></a>
-							<a href="javascript:void(0)" data-paymonth="1" 	data-month="6"	data-percent="0.9" class="t-18"><b>6개월</b><br>
+							<a href="javascript:void(0)" data-paymonth="3" 	data-month="3"	data-percent="1" class="t-18"><b>3개월</b></a>
+							<a href="javascript:void(0)" data-paymonth="6" 	data-month="6"	data-percent="0.9" class="t-18"><b>6개월</b><br>
 							<p class="t-16 mt-5"></p></a>
-							<a href="javascript:void(0)" data-paymonth="1" data-month="14"	data-percent="1" class="t-18"><b>12개월</b><br>
+							<a href="javascript:void(0)" data-paymonth="12"  data-month="14"	data-percent="1" class="t-18"><b>12개월</b><br>
 							<p class="t-16 mt-5">2개월 무료</p></a>
 						</div>
 					</div>
