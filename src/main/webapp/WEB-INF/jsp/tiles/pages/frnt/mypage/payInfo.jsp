@@ -153,12 +153,11 @@
 					<div class="d-flex align-items-center mt-30">
 						<div class="subscribe-title">구독기간</div>
 						<div class="subscribe-select periodUse">
-							<a href="javascript:void(0)" data-paymonth="1" data-month="1" data-percent="1" class="t-18 active"><b>1개월</b></a>
-							<a href="javascript:void(0)" data-id="3" data-percent="1" class="t-18"><b>3개월</b></a>
-							<a href="javascript:void(0)" data-id="6" data-percent="0.9" class="t-18"><b>6개월</b><br>
+							<a href="javascript:void(0)" data-paymonth="1" 	data-month="1"	data-percent="1" class="t-18 active"><b>1개월</b></a>
+							<a href="javascript:void(0)" data-paymonth="1" 	data-month="3"	data-percent="1" class="t-18"><b>3개월</b></a>
+							<a href="javascript:void(0)" data-paymonth="1" 	data-month="6"	data-percent="0.9" class="t-18"><b>6개월</b><br>
 							<p class="t-16 mt-5"></p></a>
-							
-							<a href="javascript:void(0)" data-paymonth="12" data-month="14" data-percent="1" class="t-18"><b>12개월</b><br>
+							<a href="javascript:void(0)" data-paymonth="1" data-month="14"	data-percent="1" class="t-18"><b>12개월</b><br>
 							<p class="t-16 mt-5">2개월 무료</p></a>
 						</div>
 					</div>
@@ -202,11 +201,12 @@
 							<sf:hidden path="servicePrice" value="100000" />
 						</div>
 
-						<!--             <div class="t-18 ml-100">결제 후 서비스 종료일</div>
+			<!--
+			<div class="t-18 ml-100">결제 후 서비스 종료일</div>
             <div class="d-flex ml-50">
               <span>2022. 09. 16</span>
             </div>
- -->
+			 -->
 					</div>
 					<!--           <div class="d-flex align-items-center mt-30">
             <div class="subscribe-title">결제방법</div>
