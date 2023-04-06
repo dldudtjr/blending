@@ -161,9 +161,6 @@
 							<p class="t-16 mt-5">2개월 무료</p></a>
 						</div>
 					</div>
-
-
-
 					<!--  <div class="d-flex align-items-center mt-30">
             <div class="subscribe-title">BTM 포인트</div>
             <div class="d-flex align-items-center">
