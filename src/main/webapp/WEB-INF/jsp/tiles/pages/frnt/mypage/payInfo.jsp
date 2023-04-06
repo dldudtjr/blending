@@ -59,7 +59,7 @@
 				<span class="info-select-title">BASIC</span>
 				<div class="info-select-cont">
 				<span class="wd-100p mb-10"> <br> </span>
-				</span> <span class="t-left t-16">1. 브랜드 제안<br>2. 제품 무제한 등록<br>3. 바이어 뉴스레터 등록
+				</span> <span class="t-left t-16">1. 브랜드 제안쿠폰<br>2. 제품 무제한 등록<br>3. 바이어 뉴스레터 등록
 				</span>
 				</div>
 			</div>
@@ -72,7 +72,7 @@
 				<span class="info-select-title">PREMIUM</span>
 				<div class="info-select-cont">
 					<span class="wd-100p mb-10">BASIC 서비스 <span class="ps-15 plus">+</span>
-					</span> <span class="t-left t-16">1. 바이어 컨택<br>2. 영업이력 관리<br>3. 시장 데이터 엑세스
+					</span> <span class="t-left t-16">1. 제안서 Template 제공<br>2. 영업이력 관리<br>3. 커뮤니티 서비스 제공
 					</span>
 				</div>
 			</div>
