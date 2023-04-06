@@ -56,40 +56,41 @@
 		</div>
 		<div class="info-select ${saveFm.priceCodeA}">
 			<div class="info-select-form">
-				<span class="info-select-title">BASIC</span> <span class="mt-40">수출 준비를 위한<br>브랜드 관리 서비스<br>및 제품 인증 서비스
+				<span class="info-select-title">BASIC</span>
+				<div class="info-select-cont">
+				<span class="wd-100p mb-10"> <br> </span>
+				</span> <span class="t-left t-16">1. 브랜드 페이지<br>2. 제품 무제한 등록<br>3. 바이어 뉴스레터 등록
 				</span>
+				</div>
 			</div>
 			<div class="info-select-form2 mt-10">
-				<span class="info-select-title">10만원 / 월구독</span> <span>6개월 구독 – 55만원 (10% 할인)<br>1년 구독 – 100만원 (20% 할인)
-				</span>
+				<span class="info-select-title">10만원 / Month</span> <span>1년 구독시 2개월 무료 제공</span>
 			</div>
 		</div>
 		<div class="info-select ${saveFm.priceCodeB}">
 			<div class="info-select-form">
 				<span class="info-select-title">PREMIUM</span>
 				<div class="info-select-cont">
-					<span class="wd-100p mb-10">기본<br>서비스
-					</span> <span class="px-15 plus">+</span> <span class="t-left t-16">1. 바이어 컨택<br>2. 영업활동 관리<br>3. 시장 데이터 엑세스
+					<span class="wd-100p mb-10">BASIC 서비스 <span class="ps-15 plus">+</span>
+					</span> <span class="t-left t-16">1. 바이어 컨택<br>2. 영업이력 관리<br>3. 시장 데이터 엑세스
 					</span>
 				</div>
 			</div>
 			<div class="info-select-form2 mt-10">
-				<span class="info-select-title">30만원 / 월구독</span> <span>6개월 구독 – 165만원 (10% 할인)<br>1년 구독 – 300만원 (20% 할인)
-				</span>
+				<span class="info-select-title">30만원 / Month</span> <span>1년 구독시 2개월 무료 제공</span>
 			</div>
 		</div>
 		<div class="info-select ${saveFm.priceCodeC}">
 			<div class="info-select-form">
 				<span class="info-select-title">EXCLUSIVE</span>
 				<div class="info-select-cont">
-					<span class="wd-100p mb-10">프리미엄<br>서비스
-					</span> <span class="t-left t-16">1. 팀 로그인<br>2. 브랜드 담당 매니저<br>3. 독점 브랜드 서비스
+					<span class="wd-100p mb-10">PREMIUM 서비스 <span class="px-15 plus">+</span>
+					</span> <span class="t-left t-16">1. 팀 로그인<br>2. 브랜드 담당 매니저<br>3. 브랜드 맞춤 서비스
 					</span>
 				</div>
 			</div>
 			<div class="info-select-form2 mt-10">
-				<span class="info-select-title">150만원 / 월구독</span> <span>6개월 구독 – 825만원 (10% 할인)<br>1년 구독 – 1500만원 (20% 할인)
-				</span>
+				<span class="info-select-title">150만원 / Month</span> <span>1년 구독시 2개월 무료 제공</span>
 			</div>
 		</div>
 	</div>
@@ -143,20 +144,20 @@
 								<div class="help-wrap">
 									<i class="wn-icon exclamation ml-5"></i>
 									<div class="help-cont">
-										<span>세부내용 설명입니다. 세부내용 설명입니다.</span>
+										<span>결제 진행전 상담 필수</span>
 									</div>
 								</div> </a>
 						</div>
 					</div>
 					<sf:hidden path="periodUse" data-percent="1" data-paymonth="1" />
 					<div class="d-flex align-items-center mt-30">
-						<div class="subscribe-title">기간</div>
+						<div class="subscribe-title">구독기간</div>
 						<div class="subscribe-select periodUse">
 							<a href="javascript:void(0)" data-paymonth="1" data-month="1" data-percent="1" class="t-18 active"><b>1개월</b></a>
-<!-- 							<a href="javascript:void(0)" data-id="3" data-percent="1" class="t-18"><b>3개월</b></a>
+							<a href="javascript:void(0)" data-id="3" data-percent="1" class="t-18"><b>3개월</b></a>
 							<a href="javascript:void(0)" data-id="6" data-percent="0.9" class="t-18"><b>6개월</b><br>
-							<p class="t-16 mt-5">10% 할인</p></a>
-							-->
+							<p class="t-16 mt-5"></p></a>
+							
 							<a href="javascript:void(0)" data-paymonth="12" data-month="14" data-percent="1" class="t-18"><b>12개월</b><br>
 							<p class="t-16 mt-5">2개월 무료</p></a>
 						</div>
@@ -195,7 +196,7 @@
 
 
 					<div class="d-flex align-items-center mt-30">
-						<div class="subscribe-title">총 결제금액</div>
+						<div class="subscribe-title">결제금액</div>
 						<div class="d-flex align-items-center">
 							<span class="t-18 mr-15">￦</span> <span class="t-18 mr-15 servicePrice">100000</span>
 							<sf:hidden path="servicePrice" value="100000" />
