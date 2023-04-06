@@ -59,7 +59,7 @@
 				<span class="info-select-title">BASIC</span>
 				<div class="info-select-cont">
 				<span class="wd-100p mb-10"> <br> </span>
-				</span> <span class="t-left t-16">1. 브랜드 페이지<br>2. 제품 무제한 등록<br>3. 바이어 뉴스레터 등록
+				</span> <span class="t-left t-16">1. 브랜드 제안<br>2. 제품 무제한 등록<br>3. 바이어 뉴스레터 등록
 				</span>
 				</div>
 			</div>
