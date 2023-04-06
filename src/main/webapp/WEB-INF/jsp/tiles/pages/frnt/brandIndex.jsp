@@ -179,6 +179,7 @@
 
 	$( document ).ready(function() {
 
+
 			if(getCookie("idSaveCheck") == "true"){
 				$("#idSaveCheck").prop("checked",true);
 				$("#loginId").val(getCookie("loginId"));

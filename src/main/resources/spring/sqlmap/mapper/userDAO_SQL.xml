@@ -23,6 +23,9 @@
 			<if test="srchPhone != '' and srchPhone != null">
 				AND PHONE = #{srchPhone}
 			</if>
+			<if test="srchUserType != '' and srchUserType != null">
+				AND USER_TYPE = #{srchUserType}
+			</if>
 		</where>
 	</sql>
 

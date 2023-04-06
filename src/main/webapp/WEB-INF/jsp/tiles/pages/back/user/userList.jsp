@@ -11,17 +11,25 @@
 						</header>
 						<sf:form commandName="srchFm" cssClass="form-horizontal" >
 						<div class="d-flex mb-15">
+							<div class="ml-5 custom-select wd-130">
+								<sf:select path="srchUserType">
+									<sf:option value="" >ALL</sf:option>
+									<sf:option value="002" >BUYER</sf:option>
+									<sf:option value="001" >BRAND</sf:option>
+								</sf:select>
+							</div>
 							<div class="search-box">
 								<sf:input path="srchTxt"  cssClass="input-text input-search"  placeholder="검색" />
 								<button title="검색" class="btn-search-icon" type="submit"></button>
 							</div>
+
 							<input type="hidden" name="tokenR" value="${tokenR}" />
 							<sf:hidden path="totalRecordCount" />
 							<sf:hidden path="currentPageNo" />
 							<input type="hidden" name="buyerViewYn" id="buyerViewYn" />
 							<div class="ml-auto">
-								<a href="#" class="button bt-yellow allbuyerViewChg" data-view="Y" data-userid="${row.userId}">On</a>
-								<a href="#" class="button bt-white  allbuyerViewChg"  data-view="N" data-userid="${row.userId}">Off</a>
+								<a href="#" class="button bt-yellow allbuyerViewChg" data-view="Y" >On</a>
+								<a href="#" class="button bt-white  allbuyerViewChg"  data-view="N" >Off</a>
 								<a href="#" class="button bt-pupple w-110">신규</a>
 							</div>
 						</div>
@@ -49,22 +57,19 @@
 											<input type="checkbox" name="userIdArr" class="rowIdx" value="${row.userId}" />
 										</td>
 										<td>
-										<c:if test="${row.userType eq '001'}">BRAND
-										</c:if>
-										<c:if test="${row.userType eq '002'}">
-										BUYER
-										</c:if>
-
+											<c:if test="${row.userType eq '001'}">BRAND</c:if>
+											<c:if test="${row.userType eq '002'}">BUYER</c:if>
 										</td>
-										<td>${row.firstNm}${row.lastNm}</td>
+										<td>
+											<a href="#" class="button bt-blue-light userChgPop"  data-email="${row.email}">${row.firstNm}${row.lastNm}</td>
 										<td>${row.position}</td>
 										<td>${row.email}</td>
 										<td>${row.phone}</td>
 										<td>${row.cmpyNm}</td>
 										<td>${row.brandNm}</td>
 										<td>
-											<a href="#" class="button bt-yellow buyerViewChg" data-view="Y" data-userid="${row.userId}">On</a>
-											<a href="#" class="button bt-white buyerViewChg"  data-view="N" data-userid="${row.userId}">Off</a>
+											<a href="#" class="button <c:if test='${row.buyerViewYn eq "Y"}'> bt-blue </c:if><c:if test='${row.buyerViewYn ne "Y"}'> bt-white </c:if> buyerViewChg" data-view="Y" data-userid="${row.userId}">On</a>
+											<a href="#" class="button <c:if test='${row.buyerViewYn eq "N"}'> bt-blue </c:if><c:if test='${row.buyerViewYn ne "N"}'> bt-white </c:if> buyerViewChg"  data-view="N" data-userid="${row.userId}">Off</a>
 										</td>
 										<td><a href="#" class="button bt-gray passwdChg" data-email="${row.email}" data-userid="${row.userId}">재설정</a></td>
 										<td>
@@ -113,6 +118,7 @@
 								type : 'POST',
 								success : function(result) {
 									alert(result.msg);
+									$("#srchFm").submit();
 								},
 								error : function(e) {
 									console.log(JSON.stringify(e));
@@ -122,15 +128,17 @@
 					});
 
 					$(".buyerViewChg").click(function() {
+						var datas = { buyerViewYn : $(this).data("view"),userId : $(this).data("userid") };
 						var msg = "상태를 변경 하시겠습니까? \n ";
 						if (confirm(msg)) {
 							var url = "<c:url value='/back/lgn/udtBuyerViewChgDo.ax'/>";
 							$.ajax({
 								url : url,
-								data : { buyerViewYn : $(this).attr("data-view"),email : $(this).attr("data-userid") },
+								data : datas,
 								type : 'POST',
 								success : function(result) {
 									alert(result.msg);
+									$("#srchFm").submit();
 								},
 								error : function(e) {
 									console.log(JSON.stringify(e));
@@ -183,5 +191,15 @@
 					});
 
 					$(".lnbchk").eq(0).addClass("active");
+
+
+					$(".userChgPop").click(function() {
+						var url = "<c:url value='/web/userchange.bt'/>";
+						var openNewWindow = window.open("about:blank");
+						openNewWindow.location.href = url+"?loginId="+$(this).data("email")
+					});
+
+
+
 
 					</script>

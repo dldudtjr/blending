@@ -148,12 +148,16 @@
 								</div> </a>
 						</div>
 					</div>
-					<sf:hidden path="periodUse" data-percent="1" />
+					<sf:hidden path="periodUse" data-percent="1" data-paymonth="1" />
 					<div class="d-flex align-items-center mt-30">
 						<div class="subscribe-title">기간</div>
 						<div class="subscribe-select periodUse">
-							<a href="javascript:void(0)" data-id="1" data-percent="1" class="t-18 active"><b>1개월</b></a> <a href="javascript:void(0)" data-id="3" data-percent="1" class="t-18"><b>3개월</b></a> <a href="javascript:void(0)" data-id="6" data-percent="0.9" class="t-18"><b>6개월</b><br>
-							<p class="t-16 mt-5">10% 할인</p></a> <a href="javascript:void(0)" data-id="10" data-percent="1" class="t-18"><b>12개월</b><br>
+							<a href="javascript:void(0)" data-paymonth="1" data-month="1" data-percent="1" class="t-18 active"><b>1개월</b></a>
+<!-- 							<a href="javascript:void(0)" data-id="3" data-percent="1" class="t-18"><b>3개월</b></a>
+							<a href="javascript:void(0)" data-id="6" data-percent="0.9" class="t-18"><b>6개월</b><br>
+							<p class="t-16 mt-5">10% 할인</p></a>
+							-->
+							<a href="javascript:void(0)" data-paymonth="12" data-month="14" data-percent="1" class="t-18"><b>12개월</b><br>
 							<p class="t-16 mt-5">2개월 무료</p></a>
 						</div>
 					</div>
@@ -288,7 +292,7 @@
 
 	function payPopup(orderCode, loginId) {
 		var sUrl = window.location.origin + "/web/mypage/success.bt";
-		var eUrl = window.location.origin + "/web/mypage/erorr.bt";
+		var eUrl = window.location.origin + "/web/mypage/error.bt";
 		var cUrl = window.location.origin + "/web/mypage/cancel.bt";
 		var url = "https://api.steppay.kr/api/public/orders/" + orderCode
 				+ "/pay?successUrl=" + sUrl + "&errorUrl=" + eUrl

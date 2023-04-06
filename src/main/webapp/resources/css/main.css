@@ -4118,8 +4118,8 @@ table {
 }
 .board-table tbody th,
 .board-table tbody td {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
   height: 48px;
   border-left: 1px solid #c0c0c0;
   border-bottom: 1px solid #c0c0c0;

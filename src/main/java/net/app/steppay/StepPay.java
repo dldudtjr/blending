@@ -159,6 +159,7 @@ public class StepPay {
          while (inner.hasNext()) {
              JsonNode innerElement = inner.next();
              if (innerElement != null) {
+                 System.out.println(">>>>>innerElement.get(\"price\").asInt()="+innerElement.get("price").asInt());
                  if(innerElement.get("price").asInt() == price) {
                      orderVO.setPriceId(innerElement.get("id").asText());
                      orderVO.setPriceCode(innerElement.get("code").asText());

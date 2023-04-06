@@ -50,13 +50,13 @@
 				</c:if>
 				<c:if test="${not empty _sessionKey}">
 					<ul class="global-top-menu gnb-menu-extra">
-						<c:if test="${_subimg ne 'true'}">
+						<%-- <c:if test="${_subimg ne 'true'}"> --%>
 							<li class="gtm-item">
-								<a href="<c:url value='/web/mypage/loginInfo.bt'/>" class="gtm-item-main">
-									<span class="top-btn">Verification</span>
+								<a href="<c:url value='/web/mypage/payInfo.bt'/>" class="gtm-item-main">
+									<span class="top-btn">Payment</span>
 								</a>
 							</li>
-						</c:if>
+						<%-- </c:if> --%>
 
 						<li class="gtm-item hover-menu">
 							<a href="#" class="gtm-item-main">

@@ -75,8 +75,9 @@ $(function () {
 // info 구독 팝업 선택 클릭
 $(function () {
   $('.periodUse a').click(function(){
-	$("#periodUse").val( $(this).data("id"));
-	$("#periodUse").data("percent", $(this).data("percent"));
+	$("#periodUse").val( $(this).data("month"));
+//	$("#periodUse").data("percent", $(this).data("percent"));
+	$("#periodUse").data("paymonth", $(this).data("paymonth"));
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
 	cal();
@@ -97,7 +98,8 @@ $(function () {
 
 
 function cal(){
-   	$("#servicePrice").val($("#price").val()  * $("#periodUse").val() * $("#periodUse").data("percent"));
+//   	$("#servicePrice").val($("#price").val()  * $("#periodUse").val() * $("#periodUse").data("percent"));
+   	$("#servicePrice").val($("#price").val()  * $("#periodUse").data("paymonth"));
    	$(".servicePrice").text(($("#servicePrice").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 }
 

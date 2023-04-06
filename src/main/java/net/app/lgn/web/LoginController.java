@@ -167,6 +167,9 @@ public class LoginController  {
     }
 
 
+
+
+
     private void loginHistDo(LoginHistVO loginHistVO, LoginHistEnum loginHistEnum) {
         loginHistVO.setStatus(loginHistEnum.getCode() +"");
         this.lgnService.insLoginHistDo(loginHistVO);

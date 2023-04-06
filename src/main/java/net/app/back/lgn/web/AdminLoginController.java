@@ -176,7 +176,7 @@ public class AdminLoginController  {
     public ModelMap udtBuyerViewChgDo(UserVO userVO) {
         String rtn = userService.udtBuyerViewChgDo(userVO);
         ModelMap modelMap = new ModelMap();
-        modelMap.put("msg", "".equals(rtn) ? this.egovMessageSource.getMessage("fail.common.msg") : " 'p'+'email' 로 변경되었습니다. ");
+        modelMap.put("msg", "".equals(rtn) ? this.egovMessageSource.getMessage("fail.common.msg") : " 상태가 변경되었습니다. ");
         return modelMap;
     }
 
