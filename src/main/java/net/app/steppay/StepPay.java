@@ -22,6 +22,10 @@ import net.app.front.mypage.service.MypageService;
 import net.app.front.mypage.vo.OrderVO;
 import net.app.front.mypage.vo.PayVO;
 import net.app.lgn.util.FrntSessionUtils;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 
 @Component
@@ -173,11 +177,11 @@ public class StepPay {
 //                 }
              }
          }
-         return this.getOrders(orderVO);
+         return this.getOrder(orderVO);
     }
 
 
-	private String getOrders(OrderVO orderVO) throws IOException, InterruptedException {
+	private String getOrder(OrderVO orderVO) throws IOException, InterruptedException {
 
         String currency = "KRW"; // 통화코드
         int minimumQuantity = 1; // 최소주문수량
@@ -206,6 +210,37 @@ public class StepPay {
     }
 
 
+	   public ResponseBody getOrders() throws IOException, InterruptedException {
+
+	        String currency = "KRW"; // 통화코드
+	        int minimumQuantity = 1; // 최소주문수량
+	        LocalDateTime now = LocalDateTime.now();
+	        String purchaseDeadline = now.plusMinutes(10).toString(); //결제 기한 - 결제창 생성 후 10분 후까지
+	        System.out.println(purchaseDeadline);
+
+
+	        String stDate = "2023-04-06T03:12:54";
+	        String edDate = "2023-04-12T03:12:54";
+
+	        OkHttpClient client = new OkHttpClient();
+
+	        Request request = new Request.Builder()
+	          .url("https://api.steppay.kr/api/v1/orders?startDate="+stDate+"&endDate="+stDate)
+	          .get()
+	          .addHeader("accept", "*/*")
+	          .addHeader("Secret-Token", "79c55d979e6024cef45bf0e1cc9a8965bc22895bb80d9da0c2bdb8d4a317bc04")
+	          .build();
+
+	        Response response = client.newCall(request).execute();
+
+	         System.out.println(">>>>>>>>269="+response.body());
+
+	        ObjectMapper mapper = new ObjectMapper();
+//	        JsonNode JsonMap = mapper.reader(response.body());
+//	        String orderCode = JsonMap.get("orderCode").asText(); // 주문코드
+
+	        return response.body();
+	    }
 
 
     // 주문 코드로 결제 금액 찾기

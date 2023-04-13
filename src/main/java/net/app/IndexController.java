@@ -1,11 +1,10 @@
 
 package net.app;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,21 +17,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.web3j.abi.TypeReference;
-import org.web3j.abi.datatypes.Function;
-import org.web3j.abi.datatypes.Type;
-import org.web3j.abi.datatypes.Utf8String;
-import org.web3j.protocol.admin.Admin;
-import org.web3j.protocol.http.HttpService;
-
-import com.lps.zuin.neuralBlock.blck.config.NeuralPonCommon;
-import com.lps.zuin.neuralBlock.blck.config.NeuralPonContract;
-import com.lps.zuin.neuralBlock.blck.config.NeuralPonTx;
-import com.lps.zuin.neuralBlock.blck.util.AES256Util;
 
 import egov.cmm.EgovMessageSource;
 import egov.utl.inno.CryptoUtils;
 import net.app.front.mypage.service.MypageService;
+import net.app.front.mypage.vo.PayVO;
 import net.app.front.mypage.vo.UserVO;
 import net.app.lgn.annotation.PassAuth;
 import net.app.lgn.enu.SessionTypeEnum;
@@ -41,6 +30,7 @@ import net.app.lgn.util.CmsSessionUtils;
 import net.app.lgn.util.FrntSessionUtils;
 import net.app.lgn.vo.SessionContext;
 import net.app.lgn.vo.SessionUserVO;
+import net.app.steppay.StepPay;
 import net.base.web.CommUtils;
 
 @PassAuth
@@ -66,77 +56,12 @@ public class IndexController {
     private LgnService lgnService;
 
 
+    @Resource(name = "stepPay")
+    private StepPay stepPay;
+
+
+
     String path = "tiles/pages/lpsm/road/user";
-
-
-    public final String endUrl = "http://3.37.135.154:9645";
-
-
-    @RequestMapping(path = {"/web/call.bt"})
-    @ResponseBody
-    public void call(){
-
-        Admin admin = Admin.build(new HttpService(endUrl));
-
-        NeuralPonCommon     neuralPonCommon     = new NeuralPonCommon();
-        NeuralPonTx         neuralPonTx         = new NeuralPonTx();
-        NeuralPonContract   neuralPonContract   = new NeuralPonContract();
-
-        String assetsKey ="0x64397283445258612c4F265ab85b7b7c8321a53E";
-        String contract ="0xE48E033dc64b9F7E5CE31cEd6C29b2FE71423E24";
-        System.out.println("?>>>>>>>"+neuralPonCommon.getBalance(admin,assetsKey));
-
-    }
-
-    /**
-    *
-    * @Method Name : getTradeAccountKey
-    * @작성자 : lps05
-    * @변경이력 :
-    * @Method 설명 : 계좌 생성 한다
-    * @param string
-    * @return
-    */
-    public  String getTradeAccountKey(String key,String fromAccount,String contractId) {
-
-
-        Admin admin = Admin.build(new HttpService(endUrl));
-
-        NeuralPonCommon     neuralPonCommon     = new NeuralPonCommon();
-        NeuralPonTx         neuralPonTx         = new NeuralPonTx();
-        NeuralPonContract   neuralPonContract   = new NeuralPonContract();
-
-        Function function;
-
-        try {
-                function = new Function("getKeyInfo",
-                        Arrays.asList(new Utf8String(AES256Util.encrypt(key+"99", key+"99")))
-                        ,Arrays.asList(
-                                 new TypeReference<Utf8String>(){}
-                                 ));
-
-                List<Type> decode = neuralPonContract.sQuery(admin, function,fromAccount,contractId);
-                String testB = (String) decode.get(0).getValue();
-
-                return AES256Util.decrypt(testB,AES256Util.encrypt(key+"99", key+"99"));
-
-            } catch (NoSuchAlgorithmException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            } catch (UnsupportedEncodingException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            } catch (GeneralSecurityException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-        return "";
-
-    }
 
 
     @RequestMapping(path = {"/web/main/main.bt"})
@@ -240,6 +165,21 @@ public class IndexController {
         }
         return  rtnPage;
     }
+
+
+    @RequestMapping(path = "/web/test.ax")
+    @ResponseBody
+    public okhttp3.ResponseBody testtest(PayVO payVO, HttpSession session) {
+        try {
+            okhttp3.ResponseBody data = stepPay.getOrders();
+            System.out.println(">>>>>>ResponseBody="+data);
+            return data;
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     private void setSessionContextFactory(SessionUserVO sessionUserVO, HttpSession session) {
         SessionContext sessionContext = (SessionContext) this.sessionContextFactory.getObject();
