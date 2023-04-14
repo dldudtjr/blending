@@ -216,7 +216,7 @@ public class LoginController  {
                 mailVO.setRtnVal(userVO.getRtnVal());
                 mailVO.setTo(userVO.getEmail() + "");
                 mailVO.setLang(LocaleContextHolder.getLocale() + "");
-                cmsMailUtil.sendMailCertify(mailVO); // 1건씩 전송
+//                cmsMailUtil.sendMailCertify(mailVO); // 1건씩 전송
 
             } catch (UnsupportedEncodingException | GeneralSecurityException e) {
                 e.printStackTrace();

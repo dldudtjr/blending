@@ -136,12 +136,8 @@
 											}
 										});
 
-						$(".saveBtn").click(
-								function() {
-									if ($("input:checkbox[id='checkAgree']")
-											.is(':checked') == true) {
-										$("#saveFm").submit();
-									}
+								$(".saveBtn").click(function() { // 조회버튼
+									$("#saveFm").submit();
 								});
 					});
 

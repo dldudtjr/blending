@@ -51,7 +51,7 @@ public class UserController {
 
 
 	@RequestMapping(path = "userList.bt")
-	public String userList(@ModelAttribute("srchFm") SrchVO srchVO, ModelMap model) {
+	public String userList(@ModelAttribute("srchFm") SrchVO srchVO,@ModelAttribute("saveFm") UserVO userVO, ModelMap model) {
 
 		List<EgovMap> eMap = this.userService.getUserPageLst(srchVO);
 		srchVO.setTotalRecordCount(eMap.size() > 0 ? Integer.parseInt(eMap.get(0).get("totCnt") + "") : 0);
