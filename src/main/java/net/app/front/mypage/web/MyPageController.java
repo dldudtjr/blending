@@ -155,10 +155,14 @@ public class MyPageController {
     }
 
     @RequestMapping(path = "cmpyInfo.bt")
-    public String cmpyInfo(SrchVO srchVO, CmpyVO cmpyVO, ModelMap model) {
+    public String cmpyInfo(SrchVO srchVO,@ModelAttribute("cmpyFm") CmpyVO cmpyVO, ModelMap model) {
         cmpyVO.setUserId(FrntSessionUtils.getUserId());
         cmpyVO.setCmpyId(FrntSessionUtils.getUserInfo().getCmpyId());
-        model.addAttribute("cmpyFm", mypageService.getCmpyDtl(cmpyVO));
+
+        if (FrntSessionUtils.getUserInfo().getCmpyId() != null && !"".equals(FrntSessionUtils.getUserInfo().getCmpyId())) {
+            model.addAttribute("cmpyFm", mypageService.getCmpyDtl(cmpyVO));
+        }
+
         return commUtils.tiles(commUtils.TILES_FRNT, "mypage/cmpyInfo");
     }
 
