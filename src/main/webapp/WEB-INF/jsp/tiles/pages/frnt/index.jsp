@@ -78,9 +78,10 @@
 					<div class="main-form">
 						<div class="main-form-img"><img src="/resources/images/main3.jpg" alt=""></div>
 						<div class="main-form-text">
-							<span class="main-form-title">해외 마케팅</span>
-							<span>해외 인플루언서 및 셀럽 콜라보</br>
-							  해외 구독박스 브랜드 콜라보</span>
+							<span class="main-form-title">Korea Market Entry</span>
+							<span>Establish Business Presence</br>
+							  Establish Business Network</br>
+							  Acquire Potential Clients</span>
 						</div>
 					</div>
 					<div class="main-fotter-btn">
