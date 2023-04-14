@@ -172,7 +172,8 @@ public class IndexController {
     public okhttp3.ResponseBody testtest(PayVO payVO, HttpSession session) {
         try {
             okhttp3.ResponseBody data = stepPay.getOrders();
-            System.out.println(">>>>>>ResponseBody="+data);
+
+            System.out.println(">>>>>>ResponseBody="+data.toString());
             return data;
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

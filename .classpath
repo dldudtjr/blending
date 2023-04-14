@@ -30,6 +30,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/service-neural-sdk-0.1.4.2-SNAPSHOT-plain.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
