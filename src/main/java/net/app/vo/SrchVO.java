@@ -28,6 +28,8 @@ public class SrchVO extends PaginationInfoVO {
 
 	public String srchEmail;
 	public String srchPhone;
+	
+	public String srchCouponType;
 
 
 }

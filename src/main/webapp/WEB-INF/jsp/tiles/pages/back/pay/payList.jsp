@@ -85,6 +85,8 @@
 		$('#srchFm').submit();
 	}
 
+	$(".lnbchk").eq(2).addClass("active");
+	
 	$(".btn_search").click(function() { // 조회버튼
 		$('#currentPageNo').val("1");
 		$("#srchFm").submit();

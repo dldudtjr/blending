@@ -10,7 +10,7 @@
 				</li>
 				<li class="sidebar-menu-item cmpyInfo">
 					<a href="<c:url value='/web/mypage/cmpyInfo.bt'/>">회사 정보</a>
-				</li
+				</li>
 <%-- 				<li class="sidebar-menu-item userInfo">
 					<a href="<c:url value='/web/mypage/userInfo.bt'/>">계정 정보</a>
 				</li> --%>

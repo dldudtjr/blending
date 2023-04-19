@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Wed May 11 15:49:38 KST 2016 -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="couponDAO">
+	<sql id="basicQry">
+		SELECT 
+				COUPON_ID
+				,COUPON_CODE
+				,TO_CHAR(COUPON_ST_DT, 'YYYY-MM-DD') AS COUPON_ST_DT
+				,TO_CHAR(COUPON_ED_DT, 'YYYY-MM-DD') AS COUPON_ED_DT
+				,DISCOUNT
+				,TYPE
+				,CASE
+					WHEN TYPE = '001' THEN '일회성'
+					WHEN TYPE = '002' THEN '다회성'
+				 END AS TYPE_TXT
+				,USE_YN
+				,TO_CHAR(REGIST_DT, 'YYYY.mm.dd') as REGIST_DT
+				,REGIST_ID
+				,TO_CHAR(UPDT_DT, 'YYYY.mm.dd') as UPDT_DT
+				,UPDT_ID
+		FROM	TB_COUPON
+	</sql>
+
+	<sql id="basicQry_where">
+		<where>
+			<if test="srchTxt != '' and srchTxt != null">
+				AND COUPON_CODE like #{srchTxt}||'%'
+			</if>
+			<if test="srchCouponType != '' and srchCouponType != null">
+				AND TYPE = #{srchCouponType}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="basicQry_pk">
+		WHERE  COUPON_ID = #{couponId}
+	</sql>
+
+	<select id="getCouponPageLst" parameterType="net.app.vo.SrchVO" resultType="egovMap">
+		<include refid="include.page_cnt_start" />
+			<include refid="basicQry" />
+			<include refid="basicQry_where" />
+		<include refid="include.page_cnt_end" />
+	</select>
+
+	<select id="getCouponDtl" parameterType="net.app.back.coupon.vo.CouponVO" resultType="net.app.back.coupon.vo.CouponVO">
+		<include refid="basicQry" />
+		<include refid="basicQry_pk" />
+	</select>
+	
+	<select id="getCouponId" parameterType="net.app.vo.SrchVO" resultType="String">
+		SELECT 'cou' || TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(NVL(Max(SUBSTR(COUPON_ID,17))+1,1),3,'0') AS COUPON_ID FROM TB_COUPON
+	</select>
+	
+	<select id="getDiscount" parameterType="net.app.back.coupon.vo.CouponVO" resultType="String">
+		SELECT 
+			CASE WHEN TYPE='001' AND CNT &lt; 1 THEN A.DISCOUNT
+				 WHEN TYPE = '002' AND CNT > 0 THEN A.DISCOUNT
+				 ELSE 1
+			END DISCOUNT 
+		FROM (SELECT DISCOUNT, COUPON_ID, TYPE
+				FROM TB_COUPON
+				WHERE COUPON_CODE = #{couponCode}
+				AND TO_CHAR(SYSDATE, 'YYYYMMDD')
+				BETWEEN TO_CHAR(COUPON_ST_DT, 'YYYYMMDD') AND TO_CHAR(COUPON_ED_DT, 'YYYYMMDD')
+				AND USE_YN = 'Y'
+			) A,
+			(SELECT COUNT(COUPON_ID) AS CNT, COUPON_ID
+				FROM TB_COUPON_HIST 
+				WHERE USER_ID = #{userId}
+				GROUP BY COUPON_ID
+			) B
+			WHERE A.COUPON_ID = B.COUPON_ID
+	</select>
+	
+	<insert id="insCouponDo" parameterType="net.app.back.coupon.vo.CouponVO">
+			MERGE INTO TB_COUPON d
+			USING (
+			  Select
+			    #{couponId} 	as COUPON_ID,
+			    #{couponCode} 	as COUPON_CODE,
+			    #{couponStDt} 	as COUPON_ST_DT,
+			    #{couponEdDt} 	as COUPON_ED_DT,
+			    #{discount} 	as DISCOUNT,
+			    #{type}	 		as TYPE,
+			    #{useYn}		as USE_YN,
+			    SYSDATE 		as REGIST_DT,
+			    #{registId} 	as REGIST_ID,
+			    SYSDATE 		as UPDT_DT,
+			    #{updtId} 		as UPDT_ID
+			  From Dual
+			  ) s
+			ON
+			  (d.COUPON_ID = s.COUPON_ID)
+			WHEN MATCHED
+			THEN
+			UPDATE SET
+			  d.COUPON_CODE 	= s.COUPON_CODE,
+			  d.COUPON_ST_DT 	= s.COUPON_ST_DT,
+			  d.COUPON_ED_DT 	= s.COUPON_ED_DT,
+			  d.DISCOUNT	 	= s.DISCOUNT,
+			  d.TYPE 			= s.TYPE,
+			  d.USE_YN 			= s.USE_YN,
+			  d.UPDT_DT	 		= s.UPDT_DT,
+			  d.UPDT_ID 		= s.UPDT_ID
+			WHEN NOT MATCHED
+			THEN
+			INSERT (
+			  d.COUPON_ID
+			  ,d.COUPON_CODE
+			  ,d.COUPON_ST_DT
+			  ,d.COUPON_ED_DT
+			  ,d.DISCOUNT
+			  ,d.TYPE
+			  ,d.USE_YN
+			  ,d.REGIST_DT
+			  ,d.REGIST_ID
+			  ,d.UPDT_DT
+			  ,d.UPDT_ID
+			  )
+			VALUES (
+			  s.COUPON_ID
+			  ,s.COUPON_CODE
+			  ,s.COUPON_ST_DT
+			  ,s.COUPON_ED_DT
+			  ,s.DISCOUNT
+			  ,s.TYPE
+			  ,s.USE_YN
+			  ,s.REGIST_DT
+			  ,s.REGIST_ID
+			  ,s.UPDT_DT
+			  ,s.UPDT_ID
+			  )
+	</insert>
+			  
+	<update id="udtCouponUseYnDo" parameterType="net.app.back.coupon.vo.CouponVO" >
+		UPDATE TB_COUPON SET USE_YN = #{useYn}
+		<include refid="basicQry_pk" />
+	</update>
+
+	<delete id="delCouponDo" parameterType="net.app.back.coupon.vo.CouponVO">
+		DELETE FROM TB_COUPON WHERE COUPON_ID = #{couponId}
+	</delete>
+	
+	<insert id="insCouponHist" parameterType="net.app.back.coupon.vo.CouponVO">
+		INSERT INTO TB_COUPON_HIST (
+			COUPON_HIST_ID
+			,COUPON_ID
+			,USER_ID
+			,REGIST_DT
+			)
+		VALUES (
+			SELECT NVL (MAX (COUPON_HIST_ID), 0) + 1 FROM TB_COUPON_HIST)
+			,#{couponId}
+			,#{userId}
+			,SYSDATE
+		)
+	</insert>
+	
+
+</mapper>

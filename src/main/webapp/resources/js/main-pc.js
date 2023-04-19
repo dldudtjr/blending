@@ -95,6 +95,7 @@ $(function () {
 
 
 	cal();
+	onOff('off')
   })
 });//jquery ready
 
@@ -105,7 +106,16 @@ function cal(){
    	$(".servicePrice").text(($("#servicePrice").val()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
 }
 
-
+function onOff(light) {
+	if (light == 'on') {
+		$(".btnApply").css("display","none");
+		$(".btnApplyCancel").css("display","block");
+	} else if (light == 'off') {
+		$("#couponCode").val('');
+		$(".btnApply").css("display","block");
+		$(".btnApplyCancel").css("display","none");
+	}
+}
 
 // help 버튼 클릭
 $(function () {

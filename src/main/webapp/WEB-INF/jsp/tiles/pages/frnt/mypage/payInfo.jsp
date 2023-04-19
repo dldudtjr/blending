@@ -24,27 +24,27 @@
 		</div>
 	</div>
 	<!-- <header class="sidebar-main-header mt-50">
-              <h3 class="tit">MY 포인트</h3>
-            </header>
-            <div class="info-subscribe mt-10">
-              <div class="d-flex">
-                <div class="form-field">
-                  <h4 class="detail-wrap-title">BTM 포인트</h4>
-                  <div class="input-add add-right">
-                    <input type="text" class="input-text" name="" value="10,000">
-                    <button class="button bt-blue w-140">BTM 충전</button>
-                  </div>
-                  <div class="d-flex align-items-center mt-10">
-                    <i class="wn-icon exclamation mr-5"></i>
-                    <span class="gray-5">포인트 및 CASH 환불은 고객센터 문의</span>
-                  </div>
-                </div>
-                <div class="form-field ml-50">
-                  <h4 class="detail-wrap-title">CASH</h4>
-                  <input type="text" class="input-text" name="" value="30,000">
-                </div>
-              </div>
-            </div> -->
+	  <h3 class="tit">MY 포인트</h3>
+	</header>
+	<div class="info-subscribe mt-10">
+	  <div class="d-flex">
+	    <div class="form-field">
+	      <h4 class="detail-wrap-title">BTM 포인트</h4>
+	      <div class="input-add add-right">
+	        <input type="text" class="input-text" name="" value="10,000">
+	        <button class="button bt-blue w-140">BTM 충전</button>
+	      </div>
+	      <div class="d-flex align-items-center mt-10">
+	        <i class="wn-icon exclamation mr-5"></i>
+	        <span class="gray-5">포인트 및 CASH 환불은 고객센터 문의</span>
+	      </div>
+	    </div>
+	    <div class="form-field ml-50">
+	      <h4 class="detail-wrap-title">CASH</h4>
+	      <input type="text" class="input-text" name="" value="30,000">
+	    </div>
+	  </div>
+	</div> -->
 	<header class="sidebar-main-header mt-50">
 		<h3 class="tit">서비스</h3>
 	</header>
@@ -142,7 +142,7 @@
 							<a href="javascript:void(0)" data-id="002" data-price="300000" class="t-24"><b>PREMIUM</b><br>
 								<p class="t-16 mt-5">￦300,000</p></a>
 							<a href="javascript:void(0)" data-id="003" data-price="1500000" class="t-24"><b>EXCLUSIVE</b><br>
-			s					<p class="t-16 mt-5">￦1,500,000</p>
+								<p class="t-16 mt-5">￦1,500,000</p>
 								<div class="help-wrap">
 									<i class="wn-icon exclamation ml-5"></i>
 									<div class="help-cont">
@@ -164,37 +164,38 @@
 							<p class="t-16 mt-5">2개월 무료</p></a>
 						</div>
 					</div>
-					<!--  <div class="d-flex align-items-center mt-30">
-            <div class="subscribe-title">BTM 포인트</div>
-            <div class="d-flex align-items-center">
-              <span class="mr-15">10,000(보유)</span>
-              <div class="input-add add-right">
-                <input type="text" class="input-text wd-130" name="" placeholder="" value="10,000">
-                <button class="button bt-blue wd-80">적용</button>
-              </div>
-            </div>
-            <div class="subscribe-title ml-50">CASH
-              <div class="help-wrap">
-                <i class="wn-icon exclamation ml-5"></i>
-                <div class="help-cont">
-                  <span>세부내용 설명입니다. 세부내용 설명입니다.</span>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex">
-              <span>￦30,000</span>
-            </div>
-          </div>
-          <div class="d-flex align-items-center mt-30">
-            <div class="subscribe-title">쿠폰</div>
-            <div class="d-flex align-items-center">
-              <div class="input-add add-right">
-                <input type="text" class="input-text wd-200" name="" placeholder="" value="">
-                <button class="button bt-blue wd-80">적용</button>
-              </div>
-            </div>
-          </div>
-		-->
+					<!-- <div class="d-flex align-items-center mt-30">
+			            <div class="subscribe-title">BTM 포인트</div>
+			            <div class="d-flex align-items-center">
+			            	<span class="mr-15">10,000(보유)</span>
+			            	<div class="input-add add-right">
+			                	<input type="text" class="input-text wd-130" name="" placeholder="" value="10,000">
+			                	<button class="button bt-blue wd-80">적용</button>
+			              	</div>
+			            </div>
+			            <div class="subscribe-title ml-50">CASH
+			            	<div class="help-wrap">
+			                	<i class="wn-icon exclamation ml-5"></i>
+			                	<div class="help-cont">
+				               		<span>세부내용 설명입니다. 세부내용 설명입니다.</span>
+								</div>
+							</div>
+			            </div>
+			            <div class="d-flex">
+		    	        	<span>￦30,000</span>
+			            </div>
+			        </div> -->
+					<div class="d-flex align-items-center mt-30">
+			    		<div class="subscribe-title">쿠폰</div>
+				        <div class="d-flex align-items-center">
+			        		<div class="input-add add-right">
+				            	<input type="text" class="input-text wd-200" name="couponCode" id="couponCode" placeholder="" value="">
+				                <a class="button bt-blue wd-80 btnApply">적용</a>
+				                <a class="button bt-yellow wd-80 btnApplyCancel" style="display:none;">적용취소</a>
+				            </div>
+		            	</div>
+			        </div>
+		
 
 
 					<div class="d-flex align-items-center mt-30">
@@ -230,7 +231,8 @@
 <script>
 	var cnt = 0;
 	var msg = "${msg}";
-
+	var bprice = 0;
+	var aprice = 0;
 	$(function() {
 
 		if (msg != "") {
@@ -238,6 +240,7 @@
 		}
 
 		$(document).on("click", ".closeBtn", function() {
+			onOff('off');
 			$('#popSubscribe').modal('hide')
 		});
 
@@ -261,9 +264,40 @@
 			var url = "<c:url value='/web/mypage/appServiceInsDo.ax'/>";
 			paySubmit(url, "결제");
 		});
-
-
-
+		
+		$(".btnApply").click(function() {
+			bprice = $("#servicePrice").val();
+			if ($("#couponCode").val() != '') {
+				$.ajax({
+					url : "<c:url value='/back/coupon/getDiscount.ax'/>",
+					data : {
+						couponCode : $("#couponCode").val(),
+					},
+					type : 'POST',
+					success : function(result) {
+						if (result > 1) {
+							onOff('on');
+							aprice = (bprice * (100 - result) * 0.01);
+							$(".servicePrice").text(aprice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+							$("#servicePrice").val(aprice);
+						} else {
+							alert("유효한 쿠폰코드가 아닙니다.")
+						}
+					},
+					error : function(e) {
+						console.log(JSON.stringify(e));
+					}
+				});
+			}
+			cal();
+		});
+		
+		$(".btnApplyCancel").click(function() {
+			$(".servicePrice").text(bprice);
+			$("#servicePrice").val(bprice);
+			onOff('off');
+			cal();
+		});
 	});
 
 	function payPop() {
@@ -320,4 +354,5 @@
 			}
 		});
 	}
+	
 </script>
