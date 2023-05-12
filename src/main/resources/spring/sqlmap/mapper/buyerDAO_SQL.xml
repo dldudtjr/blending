@@ -4,6 +4,7 @@
 <mapper namespace="buyerDAO">
 
 	<select id="getLatestBrand" parameterType="net.app.vo.SrchVO" resultType="egovMap">
+		SELECT * FROM (
 		SELECT COUNT(*)OVER() AS NEW_BRAND_CNT
 				,( SELECT COUNT(PRODUCT_ID) AS CNT FROM BLENDING.TB_PRODUCT WHERE TO_CHAR(REGT_DT,'yyyymmdd') >= TO_CHAR(SYSDATE-30,'yyyymmdd') ) AS NEW_PRODUCT_CNT
 				,(SELECT MAX(FILE_ID) FROM TB_FILE WHERE PARNTS_DTA_ID=A.CMPY_ID AND UPLOAD_FILE_NM = 'cmpyImg') AS FILE_ID
@@ -11,6 +12,8 @@
 			FROM TB_CMPY A
 			WHERE TO_CHAR(REGT_DT,'yyyymmdd') >= TO_CHAR(SYSDATE-7,'yyyymmdd')
 			AND USER_ID IN (SELECT USER_ID FROM TB_USER WHERE USER_TYPE ='001')
+			ORDER BY REGT_DT DESC
+			) WHERE ROWNUM = 1
 	</select>
 
 	<select id="getProductCateId" resultType="String">
