@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="사각형_122" data-name="사각형 122" width="14" height="14" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="arrow_next" clip-path="url(#clip-path)">
+    <path id="_581e0110b683da824149a2354ae2354e" data-name="581e0110b683da824149a2354ae2354e" d="M.256,13.795a.743.743,0,0,0,1.025,0L7.275,8.01a1.365,1.365,0,0,0,0-1.979L1.237.2A.744.744,0,0,0,.22.2a.683.683,0,0,0-.008,1L5.738,6.526a.682.682,0,0,1,0,.99L.256,12.806a.682.682,0,0,0,0,.989" transform="translate(3.151 0)" fill-rule="evenodd"/>
+  </g>
+</svg>

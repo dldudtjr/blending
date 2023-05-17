@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <clipPath id="clip-wallet_box_arrow">
+      <rect width="16" height="16"/>
+    </clipPath>
+  </defs>
+  <g id="wallet_box_arrow" clip-path="url(#clip-wallet_box_arrow)">
+    <g id="그룹_208" data-name="그룹 208" transform="translate(-643 -948)">
+      <text id="_" data-name="&gt;" transform="translate(646 962)" fill="#1454ff" font-size="16" font-family="SUIT-Bold, SUIT" font-weight="700"><tspan x="0" y="0">&gt;</tspan></text>
+      <rect id="사각형_255" data-name="사각형 255" width="16" height="16" transform="translate(643 948)" fill="none"/>
+    </g>
+  </g>
+</svg>
